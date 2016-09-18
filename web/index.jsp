@@ -12,9 +12,10 @@
         <link rel="stylesheet" href="Css/style.css"/>
         <script src="JScript/script.js"> </script>
         <title>Prueba</title>
+        
     </head>
     <body>
-        
+         <%@ include file="Cabezal.jsp" %>
     </body>
     
 </html>

@@ -17,20 +17,41 @@ public class Consultas extends Conexion{
     
     public boolean Autenticacion(String usuario, String contrasena) throws SQLException{
         
-        Statement st = con.createStatement();
-        ResultSet rs = null;
-        String Consulta = "SELECT * FROM usuarios";
-        rs = st.executeQuery(Consulta);
-       
-        while (rs.next()){
-           if (usuario.equals(rs.getString("nickname")) && contrasena.equals(rs.getString("password")))
-               return true;
-       }
+        try (Statement st = con.createStatement()) {
+            ResultSet rs = null;
+            String Consulta = "SELECT * FROM usuarios";
+            rs = st.executeQuery(Consulta);
+            
+            while (rs.next()){
+                if (usuario.equals(rs.getString("nickname")) && contrasena.equals(rs.getString("password"))){
+                    rs.close();
+                    st.close();
+                    return true;
+                }
+            }
+            rs.close();
+        }
         return false;
     }
-       /* public static void main(String[] args) throws SQLException {
-            Consultas con = new Consultas();
-            System.out.println(con.Autenticacion("adippet","Dippet123"));
-        }*/
+    
+    public boolean Comprobacion(String nickname, String mail) throws SQLException{
+        
+        try (Statement st = con.createStatement()) {
+            ResultSet rs = null;
+            String Consulta = "SELECT * FROM usuarios";
+            rs = st.executeQuery(Consulta);
+            
+            while (rs.next()){
+                if (nickname.equals(rs.getString("nickname")) || mail.equals(rs.getString("email"))){
+                    rs.close();
+                    st.close();
+                    return false;
+                }
+            }
+            rs.close();
+        }
+        return true;
+       }
+      
 }
         

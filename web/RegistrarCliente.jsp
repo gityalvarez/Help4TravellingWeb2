@@ -85,7 +85,6 @@
         if (!(session.getAttribute("habilitado")==null) && habilitado == "true") {%>
         <script type="text/javascript">
             mostrarsegunda();
-            alert("estoy por aca");
             mostrarinicio();
             escribir();
             <%session.removeAttribute("habilitado");%>
@@ -94,7 +93,6 @@
             if (session.getAttribute("habilitado")==null){%>
                 <script type="text/javascript">
                     mostrarinicio();
-                    alert("estoy por acullá");
                     ocultarsegunda();
                 </script>
             <%}%>

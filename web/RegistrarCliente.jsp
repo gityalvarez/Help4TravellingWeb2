@@ -32,6 +32,7 @@
         </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="Css/style.css"/>
     </head>
 
     <body>
@@ -86,6 +87,10 @@
         <script type="text/javascript">
             mostrarsegunda();
             mostrarinicio();
+            alert("Usuario <%=session.getAttribute("nickname")%> Disponible. Complete con sus Datos Personales");
+            document.getElementById("nickname").readOnly = true;
+            document.getElementById("mail").readOnly = true;
+            document.getElementById("Comprobar").style.display='none';
             escribir();
             <%session.removeAttribute("habilitado");%>
         </script>  

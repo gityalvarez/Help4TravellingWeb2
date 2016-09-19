@@ -5,12 +5,17 @@
  */
 package PruebaServlets;
 
+import PruebaModelo.Consultas;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,12 +33,22 @@ public class Registro extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession sesion = request.getSession();
         
+        
+        String nickname = (String)sesion.getAttribute("nickname");
+        String mail = (String)sesion.getAttribute("mail");
         String nombre = (String)request.getParameter("nombre");
         String apellido = (String)request.getParameter("apellido");
-        //String nombre = (String)request.getParameter("nombre");
+        String dia = (String)request.getParameter("dia");
+        String mes = (String)request.getParameter("mes");
+        String anio = (String)request.getParameter("anio");
+        String contrasenia = (String)request.getParameter("contrasenia");
+        String imagen = (String)request.getParameter("imagen");
+        Consultas con = new Consultas();
+        con.Registrar(nickname,nombre,apellido,contrasenia,mail,imagen,"1","8","1988");
         
         
     }
@@ -50,7 +65,11 @@ public class Registro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -64,7 +83,11 @@ public class Registro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

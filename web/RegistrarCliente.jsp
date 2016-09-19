@@ -50,15 +50,13 @@
         </div>
 
         <div id="segunda" style='display: none'> 
-            <form action="Registrar" method="post">
+            <form action="Registro" method="post">
                 <p> Escriba su Nombre </p>
                 <p>  <input type = "text"   name= "nombre" id="nombre"/> </p>        
                 <p> Escriba su Apellido </p>
                 <p>  <input type = "text"   name= "apellido" id="apellido"/> </p>
                 <p> Elija su fecha de Nacimiento </p>
                 <p>  
-
-
                     dia <select id="diaSelect" name="diaSelect">
                         <% for (int i = 1; i < 32; i++) {%>                  
                         <option value="<%=i%>"><%=i%></option>
@@ -74,9 +72,8 @@
                         <option value="<%=k%>"><%=k%></option>
                         <%}%>
                     </select>
-
-
                 </p>
+                <p>  <input type = "submit"   name= "Registrar" id="Registrar" value= "Registrar"/> </p>
             </form>
         </div>
                     
@@ -102,8 +99,5 @@
                 </script>
             <%}%>
         <%}%>
-        
-
-
     </body>
 </html>

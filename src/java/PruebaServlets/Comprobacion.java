@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author yaman
  */
-public class Validacion extends HttpServlet {
+public class Comprobacion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,22 +34,34 @@ public class Validacion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
+        
         response.setContentType("text/html;charset=UTF-8");
-        
-        
-        String usuario = request.getParameter("usuario");
-        String contrasena = request.getParameter("contrasena");
-        
-        System.out.println(usuario+ "   "+contrasena);
+        HttpSession sesion = request.getSession(true);
+        String nickname = request.getParameter("nickname");
+        String mail = request.getParameter("mail");
+        sesion.setAttribute("nickname", nickname);
+        sesion.setAttribute("mail",mail);
+        System.out.println(nickname+ "   "+mail);
         Consultas con = new Consultas();
-        //System.out.println(con.Autenticacion(usuario, contrasena));
-        HttpSession sesion = request.getSession();
-        sesion.setAttribute("nickname",usuario);
-        sesion.setAttribute("contrasena",contrasena);
-        con.Autenticacion(sesion);
-        response.sendRedirect("index.jsp");
-}   
-        
+        if (con.Comprobacion(nickname,mail))
+        {
+            response.sendRedirect("RegistrarCliente.jsp");
+            System.out.println("Se puede registrar");
+            sesion.setAttribute("habilitado", "true");
+            sesion.setAttribute("nickname", nickname);
+            sesion.setAttribute("mail", mail);
+            //request.setAttribute("habilitado",true);
+            //request.getRequestDispatcher("RegistrarClientes.jsp").forward(request,response);
+        }
+        else{
+            System.out.println("El usuario ya existe");
+            sesion.setAttribute("habilitado","false");
+            
+            //request.setAttribute("habilitado",false);
+            //request.getRequestDispatcher("RegistrarClientes.jsp").forward(request,response);
+        }
+        }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -66,7 +78,7 @@ public class Validacion extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Validacion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Comprobacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -84,7 +96,7 @@ public class Validacion extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Validacion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Comprobacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

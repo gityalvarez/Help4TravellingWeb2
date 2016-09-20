@@ -10,13 +10,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <align=/>
     </head>
     <body>
        <h1>BIENVENIDO A HELP4TRAVELLING</h1>
-        
+        <form id="searchbox" action="">
+             <input id="search" type="text" placeholder="Servicios y Promociones">
+            <input id="submit" type="submit" value="Search">
+        </form>
         <%HttpSession sesion=request.getSession(false);%>
 
-        <%    System.out.println("Bienvenido " + sesion.getAttribute("nickname"));%>
+        <%  //  System.out.println("Bienvenido " + sesion.getAttribute("nickname"));%>
         
             
         

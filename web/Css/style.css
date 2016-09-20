@@ -12,10 +12,13 @@ body
     padding: 0px;
     margin: 0px;
     font-family: Arial,Helvetica,Sans,Sans-Serif,Sans Serif;
+    background-color: #f1f1f1;
 }
 
 header {
     padding-top: 10px;
+    background-color: white;
+    margin-bottom: 30px; 
 }
 
 .logo {
@@ -38,7 +41,6 @@ header {
     text-align: center;
     background-color: #0F5B76;
     padding: 15px 0px;
-    margin-bottom: 30px; 
 }
 
 .user {

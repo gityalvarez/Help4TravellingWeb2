@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author yaman
  */
-public class Validacion extends HttpServlet {
+public class Registro extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,21 +35,27 @@ public class Validacion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
-        String usuario = request.getParameter("usuario");
-        String contrasena = request.getParameter("contrasena");
-        
-        System.out.println(usuario+ "   "+contrasena);
-        Consultas con = new Consultas();
-        //System.out.println(con.Autenticacion(usuario, contrasena));
         HttpSession sesion = request.getSession();
-        sesion.setAttribute("nickname",usuario);
-        sesion.setAttribute("contrasena",contrasena);
-        con.Autenticacion(sesion);
-        response.sendRedirect("index.jsp");
-}   
         
+        
+        String nickname = (String)sesion.getAttribute("nickname");
+        String mail = (String)sesion.getAttribute("mail");
+        String nombre = (String)request.getParameter("nombre");
+        String apellido = (String)request.getParameter("apellido");
+        String dia = (String)request.getParameter("diaSelect");
+        String mes = (String)request.getParameter("mesSelect");
+        String anio = (String)request.getParameter("anioSelect");
+        String contrasenia = (String)request.getParameter("contrasenia");
+        String imagen = (String)request.getParameter("imagen");
+        System.out.println(imagen);
+        Consultas con = new Consultas();
+        con.Registrar(nickname,nombre,apellido,contrasenia,mail,imagen,anio,mes,dia);
+       
+        
+        /* DEBO CARGARLE TODOS LOS ATRIBUTOS A SESION*/
+        response.sendRedirect("index.jsp");
+        
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -66,7 +72,7 @@ public class Validacion extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Validacion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -84,7 +90,7 @@ public class Validacion extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Validacion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

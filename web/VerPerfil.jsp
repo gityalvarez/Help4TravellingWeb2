@@ -12,7 +12,7 @@
         <title></title>
         <link rel="stylesheet" href="Css/Pestanas.css"/>
         <script>
-            function openCity(evt, pestana) {
+            function abrirPestana(evt, pestana) {
                 // Declare all variables
                 var i, tabcontent, tablinks;
 
@@ -39,8 +39,8 @@
     </head>
     <body>
         <ul class="tab">
-            <li><a href="#" class="tablinks" onclick="openCity(event, 'Datos')">Datos</a></li>
-            <li><a href="#" class="tablinks" onclick="openCity(event, 'Reservas')">Reservas</a></li>
+            <li><a href="#" class="tablinks" onclick="abrirPestana(event, 'Datos')">Datos</a></li>
+            <li><a href="#" class="tablinks" onclick="abrirPestana(event, 'Reservas')">Reservas</a></li>
             
         </ul>
 

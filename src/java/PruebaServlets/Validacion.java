@@ -5,6 +5,7 @@
  */
 package PruebaServlets;
 
+import Logica.ManejadorCliente;
 import PruebaModelo.Consultas;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,6 +49,8 @@ public class Validacion extends HttpServlet {
         sesion.setAttribute("contrasena",contrasena);
         con.Autenticacion(sesion);
         response.sendRedirect("index.jsp");
+        ManejadorCliente mc =ManejadorCliente.getInstance();
+        mc.listarClientes();
 }   
         
 

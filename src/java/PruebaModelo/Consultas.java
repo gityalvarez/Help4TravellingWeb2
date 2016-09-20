@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -16,7 +17,7 @@ import java.sql.Statement;
  */
 public class Consultas extends Conexion{
     
-    public boolean Autenticacion(String usuario, String contrasena) throws SQLException{
+    public boolean Autenticacion(HttpSession sesion) throws SQLException{
         
         try (Statement st = con.createStatement()) {
             ResultSet rs = null;
@@ -24,7 +25,12 @@ public class Consultas extends Conexion{
             rs = st.executeQuery(Consulta);
             
             while (rs.next()){
-                if (usuario.equals(rs.getString("nickname")) && contrasena.equals(rs.getString("password"))){
+                if (sesion.getAttribute("nickname").equals(rs.getString("nickname")) && sesion.getAttribute("contrasena").equals(rs.getString("password"))){
+                    //HttpSession sesion =request.getSession();
+                    sesion.setAttribute("nombre",rs.getString("nombre"));
+                    sesion.setAttribute("apellido",rs.getString("apellido"));
+                    sesion.setAttribute("email",rs.getString("email"));
+                    sesion.setAttribute("fechaNac",rs.getString("fechaNac"));
                     rs.close();
                     st.close();
                     return true;
@@ -33,6 +39,10 @@ public class Consultas extends Conexion{
             rs.close();
         }
         return false;
+    }
+    
+    public void SetearSesion(HttpSession sesion){
+        
     }
     
     public boolean Comprobacion(String nickname, String mail) throws SQLException{

@@ -44,21 +44,11 @@ public class Validacion extends HttpServlet {
         Consultas con = new Consultas();
         //System.out.println(con.Autenticacion(usuario, contrasena));
         HttpSession sesion = request.getSession();
-        if (con.Autenticacion(usuario, contrasena))
-        {
-           
-           sesion.setAttribute("nickname",usuario);
-           System.out.println("Bienvenido usuario "+sesion.getAttribute("nickname"));
-           response.sendRedirect("index.jsp");
-        }else{
-            
-            
-        }
-           
-        
-        
-        
-    }   
+        sesion.setAttribute("nickname",usuario);
+        sesion.setAttribute("contrasena",contrasena);
+        con.Autenticacion(sesion);
+        response.sendRedirect("index.jsp");
+}   
         
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

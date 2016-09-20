@@ -42,14 +42,18 @@ public class Registro extends HttpServlet {
         String mail = (String)sesion.getAttribute("mail");
         String nombre = (String)request.getParameter("nombre");
         String apellido = (String)request.getParameter("apellido");
-        String dia = (String)request.getParameter("dia");
-        String mes = (String)request.getParameter("mes");
-        String anio = (String)request.getParameter("anio");
+        String dia = (String)request.getParameter("diaSelect");
+        String mes = (String)request.getParameter("mesSelect");
+        String anio = (String)request.getParameter("anioSelect");
         String contrasenia = (String)request.getParameter("contrasenia");
         String imagen = (String)request.getParameter("imagen");
+        System.out.println(imagen);
         Consultas con = new Consultas();
-        con.Registrar(nickname,nombre,apellido,contrasenia,mail,imagen,"1","8","1988");
+        con.Registrar(nickname,nombre,apellido,contrasenia,mail,imagen,anio,mes,dia);
+       
         
+        /* DEBO CARGARLE TODOS LOS ATRIBUTOS A SESION*/
+        response.sendRedirect("index.jsp");
         
     }
 

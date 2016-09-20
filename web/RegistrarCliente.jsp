@@ -55,6 +55,10 @@
                 <p>  <input type = "text"   name= "nombre" id="nombre"/> </p>        
                 <p> Escriba su Apellido </p>
                 <p>  <input type = "text"   name= "apellido" id="apellido"/> </p>
+                <p> Digite una Contraseña </p>
+                <p>  <input type = "text"   name= "contrasenia" id="contrasenia"/> </p>
+                 <p> Repita la Contraseña </p>
+                <p>  <input type = "text"   name= "contrasenia2" id="contrasenia2"/> </p>
                 <p> Elija su fecha de Nacimiento </p>
                 <p>  
                     dia <select id="diaSelect" name="diaSelect">
@@ -73,6 +77,9 @@
                         <%}%>
                     </select>
                 </p>
+                 <p> Seleccione una Imagen </p>
+                <input type="file" name="imagen" size="50" />
+               
                 <p>  <input type = "submit"   name= "Registrar" id="Registrar" value= "Registrar"/> </p>
             </form>
         </div>

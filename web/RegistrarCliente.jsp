@@ -24,41 +24,38 @@
                 document.getElementById('segunda').style.display = 'none';
             }
             function escribir() {
-
                 document.getElementById('nickname').value = "<%=nick%>";
                 document.getElementById('mail').value = "<%=mail%>";
-
             }
         </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Registro de Cliente</title>
         <link rel="stylesheet" href="Css/style.css"/>
     </head>
 
-    <body>
-        <h1>REGISTRO</h1>
-    
-        
-        <div id="inicio" style='display: none' >
-            <form action="Comprobacion" method="post" >
+    <body style="background-color:powderblue;">       
+        <div align="center" id="inicio">
+            <h1>REGISTRO DE CLIENTE</h1>
+            <form action="Comprobacion" method="post">
                 <p>Escriba su nombre de usuario</p>
-                <p>  <input type = "text"   name= "nickname" id="nickname"/> </p>
+                <p>  <input type = "text" size="30" maxlength="50" value="nickname" name= "nickname" id="nickname"/> </p>
                 <p>Escriba su dirección de e-mail</p>
-                <p>  <input type = "text"   name= "mail" id="mail"/> </p>
+                <p>  <input type = "text" size="30" maxlength="50" value="e-mail"  name= "mail" id="mail"/> </p>
                 <p>  <input type = "submit"   name= "Comprobar" id="Comprobar" value= "Comprobar"/> </p> 
             </form>
         </div>
-
-        <div id="segunda" style='display: none'> 
+        <div align="center" id="segunda"> 
             <form action="Registro" method="post">
                 <p> Escriba su Nombre </p>
-                <p>  <input type = "text"   name= "nombre" id="nombre"/> </p>        
+                <p>  <input type = "text" size="30" maxlength="50" value="nombre" name= "nombre" id="nombre"/> </p>        
                 <p> Escriba su Apellido </p>
-                <p>  <input type = "text"   name= "apellido" id="apellido"/> </p>
+                <p>  <input type = "text" size="30" maxlength="50" value="apellido"  name= "apellido" id="apellido"/> </p>
                 <p> Digite una Contraseña </p>
-                <p>  <input type = "text"   name= "contrasenia" id="contrasenia"/> </p>
+                <p>  <input type = "password" size="20" maxlength="20" name= "contrasenia" id="contrasenia"/> </p>
                  <p> Repita la Contraseña </p>
-                <p>  <input type = "text"   name= "contrasenia2" id="contrasenia2"/> </p>
+                <p>  <input type = "password" size="20" maxlength="20"  name= "contrasenia2" id="contrasenia2"/> </p>
+                
+                
                 <p> Elija su fecha de Nacimiento </p>
                 <p>  
                     dia <select id="diaSelect" name="diaSelect">
@@ -78,9 +75,8 @@
                     </select>
                 </p>
                  <p> Seleccione una Imagen </p>
-                <input type="file" name="imagen" size="50" />
-               
-                <p>  <input type = "submit"   name= "Registrar" id="Registrar" value= "Registrar"/> </p>
+                <input type="file" name="imagen" size="50" />               
+                <p><input type = "submit"   name= "Registrar" id="Registrar" value= "Registrar"/> </p>
             </form>
         </div>
                     

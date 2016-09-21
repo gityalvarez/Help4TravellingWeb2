@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="Css/style.css"/>
-        <script src="JScript/script.js"> </script>
+        <!--script src="JScript/script.js"> </script-->
         <title>Help4Traveling</title>
     </head>
     <body>
@@ -51,7 +51,7 @@
             </article>
         </section>
         <footer>
-            Creado por mi el 2011
+            Acá va el footer
         </footer>
     </body>
 </html>

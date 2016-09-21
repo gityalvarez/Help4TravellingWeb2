@@ -9,18 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Inicio de Sesión</title>
         <link rel="stylesheet" href="Css/style.css"/>
 
     </head>
-    <body>
-        <h1>INICIO DE SESIÓN</h1>
-        
-         <div>
+    <body style="background-color:orange;">        
+         <div align="center">
+            <h1>INICIO DE SESIÓN</h1>
             <form action="Autenticacion" method="post" >
-                <p>  <input type = "text"   name= "usuario" id="usuario"/> </p>
-              <p>  <input type = "text"   name= "contrasena" id="contrasena"/> </p>
-              <p>  <input type = "submit"   name= "Entrar" id="Entrar" value= "Entrar"/> </p> 
+              <p>Usuario : <input type = "text" size="30" maxlength="50" value="nickname" name= "usuario" id="usuario"/></p>
+              <p>Password: <input type = "text" size="20" maxlength="20" name= "contrasena" id="contrasena"/> </p>
+              <p><input type="submit" name="Entrar" id="Entrar" value="Entrar"/> </p> 
                 
             </form>
         </div>

@@ -37,14 +37,14 @@
 
         </script>    
     </head>
-    <body>
+    <body style="background-color:greenyellow;">
         <ul class="tab">
             <li><a href="#" class="tablinks" onclick="abrirPestana(event, 'Datos')">Datos</a></li>
             <li><a href="#" class="tablinks" onclick="abrirPestana(event, 'Reservas')">Reservas</a></li>
             
         </ul>
 
-        <div id="Datos" class="tabcontent">
+        <div align="center" style="background-color:green;" id="Datos" class="tabcontent">
             <h3>Datos</h3>
             <p>Acá van los datos del usuario.</p>
             <% HttpSession sesion=request.getSession();%>
@@ -56,10 +56,9 @@
             <p>Acá van los datos del usuario.</p>
         </div>
 
-        <div id="Reservas" class="tabcontent">
+        <div align="center" style="background-color:aqua;" id="Reservas" class="tabcontent">
             <h3>Reservas</h3>
             <p>Acá van las reservas del usuario.</p> 
         </div>
-
     </body>
 </html>

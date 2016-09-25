@@ -47,7 +47,7 @@ public class Validacion extends HttpServlet {
         sesion.setAttribute("nickname",nickname);
         sesion.setAttribute("password",password);
         con.Autenticacion(sesion);
-        response.sendRedirect("index.html");
+        response.sendRedirect("InicioSesion.jsp");
         }   
         
 

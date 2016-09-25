@@ -51,7 +51,7 @@ public class Registro extends HttpServlet {
        
         
         /* DEBO CARGARLE TODOS LOS ATRIBUTOS A SESION*/
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("test/index.html");
         
     }
 

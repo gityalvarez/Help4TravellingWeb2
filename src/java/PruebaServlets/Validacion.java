@@ -40,14 +40,20 @@ public class Validacion extends HttpServlet {
         
         String nickname = request.getParameter("nickname_ingreso");
         String password = request.getParameter("password_ingreso");
+        
         System.out.println(nickname+ "   "+password);
         Consultas con = new Consultas();
         //System.out.println(con.Autenticacion(usuario, contrasena));
         HttpSession sesion = request.getSession();
         sesion.setAttribute("nickname",nickname);
         sesion.setAttribute("password",password);
-        con.Autenticacion(sesion);
-        response.sendRedirect("InicioSesion.jsp");
+        sesion.setAttribute("inicia", "true");
+        if (con.Autenticacion(sesion)){ 
+            sesion.setAttribute("mensaje","Bienvenido usuario " + nickname );
+        } else{
+            sesion.setAttribute("mensaje","Usuario o contraseña incorrectos");
+        }
+        response.sendRedirect("test/InicioSesion.jsp");
         }   
         
 

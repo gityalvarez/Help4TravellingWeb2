@@ -51,7 +51,7 @@ public class Comprobacion extends HttpServlet {
         }
         else{
             sesion.setAttribute("registra", "false");
-            response.sendRedirect("InicioSesion.jsp");
+            response.sendRedirect("test/InicioSesion.jsp");
             //request.setAttribute("habilitado",false);
             //request.getRequestDispatcher("RegistrarClientes.jsp").forward(request,response);
         }

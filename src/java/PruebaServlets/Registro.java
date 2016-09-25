@@ -39,17 +39,15 @@ public class Registro extends HttpServlet {
         
         
         String nickname = (String)sesion.getAttribute("nickname");
-        String mail = (String)sesion.getAttribute("mail");
-        String nombre = (String)request.getParameter("nombre");
-        String apellido = (String)request.getParameter("apellido");
-        String dia = (String)request.getParameter("diaSelect");
-        String mes = (String)request.getParameter("mesSelect");
-        String anio = (String)request.getParameter("anioSelect");
-        String contrasenia = (String)request.getParameter("contrasenia");
-        String imagen = (String)request.getParameter("imagen");
+        String mail = (String)sesion.getAttribute("email");
+        String nombre = (String)request.getParameter("nombre_in");
+        String apellido = (String)request.getParameter("apellido_in");
+        String fecha = (String)request.getParameter("fecha");
+        String contrasenia = (String)request.getParameter("password_in");
+        String imagen = (String)request.getParameter("imagen_registro");
         System.out.println(imagen);
         Consultas con = new Consultas();
-        con.Registrar(nickname,nombre,apellido,contrasenia,mail,imagen,anio,mes,dia);
+        con.Registrar(nickname,nombre,apellido,contrasenia,mail,imagen,fecha);
        
         
         /* DEBO CARGARLE TODOS LOS ATRIBUTOS A SESION*/

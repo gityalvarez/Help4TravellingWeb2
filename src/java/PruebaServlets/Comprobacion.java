@@ -37,26 +37,21 @@ public class Comprobacion extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         HttpSession sesion = request.getSession(true);
-        String nickname = request.getParameter("nickname");
-        String mail = request.getParameter("mail");
+        String nickname = request.getParameter("nickname_registro");
+        String email = request.getParameter("email_registro");
         sesion.setAttribute("nickname", nickname);
-        sesion.setAttribute("mail",mail);
-        System.out.println(nickname+ "   "+mail);
+        sesion.setAttribute("email",email);
+        sesion.setAttribute("registra", "true");
+        //System.out.println(nickname+ "   "+email);
         Consultas con = new Consultas();
-        if (con.Comprobacion(nickname,mail))
+        if (con.Comprobacion(nickname,email))
         {
-            response.sendRedirect("RegistrarCliente.jsp");
-            System.out.println("Se puede registrar");
-            sesion.setAttribute("habilitado", "true");
-            sesion.setAttribute("nickname", nickname);
-            sesion.setAttribute("mail", mail);
-            //request.setAttribute("habilitado",true);
-            //request.getRequestDispatcher("RegistrarClientes.jsp").forward(request,response);
+            response.sendRedirect("ingresoprueba.jsp");
+            
         }
         else{
-            System.out.println("El usuario ya existe");
-            sesion.setAttribute("habilitado","false");
-            
+            sesion.setAttribute("registra", "false");
+            response.sendRedirect("ingresoprueba.jsp");
             //request.setAttribute("habilitado",false);
             //request.getRequestDispatcher("RegistrarClientes.jsp").forward(request,response);
         }

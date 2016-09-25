@@ -38,20 +38,17 @@ public class Validacion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         
-        String usuario = request.getParameter("usuario");
-        String contrasena = request.getParameter("contrasena");
-        
-        System.out.println(usuario+ "   "+contrasena);
+        String nickname = request.getParameter("nickname_ingreso");
+        String password = request.getParameter("password_ingreso");
+        System.out.println(nickname+ "   "+password);
         Consultas con = new Consultas();
         //System.out.println(con.Autenticacion(usuario, contrasena));
         HttpSession sesion = request.getSession();
-        sesion.setAttribute("nickname",usuario);
-        sesion.setAttribute("contrasena",contrasena);
+        sesion.setAttribute("nickname",nickname);
+        sesion.setAttribute("password",password);
         con.Autenticacion(sesion);
-        response.sendRedirect("index.jsp");
-        ManejadorCliente mc =ManejadorCliente.getInstance();
-        mc.listarClientes();
-}   
+        response.sendRedirect("index.html");
+        }   
         
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

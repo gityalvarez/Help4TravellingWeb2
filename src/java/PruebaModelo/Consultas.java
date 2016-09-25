@@ -25,7 +25,7 @@ public class Consultas extends Conexion{
             rs = st.executeQuery(Consulta);
             
             while (rs.next()){
-                if (sesion.getAttribute("nickname").equals(rs.getString("nickname")) && sesion.getAttribute("contrasena").equals(rs.getString("password"))){
+                if (sesion.getAttribute("nickname").equals(rs.getString("nickname")) && sesion.getAttribute("password").equals(rs.getString("password"))){
                     //HttpSession sesion =request.getSession();
                     sesion.setAttribute("nombre",rs.getString("nombre"));
                     sesion.setAttribute("apellido",rs.getString("apellido"));
@@ -45,7 +45,7 @@ public class Consultas extends Conexion{
         
     }
     
-    public boolean Comprobacion(String nickname, String mail) throws SQLException{
+    public boolean Comprobacion(String nickname, String email) throws SQLException{
         
         try (Statement st = con.createStatement()) {
             ResultSet rs = null;
@@ -53,7 +53,7 @@ public class Consultas extends Conexion{
             rs = st.executeQuery(Consulta);
             
             while (rs.next()){
-                if (nickname.equals(rs.getString("nickname")) || mail.equals(rs.getString("email"))){
+                if (nickname.equals(rs.getString("nickname")) || email.equals(rs.getString("email"))){
                     rs.close();
                     st.close();
                     return false;
@@ -65,7 +65,7 @@ public class Consultas extends Conexion{
        }
     
     
-    public void Registrar(String nickname,String nombre,String apellido, String password, String email, String imagen, String anio,String mes, String dia) throws SQLException{
+    public void Registrar(String nickname,String nombre,String apellido, String password, String email, String imagen, String fecha) throws SQLException{
         
         Statement st;
         String mensaje = "Se dio de alta al Usuario Cliente.";
@@ -73,8 +73,9 @@ public class Consultas extends Conexion{
             imagen = "'" + imagen + "'";
             imagen = imagen.replace("\\", "\\\\");
         }
-            String fecha = (anio+ "-" + mes + "-" + dia);
-            String sqlau = "INSERT INTO help4traveling.usuarios (nickname,nombre,apellido,password,email,imagen,fechaNac) VALUES ('"+nickname + "','" + nombre + "','" + apellido + "','" + password + "','" + email + "'," + imagen + ",'" + fecha + "')";
+            //String fecha = (anio+ "-" + mes + "-" + dia);
+            String fechaNac = fecha.replaceAll("/", "-");
+            String sqlau = "INSERT INTO help4traveling.usuarios (nickname,nombre,apellido,password,email,imagen,fechaNac) VALUES ('"+nickname + "','" + nombre + "','" + apellido + "','" + password + "','" + email + "'," + imagen + ",'" + fechaNac + "')";
             System.out.println(sqlau);
             String sqlac = "INSERT INTO help4traveling.clientes (nickname) VALUES ('" + nickname + "')";
             String sqlai = "INS\"INSERT INTO help4traveling.usuarios (nickname,nombre,apellido,password,email,imagen,fechaNac) \"ERT INTO help4traveling.usuariosimagenes (usuario,imagen) VALUES ('" + nickname + "','" + imagen + "')";

@@ -46,7 +46,7 @@ public class Comprobacion extends HttpServlet {
         Consultas con = new Consultas();
         if (con.Comprobacion(nickname,email))
         {
-            response.sendRedirect("InicioSesion.jsp");
+            response.sendRedirect("test/InicioSesion.jsp");
             
         }
         else{

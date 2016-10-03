@@ -33,7 +33,7 @@
                         <input type="button" value="Buscar" id="btnBuscar">
                     </form>
                     <nav>
-                        <a href="#" id="proveedores">Proveedores</a>
+                        <a href="InicioPrueba.jsp" id="proveedores">Proveedores</a>
                     </nav>
                 </div>
             </section>

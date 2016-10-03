@@ -138,7 +138,7 @@
                             <label class="control-label" for="password_registro">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                 <br>
                             </label>
-                            <input class="form-control" id="password_in" name="password_in" placeholder="Ingrese su Password" type="text">
+                            <input class="form-control" id="password_in" name="password_in" placeholder="Ingrese su Password" type="password">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="password2_registro">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;

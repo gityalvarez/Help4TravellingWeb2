@@ -131,11 +131,11 @@
                     </form>
 
                     <form role="form"  class="form"  action="../Registro" method="post" id="registro_completo_form" >
-                        <div  class="form-group">
+                        <div class="form-group">
                             <label class="control-label" for="password_registro">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                 <br>
                             </label>
-                            <input class="form-control" id="password_in" name="password_in" placeholder="Ingrese su Password" type="password">
+                            <input class="form-control" id="password_in" name="password_in" placeholder="Ingrese el Password" type="password">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="password2_registro">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;

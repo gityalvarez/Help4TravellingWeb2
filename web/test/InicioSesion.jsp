@@ -26,6 +26,7 @@
             $(document).ready(function () {
                 $("#registro_completo_form").hide();
 
+
             <%if ((String) session.getAttribute("registra") == "true") {%>;
 
             <%String nick = "\"" + session.getAttribute("nickname").toString() + "\"";
@@ -48,9 +49,10 @@
             <%} else if ((String) session.getAttribute("inicia") == "true") {%>;
             <% String mensaje = "\"" + session.getAttribute("mensaje").toString() + "\"";%>
                 alert(<%=mensaje%>);
+                
+                    
             <%}%>;
-            });
-
+                });
         </script>
     </script>
 </head>
@@ -91,16 +93,20 @@
                                 <input type="password" class="form-control" name="password_ingreso" id="password_ingreso" placeholder="Password">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" action="InicioSesion.jsp">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <div class="checkbox" id="Recordarme">
                                     <label>
-                                        <input type="checkbox" value="on">Recordarme
+                                        <input type="checkbox"  name="Recordarme" > Recordarme
                                         <br>
                                     </label>
+
+                                   
                                 </div>
                             </div>
                         </div>
+                        
+                        
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-default" id="entrar_bn">Entrar</button>
@@ -177,6 +183,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
     <footer class="section section-primary" id="footer">
     </footer>

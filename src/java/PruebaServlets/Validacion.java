@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,8 +41,10 @@ public class Validacion extends HttpServlet {
         
         String nickname = request.getParameter("nickname_ingreso");
         String password = request.getParameter("password_ingreso");
+        String recordar = request.getParameter("Recordarme");
         
-        System.out.println(nickname+ "   "+password);
+        
+        System.out.println(nickname+ "   "+password+"  "+recordar);
         Consultas con = new Consultas();
         //System.out.println(con.Autenticacion(usuario, contrasena));
         HttpSession sesion = request.getSession();
@@ -50,6 +53,11 @@ public class Validacion extends HttpServlet {
         sesion.setAttribute("inicia", "true");
         if (con.Autenticacion(sesion)){ 
             sesion.setAttribute("mensaje","Bienvenido usuario " + nickname );
+            if (recordar=="on"){
+                Cookie Galleta = new Cookie("nick",nickname);
+                response.addCookie(Galleta);
+                //falta terminar la gestion de las cookies
+            }
         } else{
             sesion.setAttribute("mensaje","Usuario o contraseña incorrectos");
         }

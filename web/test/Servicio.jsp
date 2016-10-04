@@ -1,4 +1,15 @@
-<html><head>
+<%-- 
+    Document   : Servicio
+    Created on : 03-oct-2016, 23:40:06
+    Author     : Leonardo
+--%>
+
+<%@page import="Logica.DtServicio"%>
+<%@page import="PruebaModelo.Consultas"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -7,12 +18,18 @@
     <script src="js/includes.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
-  </head><body>
+  </head>
+  
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
     <div>
       <p>A</p>
     </div>
     <!--div class="section"></div-->
+    <% String servicio = (String) request.getParameter("nombre");%>
+    <% String proveedor = (String) request.getParameter("proveedor");%>
+    <% DtServicio dtServ = null;%>
+    <% Consultas con = new Consultas();%>
+    <% dtServ = con.getDtServicio(servicio, proveedor);%>    
     <div class="section">
       <div class="container">
         <div class="row">
@@ -108,4 +125,3 @@
     <footer class="section section-primary" id="footer"></footer>
   
 
-</body></html>

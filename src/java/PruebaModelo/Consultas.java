@@ -5,10 +5,16 @@
  */
 package PruebaModelo;
 
+import Logica.DtCategoria;
+import Logica.DtServicio;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -45,8 +51,7 @@ public class Consultas extends Conexion{
         
     }
     
-    public boolean Comprobacion(String nickname, String email) throws SQLException{
-        
+    public boolean Comprobacion(String nickname, String email) throws SQLException{        
         try (Statement st = con.createStatement()) {
             ResultSet rs = null;
             String Consulta = "SELECT * FROM usuarios";
@@ -62,13 +67,10 @@ public class Consultas extends Conexion{
             rs.close();
         }
         return true;
-       }
+    }    
     
-    
-    public void Registrar(String nickname,String nombre,String apellido, String password, String email, String imagen, String fecha) throws SQLException{
-        
+    public void Registrar(String nickname,String nombre,String apellido, String password, String email, String imagen, String fecha) throws SQLException{        
         Statement st;
-        String mensaje = "Se dio de alta al Usuario Cliente.";
         if (imagen != null) {
             imagen = "'" + imagen + "'";
             imagen = imagen.replace("\\", "\\\\");
@@ -92,10 +94,52 @@ public class Consultas extends Conexion{
                 st.close();
                 System.out.println("INSERTE :)");
             } catch (SQLException e) {
-                mensaje = "ERROR: No se pudo insertar.";
                 System.out.println("No pude INSERTAR :(");
                 System.out.println(e);
             }
-    }     
+    }    
+    
+    public DtServicio getDtServicio(String nombre, String proveedor) throws SQLException {
+        ResultSet rsServ, rsCat, rsImg;
+        DtServicio dtServ = null;
+        Connection con = Logica.Conexion.getInstance().getConnection();
+        Statement st;
+        String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + nombre + "' and proveedor='" + proveedor + "'";
+        try {
+            st = con.createStatement();
+            rsServ = st.executeQuery(sql);
+            while (rsServ.next()) {
+                String descripcion = rsServ.getString("descripcion");
+                String precio = rsServ.getString("precio");
+                String origen = rsServ.getString("origen");
+                String destino = rsServ.getString("destino");
+                Float valor = Float.parseFloat(precio);
+                List<String> imagenes = new ArrayList<String>();
+                sql = "SELECT * FROM help4traveling.serviciosimagenes WHERE servicio='" + nombre + "'";
+                rsImg = st.executeQuery(sql);
+                while (rsImg.next()) {
+                    imagenes.add(rsImg.getString("imagen"));
+                }
+                rsImg.close();
+                Map<String,DtCategoria> categorias = new HashMap<String,DtCategoria>();
+                sql = "SELECT * FROM help4traveling.servicioscategorias WHERE servicio='" + nombre + "' and proveedorServicio='" + proveedor + "'";
+                rsCat = st.executeQuery(sql);
+                while (rsCat.next()) {
+                    DtCategoria dtCat = new DtCategoria(rsCat.getString("categoria"),rsCat.getString("categoriaPadre"));
+                    categorias.put(rsCat.getString("categoria"),dtCat);
+                }
+                rsCat.close();
+                dtServ = new DtServicio(nombre, proveedor, descripcion, imagenes, categorias, valor, origen, destino);
+            }
+            rsServ.close();
+            st.close();
+            con.close();
+        } 
+        catch (SQLException e) {
+            System.out.println("No pude crear DtServicio :(");
+        }
+        return dtServ;
+    }
+    
 }
         

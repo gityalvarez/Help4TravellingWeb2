@@ -43,6 +43,8 @@ public class Validacion extends HttpServlet {
         String password = request.getParameter("password_ingreso");
         String recordar = request.getParameter("Recordarme");
         
+            
+            
         
         System.out.println(nickname+ "   "+password+"  "+recordar);
         Consultas con = new Consultas();
@@ -51,6 +53,7 @@ public class Validacion extends HttpServlet {
         sesion.setAttribute("nickname",nickname);
         sesion.setAttribute("password",password);
         sesion.setAttribute("inicia", "true");
+
         if (con.Autenticacion(sesion)){ 
             sesion.setAttribute("mensaje","Bienvenido usuario " + nickname );
             if (recordar=="on"){

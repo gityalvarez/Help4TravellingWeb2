@@ -82,7 +82,7 @@
 
                             </div>
                             <div class="col-sm-10" id="nickname_ingreso">
-                                <input type="text" class="form-control" name="nickname_ingreso" id="nickname_ingreso" placeholder="Ingrese su Nickname">
+                                <input type="text" class="form-control" name="nickname_ingreso" id="nickname_ingreso" placeholder="Ingrese su Nickname" required="true">
                             </div>
                         </div>
                         <div class="form-group">
@@ -90,7 +90,7 @@
                                 <label for="password_ingreso" class="control-label">Password</label>
                             </div>
                             <div class="col-sm-10" id="password_ingreso">
-                                <input type="password" class="form-control" name="password_ingreso" id="password_ingreso" placeholder="Password">
+                                <input type="password" class="form-control" name="password_ingreso" id="password_ingreso" placeholder="Password" required="true">
                             </div>
                         </div>
                         <div class="form-group" action="InicioSesion.jsp">
@@ -122,14 +122,14 @@
                             <label class="control-label" for="nickname_registro">Nickname
                                 <br>
                             </label>
-                            <input class="form-control" id="nickname_registro" name="nickname_registro" placeholder="Ingrese su Nickname" type="text">
+                            <input class="form-control" id="nickname_registro" name="nickname_registro" placeholder="Ingrese su Nickname" type="text" required="true">
                         </div>
                         <div class="form-group">
                             <div class="form-group">
                                 <label>Email&nbsp;
                                     <br>
                                 </label>
-                                <input type="email" id="email_in" name="email_registro" class="form-control" placeholder="Ingrese su Email">
+                                <input type="email" id="email_in" name="email_registro" class="form-control" placeholder="Ingrese su Email" required="true">
 
                             </div>
                         </div>
@@ -141,17 +141,17 @@
                             <label class="control-label" for="password_registro">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                 <br>
                             </label>
-                            <input class="form-control" id="password_in" name="password_in" placeholder="Ingrese el Password" type="password">
+                            <input class="form-control" id="password_in" name="password_in" placeholder="Ingrese el Password" type="password" required="true">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="password2_registro">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                 <br>
                             </label>
-                            <input class="form-control" id="password2_in" name="password2_in" placeholder="Reingrese el Password" type="password">
+                            <input class="form-control" id="password2_in" name="password2_in" placeholder="Reingrese el Password" type="password" required="true">
                         </div>
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" class="form-control" id= "nombre_in" name="nombre_in" placeholder="Nombre">
+                            <input type="text" class="form-control" id= "nombre_in" name="nombre_in" placeholder="Nombre" required="true">
                         </div>
                         <div class="form-group">
                             <label>Apellido</label>

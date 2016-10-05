@@ -4,6 +4,9 @@
     Author     : Leonardo
 --%>
 
+<%@page import="Logica.DtProveedor"%>
+<%@page import="java.util.List"%>
+<%@page import="Logica.ManejadorCategoria"%>
 <%@page import="Logica.DtServicio"%>
 <%@page import="PruebaModelo.Consultas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,11 +28,16 @@
       <p>A</p>
     </div>
     <!--div class="section"></div-->
-    <% String servicio = (String) request.getParameter("nombre");%>
-    <% String proveedor = (String) request.getParameter("proveedor");%>
-    <% DtServicio dtServ = null;%>
-    <% Consultas con = new Consultas();%>
-    <% dtServ = con.getDtServicio(servicio, proveedor);%>    
+    <% String servicio = (String) request.getParameter("nombre");
+       String proveedor = (String) request.getParameter("proveedor");
+       String categoria = (String) request.getParameter("categoria");
+       ManejadorCategoria mc = ManejadorCategoria.getInstance();
+       String padre = null;
+       padre = mc.obtenerPadre(categoria);
+       String abuelo = null;
+       DtServicio dtServ = null;
+       Consultas con = new Consultas();
+       dtServ = con.getDtServicio(servicio, proveedor);%>    
     <div class="section">
       <div class="container">
         <div class="row">
@@ -38,13 +46,19 @@
         <div class="row">
           <div class="col-md-12">
             <ul class="breadcrumb">
-              <li>
-                <a href="#">Principal</a>
-              </li>
-              <li>
-                <a href="#">Categoría</a>
-              </li>
-              <li class="active">Subcategoría</li>
+            <%  if (padre != null){
+                    abuelo = mc.obtenerPadre(padre);
+                    if (abuelo != null){
+                        out.println("<li>"); 
+                        out.println("<a href=\"#\">" + abuelo + "</a>"); 
+                        out.println("</li>");                     
+                    }
+                    out.println("<li>"); 
+                    out.println("<a href=\"#\">" + padre + "</a>"); 
+                    out.println("</li>");                     
+                }
+            %>
+            <li class="active"><%=categoria%></li>
             </ul>
           </div>
         </div>
@@ -53,30 +67,61 @@
             <div class="section">
               <div class="container">
                 <div class="row default">
-                  <div class="col-md-6">
-                    <a href="#"><img src="http://guiamexico.com.mx/Imagenes/b/203688717-3-turisticos-maxani-servicios-turisticos-y-viajes-escolares.jpeg" class="img-responsive"></a>
-                    <hr>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <a href="#"><img src="http://guiamexico.com.mx/Imagenes/b/203688717-3-turisticos-maxani-servicios-turisticos-y-viajes-escolares.jpeg" class="img-responsive"></a>
-                      </div>
-                      <div class="col-md-4">
-                        <a href="#"><img src="http://3.bp.blogspot.com/-9G4QVvS1OAc/VX9qcLZVYGI/AAAAAAAAAI0/ecPY1G2OnCQ/s1600/Baner_bolg_hoteles.jpg" class="img-responsive"></a>
-                      </div>
-                      <div class="col-md-4">
-                        <a href="#"><img src="http://www.sectur.gob.mx/wp-content/uploads/2014/01/3051.jpg" class="img-responsive"></a>
-                      </div>
-                    </div>
+                <% List<String> imagenes = dtServ.getImagenes();
+                   int cantimgs = imagenes.size(); 
+                   if (cantimgs > 0)
+                       if (cantimgs == 1){  
+                           out.println("<div class=\"col-md-6\">");                    
+                           out.println("<a href=\"#\"><img src=\""+imagenes.get(0)+"\"class=\"img-responsive\"></a>");
+                           out.println("<hr>"); 
+                           out.println("<div class=\"row\">");
+                           out.println("<div class=\"col-md-4\">");
+                           out.println("<a href=\"#\"><img src=\""+imagenes.get(0)+"\"class=\"img-responsive\"></a>");
+                           out.println("</div>");
+                           out.println("</div>");                               
+                       }
+                       else if (cantimgs == 2){  
+                                out.println("<div class=\"col-md-6\">");                    
+                                out.println("<a href=\"#\"><img src=\""+imagenes.get(0)+"\"class=\"img-responsive\"></a>");
+                                out.println("<hr>"); 
+                                out.println("<div class=\"row\">");
+                                out.println("<div class=\"col-md-4\">");
+                                out.println("<a href=\"#\"><img src=\""+imagenes.get(0)+"\"class=\"img-responsive\"></a>");
+                                out.println("</div>");
+                                out.println("<div class=\"col-md-4\">");
+                                out.println("<a href=\"#\"><img src=\""+imagenes.get(1)+"\"class=\"img-responsive\"></a>");
+                                out.println("</div>");
+                                out.println("</div>");                               
+                            }
+                            else if (cantimgs == 3){  
+                                    out.println("<div class=\"col-md-6\">");                    
+                                    out.println("<a href=\"#\"><img src=\""+imagenes.get(0)+"\"class=\"img-responsive\"></a>");
+                                    out.println("<hr>"); 
+                                    out.println("<div class=\"row\">");
+                                    out.println("<div class=\"col-md-4\">");
+                                    out.println("<a href=\"#\"><img src=\""+imagenes.get(0)+"\"class=\"img-responsive\"></a>");
+                                    out.println("</div>");
+                                    out.println("<div class=\"col-md-4\">");
+                                    out.println("<a href=\"#\"><img src=\""+imagenes.get(1)+"\"class=\"img-responsive\"></a>");
+                                    out.println("</div>");
+                                    out.println("</div>");                               
+                                 }            
+                %>  
                     <hr>
                     <table class="default table table-bordered table-hover table-striped">
                       <tbody>
                         <tr class="default">
                           <td class="default" width="200">Proveedor</td>
-                          <td id="nomprov">Martin Garcia</td>
+                          <% String nickname = dtServ.getNkProveedor();
+                             DtProveedor prov = con.getDtProveedor(nickname);
+                             out.println("<td id=\"nomprov\">"+prov.getNombre()+" "+prov.getApellido()+"</td>");
+                          %>                          
                         </tr>
                         <tr>
                           <td class="default" width="200">Origen</td>
-                          <td id="ciuorigen">Latveria</td>
+                          <% String origen = dtServ.getNomCiuOrigen();
+                             out.println("<td id=\"ciuorigen\">"+origen+"</td>");
+                          %>
                         </tr>
                         <tr>
                           <td class="default" width="200">Destino</td>

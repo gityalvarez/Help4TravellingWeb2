@@ -5,14 +5,20 @@
  */
 package PruebaModelo;
 
+import Logica.Date;
 import Logica.DtCategoria;
+import Logica.DtPromocion;
+import Logica.DtProveedor;
 import Logica.DtServicio;
+import Logica.DtUsuario;
+import Logica.Proveedor;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -140,6 +146,89 @@ public class Consultas extends Conexion{
         }
         return dtServ;
     }
+    
+    public DtProveedor getDtProveedor(String nickname) throws SQLException {
+        ResultSet rs;
+        DtProveedor p = null;
+        Connection con = Logica.Conexion.getInstance().getConnection();
+        Statement st;
+        String sql = "SELECT * FROM help4traveling.usuarios WHERE nickname='" + nickname + "'";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
+                Date fecha = new Date();
+                p = new DtProveedor(rs.getString("nombre"), rs.getString("apellido"), rs.getString("nickname"), rs.getString("email"), fecha, "imagen", "empresa", "link");                        
+            }
+            rs.close();
+            st.close();
+            con.close();            
+        } 
+        catch (SQLException e) {
+            System.out.println("No obtuve proveedor :(");
+            System.err.println(e.getMessage());
+        }
+        return p;
+    }
+        
+    public List<DtPromocion> listarPromocionesSistema() throws SQLException {
+        List<DtPromocion> promociones = null;
+        ResultSet rs;
+        //Connection con = Logica.Conexion.getInstance().getConnection();
+        Statement st;
+        String sql = "SELECT * FROM help4traveling.promociones";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            promociones = new LinkedList<DtPromocion>();
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String proveedor = rs.getString("proveedor");
+                String descuento = rs.getString("descuento");
+                String total = rs.getString("total");
+                DtPromocion nuevo = new DtPromocion(nombre, proveedor, descuento, total);
+                promociones.add(nuevo);
+            }
+            rs.close();
+            con.close();
+            st.close();
+            System.out.println("promociones  cargadas :)");
+        } catch (SQLException e) {
+            System.out.println("No pude cargar promociones :(");
+        }
+        return promociones;
+    }
+    
+    
+    public List<DtUsuario> listarUsuariosSistema() throws SQLException {
+        List<DtUsuario> usuarios = null;
+        ResultSet rs;
+        //Connection con = Logica.Conexion.getInstance().getConnection();
+        Statement st;
+        String sql = "SELECT * FROM help4traveling.usuarios";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            usuarios = new LinkedList<DtUsuario>();
+            while (rs.next()) {
+                String nickname = rs.getString("nickname");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String correo = rs.getString("email");
+                Date fecha = new Date();
+                DtUsuario nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, null, "tipo", "empresa", "link");                                      
+                usuarios.add(nuevo);
+            }
+            rs.close();
+            con.close();
+            st.close();
+            System.out.println("usuarios  cargados :)");
+        } catch (SQLException e) {
+            System.out.println("No pude cargar usuarios :(");
+        }
+        return usuarios;
+    }
+    
     
 }
         

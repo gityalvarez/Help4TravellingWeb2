@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Leonardo
  */
-@WebServlet(name = "Oferta", urlPatterns = {"/Oferta"})
+@WebServlet(name = "Oferta", urlPatterns = {"/DiscriminarOferta"})
 public class Oferta extends HttpServlet {
 
     /**
@@ -37,14 +37,21 @@ public class Oferta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
+        System.out.println("Entro al processs request");
         String nomoferta = (String) request.getParameter("nombre");
         String nomproveedor = (String) request.getParameter("proveedor");
+        String nomcategoria = (String) request.getParameter("categoria");
         ManejadorServicio ms = ManejadorServicio.getInstance();
-        response.setContentType("text/html;charset=UTF-8");        
-        if (ms.existeServicio(nomoferta)){            
-            response.sendRedirect("test/Servicio.jsp?nombre="+nomoferta+"&proveedor="+nomproveedor);
+        response.setContentType("text/html;charset=UTF-8");  
+        //String nomoferta = "Air-France-FC";
+        //String nomproveedor = "tCook";
+        //String nomcategoria = "Air France";
+        System.out.println("Antes de ver tipo ervicio");
+        if (ms.existeServicio(nomoferta)){  
+            System.out.println("Es Servicio");
+            response.sendRedirect("test/Servicio.jsp?nombre="+nomoferta+"&proveedor="+nomproveedor+"&categoria="+nomcategoria);
         }
-        else response.sendRedirect("test/Promocion.jsp?nombre="+nomoferta+"&proveedor="+nomproveedor);        
+        else response.sendRedirect("test/Promocion.jsp?nombre="+nomoferta+"&proveedor="+nomproveedor+"&categoria="+nomcategoria);        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

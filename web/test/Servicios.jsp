@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Promociones
-    Created on : 05-oct-2016, 9:49:28
+    Document   : Servicios
+    Created on : 05-oct-2016, 15:00:32
     Author     : Leonardo
 --%>
 
@@ -8,7 +8,7 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="PruebaModelo.Consultas"%>
-<%@page import="Logica.DtPromocion"%>
+<%@page import="Logica.DtServicio"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
   <head>
@@ -36,37 +36,40 @@
             <div class="section">
               <div class="container">
                 <div class="row default">
-                    <div class="row default"><h2><b>Listado de Promociones</b></h2></div>
+                    <div class="row default"><h2><b>Listado de Servicios</b></h2></div>
                     <hr>
                     <table class="default table table-bordered table-hover table-striped">
                         <thead>
                           <tr class="default">
                             <td class="default" width="200" align="center"><b>Nombre</b></td>
+                            <td class="default" width="200" align="center"><b>Descripcion</b></td>
                             <td class="default" width="200" align="center"><b>Proveedor</b></td>
-                            <td class="default" width="200" align="center"><b>Descuento</b></td>
-                            <td class="default" width="200" align="center"><b>Total</b></td>                          
+                            <td class="default" width="200" align="center"><b>Precio</b></td>
+                            <td class="default" width="200" align="center"><b>Origen</b></td>                          
                           </tr>
                         </thead>
                       <tbody>    
                           <!--tr >
                             <td colspan="4"></td>
                           </tr-->
-                        <% DtPromocion dtProm = null;
-                           List<DtPromocion> promos;
+                        <% DtServicio dtServ = null;
+                           List<DtServicio> servicios;
                            Consultas con = new Consultas();
-                           promos = con.listarPromocionesSistema();
-                           Iterator<DtPromocion> iter = promos.iterator();
+                           servicios = con.listarServiciosSistema();
+                           Iterator<DtServicio> iter = servicios.iterator();
                            while (iter.hasNext()){
-                               dtProm = iter.next();
-                               String nombre = dtProm.getNombre();
-                               String proveedor = dtProm.getProveedor();
-                               String descuento = dtProm.getDescuento();
-                               String total = dtProm.getDescuento();
+                               dtServ = iter.next();
+                               String nombre = dtServ.getNombre();
+                               String proveedor = dtServ.getNkProveedor();
+                               String descripcion = dtServ.getDescripcion();
+                               float precio = dtServ.getPrecio();
+                               String origen = dtServ.getNomCiuOrigen();
                                out.println("<tr class=\"default\">");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"nombre\">"+nombre+"</td>");
+                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"nombre\"><a href=\"Servicio.jsp?nombre="+nombre+"&proveedor="+proveedor+"\">"+nombre+"</a></td>");
+                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"descripcion\">"+descripcion+"</td>");                             
                                out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"proveedor\">"+proveedor+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"descuento\">"+descuento+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"total\">"+total+"</td>");
+                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"precio\">"+precio+"</td>");
+                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"origen\">"+origen+"</td>");
                                out.println("</tr>");
                            }                           
                         %>                       

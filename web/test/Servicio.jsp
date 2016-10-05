@@ -4,6 +4,7 @@
     Author     : Leonardo
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="Logica.DtProveedor"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.ManejadorCategoria"%>
@@ -28,16 +29,21 @@
       <p>A</p>
     </div>
     <!--div class="section"></div-->
-    <% String servicio = (String) request.getParameter("nombre");
-       String proveedor = (String) request.getParameter("proveedor");
-       String categoria = (String) request.getParameter("categoria");
-       ManejadorCategoria mc = ManejadorCategoria.getInstance();
+    <% //String nombre = (String) request.getParameter("nombre");
+       //String proveedor = (String) request.getParameter("proveedor");
+       //String categoria = (String) request.getParameter("categoria");
+       String nombre = "Air-France-FC";
+       String proveedor = "tCook";
+       String categoria = "Air France";
+       Consultas con = new Consultas();
+       //ManejadorCategoria mc = ManejadorCategoria.getInstance();
        String padre = null;
-       padre = mc.obtenerPadre(categoria);
+       //padre = mc.obtenerPadre(categoria);
+       padre = con.obtenerPadre(categoria);
        String abuelo = null;
        DtServicio dtServ = null;
-       Consultas con = new Consultas();
-       dtServ = con.getDtServicio(servicio, proveedor);%>    
+       dtServ = con.getDtServicio(nombre, proveedor);
+    %>    
     <div class="section">
       <div class="container">
         <div class="row">
@@ -47,7 +53,8 @@
           <div class="col-md-12">
             <ul class="breadcrumb">
             <%  if (padre != null){
-                    abuelo = mc.obtenerPadre(padre);
+                    //abuelo = mc.obtenerPadre(padre);
+                    abuelo = con.obtenerPadre(padre);
                     if (abuelo != null){
                         out.println("<li>"); 
                         out.println("<a href=\"#\">" + abuelo + "</a>"); 
@@ -67,8 +74,12 @@
             <div class="section">
               <div class="container">
                 <div class="row default">
-                <% List<String> imagenes = dtServ.getImagenes();
+                <% List<String> imagenes = new ArrayList<String>(); // = dtServ.getImagenes();
+                   imagenes.add("imagen1");
+                   imagenes.add("imagen2");
+                   imagenes.add("imagen3");
                    int cantimgs = imagenes.size(); 
+                   System.out.println(cantimgs);
                    if (cantimgs > 0)
                        if (cantimgs == 1){  
                            out.println("<div class=\"col-md-6\">");                    

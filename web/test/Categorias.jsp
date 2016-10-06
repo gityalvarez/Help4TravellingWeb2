@@ -22,7 +22,15 @@
     <script>
         $(document).ready(function () {
             $("#selector").jstree();
+            $("#selector").on("select_node.jstree",
+                    function (evt, data) {
+                        //hacemos lo que queremos con la categoria seleccionada
+                    }
+            );
+
         });
+
+
     </script>
 </head>
 

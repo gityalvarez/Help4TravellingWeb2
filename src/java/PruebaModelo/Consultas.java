@@ -286,5 +286,60 @@ public class Consultas extends Conexion{
         }
         return ReservaxUsuario;
     }
+
+       
+    public List<DtServicio> listarServiciosSistema() throws SQLException {
+        List<DtServicio> servicios = null;
+        ResultSet rs;
+        //Connection con = Logica.Conexion.getInstance().getConnection();
+        Statement st;
+        String sql = "SELECT * FROM help4traveling.servicios";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            servicios = new LinkedList<DtServicio>();            
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String proveedor = rs.getString("proveedor");
+                String descripcion = rs.getString("descripcion");
+                float precio = Float.parseFloat(rs.getString("precio"));
+                String origen = rs.getString("origen");
+                Date fecha = new Date();
+                DtServicio nuevo = new DtServicio(nombre, proveedor, descripcion, null, null, precio, origen, null);
+                servicios.add(nuevo);
+            }
+            rs.close();
+            con.close();
+            st.close();
+            System.out.println("usuarios  cargados :)");
+        } catch (SQLException e) {
+            System.out.println("No pude cargar usuarios :(");
+        }
+        return servicios;
+    }
+    
+    public String obtenerPadre(String hijo) {
+        String padre = null;
+        ResultSet rs;
+        //Connection con = Logica.Conexion.getInstance().getConnection();
+        Statement st;
+        String sql;
+        sql = "SELECT padre FROM help4traveling.categorias WHERE nombre='" + hijo + "'";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                padre = rs.getString("padre");
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("No pude obtener categorias :(");
+        }
+        return padre;
+    }
+    
 }
+
         

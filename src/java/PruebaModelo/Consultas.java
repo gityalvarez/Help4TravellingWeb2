@@ -9,9 +9,17 @@ import Logica.Date;
 import Logica.DtCategoria;
 import Logica.DtPromocion;
 import Logica.DtProveedor;
+import Logica.DtReserva;
 import Logica.DtServicio;
 import Logica.DtUsuario;
+import Logica.ItemReserva;
 import Logica.Proveedor;
+import Logica.Reserva;
+import Logica.Reserva.eEstado;
+import static Logica.Reserva.eEstado.CANCELADA;
+import static Logica.Reserva.eEstado.FACTURADA;
+import static Logica.Reserva.eEstado.PAGADA;
+import static Logica.Reserva.eEstado.REGISTRADA;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -229,6 +237,54 @@ public class Consultas extends Conexion{
         return usuarios;
     }
     
-    
+     public List<DtReserva> listarReservasUsuario(String cli) throws SQLException {
+        List<DtReserva> ReservaxUsuario = null;
+        ResultSet rs;
+        //Connection con = Logica.Conexion.getInstance().getConnection();
+        Statement st;
+        String sql = "SELECT * FROM help4traveling.reservas where cliente ='"+cli+"'";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            ReservaxUsuario = new LinkedList<DtReserva>();
+            while (rs.next()) {
+                String numero = rs.getString("numero");
+                String fecha1 = rs.getString("fecha");
+                String total = rs.getString("total");
+                String estado = rs.getString("estado");
+                
+                String partes[]=fecha1.split("-");
+        
+       
+                Date fecha = new Date(Integer.valueOf(partes[2]),Integer.valueOf(partes[1]), Integer.valueOf(partes[0]));
+               Map<Integer, ItemReserva> items=null ;
+               
+                DtReserva nueva = null;
+               switch (estado) {
+            case "REGISTRADA":
+                nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.REGISTRADA , Double.parseDouble(total), cli, items);
+                break;
+            case "CANCELADA":
+                nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.CANCELADA , Double.parseDouble(total), cli, items);
+                break;
+            case "FACTURADA":
+                nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.FACTURADA , Double.parseDouble(total), cli, items);
+                break;
+            case "PAGADA":
+                nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.PAGADA , Double.parseDouble(total), cli, items);
+                break;
+        }
+                
+                ReservaxUsuario.add(nueva);
+            }
+            rs.close();
+            con.close();
+            st.close();
+            System.out.println("usuarios  cargados :)");
+        } catch (SQLException e) {
+            System.out.println("No pude cargar usuarios :(");
+        }
+        return ReservaxUsuario;
+    }
 }
         

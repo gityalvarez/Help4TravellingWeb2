@@ -21,6 +21,7 @@
     <script src="js/includes.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
+    <title>Lista de usuarios</title>
   </head>
   
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>

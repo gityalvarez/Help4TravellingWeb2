@@ -56,15 +56,22 @@ public class Validacion extends HttpServlet {
 
         if (con.Autenticacion(sesion)){ 
             sesion.setAttribute("mensaje","Bienvenido usuario " + nickname );
-            if (recordar=="on"){
+            if(!(request.getParameter("Recordarme")==null)){
+            if (recordar.equals("on")){
                 Cookie Galleta = new Cookie("nick",nickname);
+                Galleta.setMaxAge(60*60*24*7);
                 response.addCookie(Galleta);
+                System.out.println("se cre la galleta con nombre "+Galleta.getName());
+                System.out.println("entre al recordar");
                 //falta terminar la gestion de las cookies
             }
+            }
+            response.sendRedirect("test/InicioSesion.jsp");
         } else{
             sesion.setAttribute("mensaje","Usuario o contraseña incorrectos");
+            response.sendRedirect("test/InicioSesion.jsp");
         }
-        response.sendRedirect("test/InicioSesion.jsp");
+        //response.sendRedirect("test/InicioSesion.jsp");
         }   
         
 

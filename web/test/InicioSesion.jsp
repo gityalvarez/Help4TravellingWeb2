@@ -8,19 +8,16 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
-        <script src="js/includes.js"></script>
-        <!--<script src="js/google-code-prettify/prettify.js"></script>   -->     
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-       <%-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>--%>
-        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="css\test.css" rel="stylesheet" type="text/css">
+    <head> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/includes.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css\test.css" rel="stylesheet" type="text/css">
+  </head>
         <script type="text/javascript">
                 $(document).ready(function () {
                 $("#registro_completo_form").hide();
@@ -55,6 +52,7 @@
         </script>
 </head>
 <body>
+       
     <div class="navbar navbar-default navbar-fixed-top" id="header">
     </div>
     <div class="section">
@@ -66,6 +64,20 @@
             </div>
         </div>
     </div>
+    <%
+            
+                            Cookie [] todoslosCookies = request.getCookies();
+                            if(todoslosCookies != null ){
+                            for(int i=0;i<todoslosCookies.length;i++){
+                                Cookie unCookie=todoslosCookies[i];
+                                if (unCookie.getName().equals("nick")){
+                                    String nicknameCookie=unCookie.getValue();
+                                        
+                                    out.println("<div><h1> "+nicknameCookie +"</h1></div>");
+                                    }
+                            }
+                            }
+    %> 
     <div class="section"></div>
     <div class="section">
         <div class="container">
@@ -75,9 +87,9 @@
                     <form role="form" class="form-horizontal" action="../Autenticacion" method="post" id="ingreso_form">
                         <div class="form-group">
                             <div class="col-sm-2">
-                                <label for="nickname_ingreso" class="control-label">Nickname</label>
+                                <label for="nickname_ingreso" class="control-label">Nickname
                                 <br>
-
+                                </label>
                             </div>
                             <div class="col-sm-10" id="nickname_ingreso">
                                 <input type="text" class="form-control" name="nickname_ingreso" id="nickname_ingreso" placeholder="Ingrese su Nickname" required="true">
@@ -85,7 +97,9 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-2">
-                                <label for="password_ingreso" class="control-label">Password</label>
+                                <label for="password_ingreso" class="control-label">Password
+                                <br>
+                                </label>
                             </div>
                             <div class="col-sm-10" id="password_ingreso">
                                 <input type="password" class="form-control" name="password_ingreso" id="password_ingreso" placeholder="Password" required="true">

@@ -30,12 +30,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author yaman
  */
-public class Consultas extends Conexion{
+public class Consultas extends Conexion {
     
     public boolean Autenticacion(HttpSession sesion) throws SQLException{
         
@@ -69,8 +70,7 @@ public class Consultas extends Conexion{
         try (Statement st = con.createStatement()) {
             ResultSet rs = null;
             String Consulta = "SELECT * FROM usuarios";
-            rs = st.executeQuery(Consulta);
-            
+            rs = st.executeQuery(Consulta);            
             while (rs.next()){
                 if (nickname.equals(rs.getString("nickname")) || email.equals(rs.getString("email"))){
                     rs.close();
@@ -115,14 +115,15 @@ public class Consultas extends Conexion{
     
     public DtServicio getDtServicio(String nombre, String proveedor) throws SQLException {
         ResultSet rsServ, rsCat, rsImg;
-        DtServicio dtServ = null;
-        Connection con = Logica.Conexion.getInstance().getConnection();
-        Statement st;
-        String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + nombre + "' and proveedor='" + proveedor + "'";
+        DtServicio nuevo = null;
+        Statement stServ, stImg, stCat;
         try {
-            st = con.createStatement();
-            rsServ = st.executeQuery(sql);
-            while (rsServ.next()) {
+            //Connection con = Logica.Conexion.getInstance().getConnection();
+            stServ = con.createStatement();
+            String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + nombre + "' AND proveedor='" + proveedor + "'";
+            rsServ = stServ.executeQuery(sql);
+            System.out.println("Ejecuto conulta");
+            if (rsServ.next()) {
                 String descripcion = rsServ.getString("descripcion");
                 String precio = rsServ.getString("precio");
                 String origen = rsServ.getString("origen");
@@ -130,63 +131,86 @@ public class Consultas extends Conexion{
                 Float valor = Float.parseFloat(precio);
                 List<String> imagenes = new ArrayList<String>();
                 sql = "SELECT * FROM help4traveling.serviciosimagenes WHERE servicio='" + nombre + "'";
-                rsImg = st.executeQuery(sql);
+                stImg = con.createStatement();
+                rsImg = stImg.executeQuery(sql);
                 while (rsImg.next()) {
                     imagenes.add(rsImg.getString("imagen"));
                 }
                 rsImg.close();
+                stImg.close();
                 Map<String,DtCategoria> categorias = new HashMap<String,DtCategoria>();
-                sql = "SELECT * FROM help4traveling.servicioscategorias WHERE servicio='" + nombre + "' and proveedorServicio='" + proveedor + "'";
-                rsCat = st.executeQuery(sql);
+                sql = "SELECT * FROM help4traveling.servicioscategorias WHERE servicio='" + nombre + "' AND proveedorServicio='" + proveedor + "'";
+                stCat = con.createStatement();
+                rsCat = stCat.executeQuery(sql);
                 while (rsCat.next()) {
                     DtCategoria dtCat = new DtCategoria(rsCat.getString("categoria"),rsCat.getString("categoriaPadre"));
                     categorias.put(rsCat.getString("categoria"),dtCat);
                 }
                 rsCat.close();
-                dtServ = new DtServicio(nombre, proveedor, descripcion, imagenes, categorias, valor, origen, destino);
+                stCat.close();
+                nuevo = new DtServicio(nombre, proveedor, descripcion, imagenes, categorias, valor, origen, destino);                
             }
             rsServ.close();
-            st.close();
             con.close();
+            stServ.close();            
         } 
         catch (SQLException e) {
-            System.out.println("No pude crear DtServicio :(");
+            System.out.println("No pude crear Servicio :(");            
         }
-        return dtServ;
+        return nuevo;        
     }
     
-    public DtProveedor getDtProveedor(String nickname) throws SQLException {
-        ResultSet rs;
-        DtProveedor p = null;
-        Connection con = Logica.Conexion.getInstance().getConnection();
-        Statement st;
-        String sql = "SELECT * FROM help4traveling.usuarios WHERE nickname='" + nickname + "'";
+    public DtUsuario getDtProveedor(String nickname) {
+        ResultSet rsUsu, rsProv, rsImg;
+        DtUsuario nuevo = null;
+        Statement stUsu, stProv, stImg;
         try {
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            if (rs.next()) {
-                Date fecha = new Date();
-                p = new DtProveedor(rs.getString("nombre"), rs.getString("apellido"), rs.getString("nickname"), rs.getString("email"), fecha, "imagen", "empresa", "link");                        
+            //Connection con = Conexion.getInstance().getConnection();
+            stUsu = con.createStatement();
+            String sql = "SELECT * FROM help4traveling.usuarios WHERE nickname='" + nickname + "'";
+            rsUsu = stUsu.executeQuery(sql);
+            stProv = con.createStatement();
+            sql = "SELECT * FROM help4traveling.proveedores WHERE nickname='" + nickname + "'";
+            rsProv = stProv.executeQuery(sql);
+            if (rsUsu.next() && rsProv.next()) {
+                String nombre = rsUsu.getString("nombre");
+                String apellido = rsUsu.getString("apellido");
+                String correo = rsUsu.getString("email");      
+                Date fecha = new Date(rsUsu.getString("fechaNac"));
+                String imagen = null;
+                stImg = con.createStatement();
+                sql = "SELECT * FROM help4traveling.usuariosimagenes WHERE usuario='" + nickname + "'";
+                rsImg = stImg.executeQuery(sql);
+                if (rsImg.next())
+                    imagen = rsImg.getString("imagen");
+                rsImg.close();
+                stImg.close();
+                String empresa = rsProv.getString("empresa");
+                String enlace = rsProv.getString("link");
+                nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, imagen, "Proveedor", empresa, enlace);                            
             }
-            rs.close();
-            st.close();
-            con.close();            
+            rsProv.close();
+            stProv.close();
+            rsUsu.close();
+            stUsu.close();
+            con.close();
+            System.out.println("Se obtuvo Proveedor :)");
         } 
         catch (SQLException e) {
-            System.out.println("No obtuve proveedor :(");
+            System.out.println("No obtuve Proveedor :(");
             System.err.println(e.getMessage());
         }
-        return p;
-    }
+        return nuevo;        
+    }    
         
     public List<DtPromocion> listarPromocionesSistema() throws SQLException {
         List<DtPromocion> promociones = null;
         ResultSet rs;
-        //Connection con = Logica.Conexion.getInstance().getConnection();
-        Statement st;
-        String sql = "SELECT * FROM help4traveling.promociones";
+        Statement st;        
         try {
+            //Connection con = Logica.Conexion.getInstance().getConnection();
             st = con.createStatement();
+            String sql = "SELECT * FROM help4traveling.promociones";
             rs = st.executeQuery(sql);
             promociones = new LinkedList<DtPromocion>();
             while (rs.next()) {
@@ -210,29 +234,38 @@ public class Consultas extends Conexion{
     
     public List<DtUsuario> listarUsuariosSistema() throws SQLException {
         List<DtUsuario> usuarios = null;
-        ResultSet rs;
-        //Connection con = Logica.Conexion.getInstance().getConnection();
-        Statement st;
-        String sql = "SELECT * FROM help4traveling.usuarios";
+        ResultSet rsUsu, rsImg;
+        Statement stUsu, stImg;
         try {
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
+            //Connection con = Logica.Conexion.getInstance().getConnection();
+            stUsu = con.createStatement();
+            String sql = "SELECT * FROM help4traveling.usuarios";
+            rsUsu = stUsu.executeQuery(sql);
             usuarios = new LinkedList<DtUsuario>();
-            while (rs.next()) {
-                String nickname = rs.getString("nickname");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                String correo = rs.getString("email");
-                Date fecha = new Date();
-                DtUsuario nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, null, "tipo", "empresa", "link");                                      
+            while (rsUsu.next()) {
+                String nickname = rsUsu.getString("nickname");
+                String nombre = rsUsu.getString("nombre");
+                String apellido = rsUsu.getString("apellido");
+                String correo = rsUsu.getString("email");
+                Date fecha = new Date(rsUsu.getString("fechaNac"));
+                String imagen = null;
+                stImg = con.createStatement();
+                sql = "SELECT * FROM help4traveling.usuariosimagenes WHERE usuario='" + nickname + "'";
+                rsImg = stImg.executeQuery(sql);
+                if (rsImg.next())
+                    imagen = rsImg.getString("imagen");
+                rsImg.close();
+                stImg.close();
+                DtUsuario nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, imagen, "tipo", "empresa", "link");                                      
                 usuarios.add(nuevo);
             }
-            rs.close();
-            con.close();
-            st.close();
-            System.out.println("usuarios  cargados :)");
-        } catch (SQLException e) {
-            System.out.println("No pude cargar usuarios :(");
+            rsUsu.close();
+            stUsu.close();
+            con.close();            
+            System.out.println("Usuarios cargados :)");
+        } 
+        catch (SQLException e) {
+            System.out.println("No pude cargar Usuarios :(");
         }
         return usuarios;
     }
@@ -291,11 +324,11 @@ public class Consultas extends Conexion{
     public List<DtServicio> listarServiciosSistema() throws SQLException {
         List<DtServicio> servicios = null;
         ResultSet rs;
-        //Connection con = Logica.Conexion.getInstance().getConnection();
         Statement st;
-        String sql = "SELECT * FROM help4traveling.servicios";
         try {
+            //Connection con = Logica.Conexion.getInstance().getConnection();
             st = con.createStatement();
+            String sql = "SELECT * FROM help4traveling.servicios";
             rs = st.executeQuery(sql);
             servicios = new LinkedList<DtServicio>();            
             while (rs.next()) {
@@ -304,16 +337,15 @@ public class Consultas extends Conexion{
                 String descripcion = rs.getString("descripcion");
                 float precio = Float.parseFloat(rs.getString("precio"));
                 String origen = rs.getString("origen");
-                Date fecha = new Date();
                 DtServicio nuevo = new DtServicio(nombre, proveedor, descripcion, null, null, precio, origen, null);
                 servicios.add(nuevo);
             }
             rs.close();
             con.close();
             st.close();
-            System.out.println("usuarios  cargados :)");
+            System.out.println("Servicios cargados :)");
         } catch (SQLException e) {
-            System.out.println("No pude cargar usuarios :(");
+            System.out.println("No pude cargar Servicios :(");
         }
         return servicios;
     }

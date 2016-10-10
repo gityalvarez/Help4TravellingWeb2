@@ -4,12 +4,12 @@
     Author     : Leonardo
 --%>
 
+<%@page import="Logica.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="PruebaModelo.Consultas"%>
 <%@page import="Logica.DtUsuario"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
   <head>
@@ -20,13 +20,12 @@
     <script src="js/jquery-3.1.0.min.js"></script>
     <script src="js/includes.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="css\test.css" rel="stylesheet" type="text/css">
-    <title>Lista de usuarios</title>
+    <link href="css\test.css" rel="stylesheet" type="text/css">    
   </head>
-  
+  <title>Listado de Usuarios</title>
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
     <div>
-      <p>A</p>
+      <p>AAA</p>
     </div>
     <div class="section">
       <div class="container">
@@ -44,6 +43,7 @@
                           <td class="default" width="200" align="center"><b>Nombre</b></td>
                           <td class="default" width="200" align="center"><b>Apellido</b></td>
                           <td class="default" width="200" align="center"><b>Correo electrónico</b></td>
+                          <td class="default" width="200" align="center"><b>Fecha Nacimiento</b></td>
                         </tr>
                         <% DtUsuario dtUsu = null;
                            List<DtUsuario> usuarios;
@@ -56,14 +56,17 @@
                                String nombre = dtUsu.getNombre();
                                String apellido = dtUsu.getApellido();
                                String correo = dtUsu.getCorreo();
-                               out.println("<tr class=\"default\">");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"nickname\">"+nick+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"nombre\">"+nombre+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"apellido\">"+apellido+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"correo\">"+correo+"</td>");
-                               out.println("</tr>");
-                           }                           
-                        %>                       
+                               Date fechanac = dtUsu.getNacimiento();
+                               String nacimiento = String.valueOf(fechanac.getDia()) + "/" + String.valueOf(fechanac.getMes()) + "/" + String.valueOf(fechanac.getAno());
+                               %>
+                               <tr class="default">
+                               <td class="default" align="center" width="200" id="nickname"><%=nick%></td>
+                               <td class="default" align="center" width="200" id="nombre"><%=nombre%></td>
+                               <td class="default" align="center" width="200" id="apellido"><%=apellido%></td>
+                               <td class="default" align="center" width="200" id="correo"><%=correo%></td>
+                               <td class="default" align="center" width="200" id="nacimiento"><%=nacimiento%></td>
+                               </tr>
+                        <% } %>                       
                       </tbody>
                     </table>
                     <ul class="list-group"></ul>

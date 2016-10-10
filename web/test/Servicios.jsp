@@ -21,10 +21,10 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
   </head>
-  
+  <title>Listado de Servicios</title>
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
     <div>
-      <p>A</p>
+      <p>AAA</p>
     </div>
     <div class="section">
       <div class="container">
@@ -64,15 +64,16 @@
                                String descripcion = dtServ.getDescripcion();
                                float precio = dtServ.getPrecio();
                                String origen = dtServ.getNomCiuOrigen();
-                               out.println("<tr class=\"default\">");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"nombre\"><a href=\"Servicio.jsp?nombre="+nombre+"&proveedor="+proveedor+"\">"+nombre+"</a></td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"descripcion\">"+descripcion+"</td>");                             
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"proveedor\">"+proveedor+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"precio\">"+precio+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"origen\">"+origen+"</td>");
-                               out.println("</tr>");
-                           }                           
-                        %>                       
+                               String categoria = "Air France";                               
+                        %>     
+                               <tr class="default">
+                               <td class="default" align="center" width="200" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(nombre); %>&proveedor=<% out.print(proveedor); %>&categoria=<% out.print(categoria); %>"><%=nombre%></a></td>                                       
+                               <td class="default" align="center" width="200" id="descripcion"><%=descripcion%></td>                             
+                               <td class="default" align="center" width="200" id="proveedor"><%=proveedor%></td>
+                               <td class="default" align="center" width="200" id="precio"><%=precio%></td>
+                               <td class="default" align="center" width="200" id="origen"><%=origen%></td>
+                               </tr>
+                        <% } %>                       
                       </tbody>
                     </table>
                     <ul class="list-group"></ul>

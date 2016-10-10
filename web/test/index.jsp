@@ -17,14 +17,6 @@
                     $('#idIniciar').hide();
                     $('#idRegistrar').hide();
                 <%}%>;
-                    
-                $("#idIniciar").click(function () {
-                    $(location).attr('href','InicioSesion.jsp');
-                });
-                
-                $("#idRegistrar").click(function () {
-                    $(location).attr('href','InicioSesion.jsp');
-                });
             }, 100);
         });
     </script>

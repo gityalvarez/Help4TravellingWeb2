@@ -21,7 +21,7 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
   </head>
-  
+    <title>Listado de Promociones</title>
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
     <div>
       <p>A</p>
@@ -61,15 +61,15 @@
                                String nombre = dtProm.getNombre();
                                String proveedor = dtProm.getProveedor();
                                String descuento = dtProm.getDescuento();
-                               String total = dtProm.getDescuento();
-                               out.println("<tr class=\"default\">");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"nombre\">"+nombre+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"proveedor\">"+proveedor+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"descuento\">"+descuento+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"total\">"+total+"</td>");
-                               out.println("</tr>");
-                           }                           
-                        %>                       
+                               String total = dtProm.getDescuento();                               
+                        %>
+                               <tr class="default">
+                               <td class="default" align="center" width="200" id="nombre"><%=nombre%></td>
+                               <td class="default" align="center" width="200" id="proveedor"><%=proveedor%></td>
+                               <td class="default" align="center" width="200" id="descuento"><%=descuento%></td>
+                               <td class="default" align="center" width="200" id="total"><%=total%></td>
+                               </tr>
+                        <% } %>                       
                       </tbody>
                     </table>
                     <ul class="list-group"></ul>

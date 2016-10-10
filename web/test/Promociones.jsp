@@ -20,11 +20,11 @@
     <script src="js/includes.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
-  </head>
-    <title>Listado de Promociones</title>
+  </head>  
+    <title>Listado de Promociones</title>    
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
     <div>
-      <p>A</p>
+      <p>AAA</p>
     </div>
     <div class="section">
       <div class="container">
@@ -61,8 +61,7 @@
                                String nombre = dtProm.getNombre();
                                String proveedor = dtProm.getProveedor();
                                String descuento = dtProm.getDescuento();
-                               String total = dtProm.getDescuento();                               
-                        %>
+                               String total = dtProm.getDescuento();  %>
                                <tr class="default">
                                <td class="default" align="center" width="200" id="nombre"><%=nombre%></td>
                                <td class="default" align="center" width="200" id="proveedor"><%=proveedor%></td>

@@ -30,15 +30,12 @@
   <title>Detalle de Servicio</title>
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
     <div>
-      <p>A</p>
+      <p>AAA</p>
     </div>
     <!--div class="section"></div-->
     <% String nombre = (String) request.getParameter("nombre");
        String proveedor = (String) request.getParameter("proveedor");
        String categoria = (String) request.getParameter("categoria");
-       //String nombre = "Air-France-FC";
-       //String proveedor = "tCook";
-       //String categoria = "Air France";
        //ManejadorCategoria mc = ManejadorCategoria.getInstance();
        String padre = null;
        //padre = mc.obtenerPadre(categoria);

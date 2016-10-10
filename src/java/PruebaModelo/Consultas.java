@@ -119,8 +119,6 @@ public class Consultas extends Conexion {
         Statement stServ, stImg, stCat;
         try {
             //Connection con = Logica.Conexion.getInstance().getConnection();
-            //System.out.print("Conulta sql = ");
-            //System.out.println(sql);
             stServ = con.createStatement();
             String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + nombre + "' AND proveedor='" + proveedor + "'";
             rsServ = stServ.executeQuery(sql);

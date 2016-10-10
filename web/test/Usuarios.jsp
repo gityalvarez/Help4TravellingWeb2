@@ -10,7 +10,6 @@
 <%@page import="java.util.LinkedList"%>
 <%@page import="PruebaModelo.Consultas"%>
 <%@page import="Logica.DtUsuario"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
   <head>
@@ -26,7 +25,7 @@
   <title>Listado de Usuarios</title>
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
     <div>
-      <p>A</p>
+      <p>AAA</p>
     </div>
     <div class="section">
       <div class="container">

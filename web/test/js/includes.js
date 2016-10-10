@@ -45,6 +45,9 @@ $(document).ready(function () {
                 $("#idRegistrar").click(function () {
                     $(location).attr('href','InicioSesion.jsp');
                 });
+                
+                
+               
             }, 100);
          });
      });

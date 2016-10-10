@@ -9,13 +9,13 @@
     <script>
         $(document).ready(function () {   
             setTimeout(function(){
-                <%if ((String) session.getAttribute("nickname") == null) {%>;
+                <%if ((String) session.getAttribute("nickname") != null) {%>
+                    $('#idIniciar').hide();
+                    $('#idRegistrar').hide();
+                <%} else {%> 
                     $('#idPerfil').hide();
                     $('#idReservas').hide();
                     $('#idSalir').hide();
-                <%} else {%>;
-                    $('#idIniciar').hide();
-                    $('#idRegistrar').hide();
                 <%}%>;
             }, 100);
         });

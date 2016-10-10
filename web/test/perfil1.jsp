@@ -35,24 +35,30 @@
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="css\test.css" rel="stylesheet" type="text/css">
-        <script type="text/javascript">
-            
-            
-        
-        
+        <script type="text/javascript"></script>
         <script>
             $(document).ready(function(){
-            <%if ((String) session.getAttribute("registra") == "true") {%>;
-            <%--String nick = "\"" + session.getAttribute("nickname").toString() + "\"";
-               String nombre = "\"" + session.getAttribute("nombre").toString() + "\"";
-               String apellido = "\"" + session.getAttribute("apellido").toString() + "\"";
-                String fecha = "\"" + session.getAttribute("fNac").toString() + "\"";
-               String email = "\"" + session.getAttribute("email").toString() + "\"";
-         
-            --%>
-            <%};%>
-                };
+                <%if ((String) session.getAttribute("registra") == "true") {%>;
+                <%--String nick = "\"" + session.getAttribute("nickname").toString() + "\"";
+                   String nombre = "\"" + session.getAttribute("nombre").toString() + "\"";
+                   String apellido = "\"" + session.getAttribute("apellido").toString() + "\"";
+                    String fecha = "\"" + session.getAttribute("fNac").toString() + "\"";
+                   String email = "\"" + session.getAttribute("email").toString() + "\"";
 
+                --%>
+                <%};%>
+                
+                setTimeout(function(){
+                    <%if ((String) session.getAttribute("nickname") != null) {%>
+                        $('#idIniciar').hide();
+                        $('#idRegistrar').hide();
+                    <%} else {%> 
+                        $('#idPerfil').hide();
+                        $('#idReservas').hide();
+                        $('#idSalir').hide();
+                    <%}%>;
+                }, 100);
+            });
         </script>
         
         <title>Ver Perfil</title>

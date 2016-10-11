@@ -4,6 +4,8 @@
     Author     : Leonardo
 --%>
 
+<%@page import="Logica.ManejadorProveedor"%>
+<%@page import="Logica.ManejadorServicio"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Map"%>
 <%@page import="Logica.DtCategoria"%>
@@ -36,14 +38,14 @@
     <% String nombre = (String) request.getParameter("nombre");
        String proveedor = (String) request.getParameter("proveedor");
        String categoria = (String) request.getParameter("categoria");
-       //ManejadorCategoria mc = ManejadorCategoria.getInstance();
        String padre = null;
-       //padre = mc.obtenerPadre(categoria);
-       Consultas con = new Consultas();
-       padre = con.obtenerPadre(categoria);
-       con = new Consultas();
        String abuelo = null;
-       DtServicio dtServ = con.getDtServicio(nombre,proveedor);       
+       /*Consultas con = new Consultas();
+       padre = con.obtenerPadre(categoria);
+       con = new Consultas();       
+       DtServicio dtServ = con.getDtServicio(nombre,proveedor);*/    
+       padre = ManejadorCategoria.getInstance().obtenerPadre(categoria);
+       DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(nombre,proveedor);
     %>    
     <div class="section">
       <div class="container">
@@ -54,18 +56,12 @@
           <div class="col-md-12">
             <ul class="breadcrumb">
             <%  if (padre != null) {
-                    //abuelo = mc.obtenerPadre(padre);
-                    con = new Consultas();
-                    abuelo = con.obtenerPadre(padre);
-                    if (abuelo != null){ 
-                        /*out.println("<li>"); 
-                        out.println("<a href=\"#\">" + abuelo + "</a>"); 
-                        out.println("</li>");*/  %>
+                    /*con = new Consultas();
+                    abuelo = con.obtenerPadre(padre);*/
+                    abuelo = ManejadorCategoria.getInstance().obtenerPadre(padre);                    
+                    if (abuelo != null){ %>
                         <li><% out.print(abuelo); %></li>
-                 <% }    
-                    /*out.println("<li>"); 
-                    out.println("<a href=\"#\">" + padre + "</a>"); 
-                    out.println("</li>");*/ %>
+                 <% } %>
                     <li><% out.print(padre); %></li>    
             <%  }  %>
             <li class="active"><%=categoria%></li>
@@ -126,8 +122,10 @@
                         <tr class="default">
                           <td class="default" width="200">Proveedor</td>
                           <% String nickname = dtServ.getNkProveedor();
-                             con = new Consultas();
-                             DtUsuario prov = con.getDtProveedor(nickname); %> 
+                             /*con = new Consultas();
+                             DtUsuario prov = con.getDtProveedor(nickname);*/
+                             DtUsuario prov = ManejadorProveedor.getInstance().getDtProveedor(nickname);
+                             %> 
                           <td id="nomprov"><% out.print(prov.getNombre()); out.print(" "); out.print(prov.getApellido()); %></td>
                         </tr>
                         <tr>

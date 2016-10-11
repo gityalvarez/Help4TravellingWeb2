@@ -35,17 +35,17 @@
 </head>
 
 
-<p>A</p>
-</div>
+<!--p>A</p-->
+<!--/div-->
 <div class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section">
-                    <div class="container">
-                        <div class="row default"><h2><b>Arbol de Categorías</b></h2></div>
+    <div>
+        <div><!--div class="row"-->
+            <div><!--div class="col-md-12"-->
+                <div><!--div class="section"-->
+                    <div>
+                        <div><!--div class="row default"--><h2><b>Arbol de Categorías</b></h2></div>
                         <hr>
-                        <div class="row default">     
+                        <div><!--div class="row default"-->     
                             <div id="selector">
                                 <ul>
                                     <li class="jstree-open"><a>Categorias</a>

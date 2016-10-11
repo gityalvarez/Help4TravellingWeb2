@@ -5,6 +5,7 @@
  */
 package PruebaModelo;
 
+import Logica.Conexion;
 import Logica.Date;
 import Logica.DtCategoria;
 import Logica.DtPromocion;
@@ -36,10 +37,10 @@ import javax.swing.JOptionPane;
  *
  * @author yaman
  */
-public class Consultas extends Conexion {
+public class Consultas {
     
     public boolean Autenticacion(HttpSession sesion) throws SQLException{
-        
+        Connection con = Conexion.getInstance().getConnection();
         try (Statement st = con.createStatement()) {
             ResultSet rs = null;
             String Consulta = "SELECT * FROM usuarios";
@@ -66,7 +67,8 @@ public class Consultas extends Conexion {
         
     }
     
-    public boolean Comprobacion(String nickname, String email) throws SQLException{        
+    public boolean Comprobacion(String nickname, String email) throws SQLException{   
+        Connection con = Conexion.getInstance().getConnection();
         try (Statement st = con.createStatement()) {
             ResultSet rs = null;
             String Consulta = "SELECT * FROM usuarios";
@@ -96,6 +98,7 @@ public class Consultas extends Conexion {
             String sqlac = "INSERT INTO help4traveling.clientes (nickname) VALUES ('" + nickname + "')";
             String sqlai = "INS\"INSERT INTO help4traveling.usuarios (nickname,nombre,apellido,password,email,imagen,fechaNac) \"ERT INTO help4traveling.usuariosimagenes (usuario,imagen) VALUES ('" + nickname + "','" + imagen + "')";
             try {
+                Connection con = Conexion.getInstance().getConnection();
                 st = con.createStatement();
                 //System.out.println("antes de insertar");
                 st.executeUpdate(sqlau);
@@ -113,16 +116,15 @@ public class Consultas extends Conexion {
             }
     }    
     
-    public DtServicio getDtServicio(String nombre, String proveedor) throws SQLException {
+    /*public DtServicio getDtServicio(String nombre, String proveedor) throws SQLException {
         ResultSet rsServ, rsCat, rsImg;
         DtServicio nuevo = null;
         Statement stServ, stImg, stCat;
         try {
-            //Connection con = Logica.Conexion.getInstance().getConnection();
+            Connection con = Conexion.getInstance().getConnection();
             stServ = con.createStatement();
             String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + nombre + "' AND proveedor='" + proveedor + "'";
             rsServ = stServ.executeQuery(sql);
-            System.out.println("Ejecuto conulta");
             if (rsServ.next()) {
                 String descripcion = rsServ.getString("descripcion");
                 String precio = rsServ.getString("precio");
@@ -158,14 +160,14 @@ public class Consultas extends Conexion {
             System.out.println("No pude crear Servicio :(");            
         }
         return nuevo;        
-    }
+    }*/
     
-    public DtUsuario getDtProveedor(String nickname) {
+    /*public DtUsuario getDtProveedor(String nickname) {
         ResultSet rsUsu, rsProv, rsImg;
         DtUsuario nuevo = null;
         Statement stUsu, stProv, stImg;
         try {
-            //Connection con = Conexion.getInstance().getConnection();
+            Connection con = Conexion.getInstance().getConnection();
             stUsu = con.createStatement();
             String sql = "SELECT * FROM help4traveling.usuarios WHERE nickname='" + nickname + "'";
             rsUsu = stUsu.executeQuery(sql);
@@ -201,14 +203,14 @@ public class Consultas extends Conexion {
             System.err.println(e.getMessage());
         }
         return nuevo;        
-    }    
+    }    */
         
-    public List<DtPromocion> listarPromocionesSistema() throws SQLException {
+    /*public List<DtPromocion> listarPromociones() throws SQLException {
         List<DtPromocion> promociones = null;
         ResultSet rs;
         Statement st;        
         try {
-            //Connection con = Logica.Conexion.getInstance().getConnection();
+            Connection con = Conexion.getInstance().getConnection();
             st = con.createStatement();
             String sql = "SELECT * FROM help4traveling.promociones";
             rs = st.executeQuery(sql);
@@ -229,7 +231,7 @@ public class Consultas extends Conexion {
             System.out.println("No pude cargar promociones :(");
         }
         return promociones;
-    }
+    }*/
     
     
     public List<DtUsuario> listarUsuariosSistema() throws SQLException {
@@ -237,7 +239,7 @@ public class Consultas extends Conexion {
         ResultSet rsUsu, rsImg;
         Statement stUsu, stImg;
         try {
-            //Connection con = Logica.Conexion.getInstance().getConnection();
+            Connection con = Conexion.getInstance().getConnection();
             stUsu = con.createStatement();
             String sql = "SELECT * FROM help4traveling.usuarios";
             rsUsu = stUsu.executeQuery(sql);
@@ -273,7 +275,7 @@ public class Consultas extends Conexion {
      public List<DtReserva> listarReservasUsuario(String cli) throws SQLException {
         List<DtReserva> ReservaxUsuario = null;
         ResultSet rs;
-        //Connection con = Logica.Conexion.getInstance().getConnection();
+        Connection con = Conexion.getInstance().getConnection();
         Statement st;
         String sql = "SELECT * FROM help4traveling.reservas where cliente ='"+cli+"'";
         try {
@@ -321,12 +323,12 @@ public class Consultas extends Conexion {
     }
 
        
-    public List<DtServicio> listarServiciosSistema() throws SQLException {
+    /*public List<DtServicio> listarServicios() throws SQLException {
         List<DtServicio> servicios = null;
         ResultSet rs;
         Statement st;
         try {
-            //Connection con = Logica.Conexion.getInstance().getConnection();
+            Connection con = Conexion.getInstance().getConnection();
             st = con.createStatement();
             String sql = "SELECT * FROM help4traveling.servicios";
             rs = st.executeQuery(sql);
@@ -348,12 +350,12 @@ public class Consultas extends Conexion {
             System.out.println("No pude cargar Servicios :(");
         }
         return servicios;
-    }
+    }*/
     
-    public String obtenerPadre(String hijo) {
+    /*public String obtenerPadre(String hijo) {
         String padre = null;
         ResultSet rs;
-        //Connection con = Logica.Conexion.getInstance().getConnection();
+        Connection con = Conexion.getInstance().getConnection();
         Statement st;
         String sql;
         sql = "SELECT padre FROM help4traveling.categorias WHERE nombre='" + hijo + "'";
@@ -370,7 +372,30 @@ public class Consultas extends Conexion {
             System.out.println("No pude obtener categorias :(");
         }
         return padre;
-    }
+    }*/
+    
+    /*public List<String> listarServiciosCategoria(String categoria) {
+        ResultSet rs;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        String sql;
+        List<String> servicios = null;
+        try {
+            st = con.createStatement();
+            sql = "SELECT * FROM help4traveling.servicioscategorias WHERE categoria='" + categoria + "'";
+            rs = st.executeQuery(sql);
+            servicios = new LinkedList<String>();
+            while (rs.next()) {
+                servicios.add(rs.getString("servicio"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("No pude cargar servicios");
+            System.err.println(e.getMessage());
+        }
+
+        return servicios;
+    }*/
     
 }
 

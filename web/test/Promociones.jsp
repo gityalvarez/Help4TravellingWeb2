@@ -4,6 +4,7 @@
     Author     : Leonardo
 --%>
 
+<%@page import="Logica.ManejadorServicio"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
@@ -53,8 +54,9 @@
                           </tr-->
                         <% DtPromocion dtProm = null;
                            List<DtPromocion> promos;
-                           Consultas con = new Consultas();
-                           promos = con.listarPromocionesSistema();
+                           //Consultas con = new Consultas();
+                           //promos = con.listarPromocionesSistema();
+                           promos = ManejadorServicio.getInstance().listarPromociones();
                            Iterator<DtPromocion> iter = promos.iterator();
                            while (iter.hasNext()){
                                dtProm = iter.next();

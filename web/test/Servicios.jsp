@@ -4,6 +4,7 @@
     Author     : Leonardo
 --%>
 
+<%@page import="Logica.ManejadorServicio"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
@@ -32,9 +33,23 @@
           <p class="default">Ofertas en Hoteles, Paquetes de viaje y más</p>
         </div>
         <div class="row">
-          <div class="col-md-12">
+          <table>  
+              <tr>
+                            <td>
+          <div class="col-md-12">              
             <div class="section">
-              <div class="container">
+                <div>
+                  <%@include file="Categorias.jsp"%>
+                </div>
+            </div>
+          </div> 
+         </td>
+         
+         
+                            <td>
+          <div class="col-md-12">              
+            <div class="section">
+                <div>
                 <div class="row default">
                     <div class="row default"><h2><b>Listado de Servicios</b></h2></div>
                     <hr>
@@ -42,10 +57,10 @@
                         <thead>
                           <tr class="default">
                             <td class="default" width="200" align="center"><b>Nombre</b></td>
-                            <td class="default" width="200" align="center"><b>Descripcion</b></td>
+                            <td class="default" width="400" align="center"><b>Descripcion</b></td>
                             <td class="default" width="200" align="center"><b>Proveedor</b></td>
-                            <td class="default" width="200" align="center"><b>Precio</b></td>
-                            <td class="default" width="200" align="center"><b>Origen</b></td>                          
+                            <td class="default" width="100" align="center"><b>Precio</b></td>
+                            <td class="default" width="100" align="center"><b>Origen</b></td>                          
                           </tr>
                         </thead>
                       <tbody>    
@@ -54,8 +69,9 @@
                           </tr-->
                         <% DtServicio dtServ = null;
                            List<DtServicio> servicios;
-                           Consultas con = new Consultas();
-                           servicios = con.listarServiciosSistema();
+                           /*Consultas con = new Consultas();
+                           servicios = con.listarServiciosSistema();*/
+                           servicios = ManejadorServicio.getInstance().listarServicios();
                            Iterator<DtServicio> iter = servicios.iterator();
                            while (iter.hasNext()){
                                dtServ = iter.next();
@@ -67,11 +83,11 @@
                                String categoria = "Air France";                               
                         %>     
                                <tr class="default">
-                               <td class="default" align="center" width="200" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(nombre); %>&proveedor=<% out.print(proveedor); %>&categoria=<% out.print(categoria); %>"><%=nombre%></a></td>                                       
-                               <td class="default" align="center" width="200" id="descripcion"><%=descripcion%></td>                             
-                               <td class="default" align="center" width="200" id="proveedor"><%=proveedor%></td>
-                               <td class="default" align="center" width="200" id="precio"><%=precio%></td>
-                               <td class="default" align="center" width="200" id="origen"><%=origen%></td>
+                                    <td class="default" align="center" width="200" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(nombre); %>&proveedor=<% out.print(proveedor); %>&categoria=<% out.print(categoria); %>"><%=nombre%></a></td>                                       
+                                    <td class="default" align="center" width="400" id="descripcion"><%=descripcion%></td>                             
+                                    <td class="default" align="center" width="200" id="proveedor"><%=proveedor%></td>
+                                    <td class="default" align="center" width="100" id="precio"><%=precio%></td>
+                                    <td class="default" align="center" width="100" id="origen"><%=origen%></td>
                                </tr>
                         <% } %>                       
                       </tbody>
@@ -81,6 +97,9 @@
                 </div>
               </div>
             </div>
+                      </td>
+                      </tr>
+                      </table>
           </div>
         </div>
       </div>    

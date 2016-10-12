@@ -14,8 +14,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-    <head>
+<html>
+     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css\test.css" rel="stylesheet" type="text/css">
            
@@ -60,23 +60,20 @@
                 }, 100);
             });
         </script>
-        
         <title>Ver Perfil</title>
     </head>
-    
- <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
+    <body>
+        <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
         <%
             String nick = session.getAttribute("nickname").toString();
-               String nombre = session.getAttribute("nombre").toString() ;
-               String apellido = session.getAttribute("apellido").toString() ;
-               String fecha =  session.getAttribute("fechaNac").toString() ;
-               String email =  session.getAttribute("email").toString() ;
-               
-               
-        String partes[]=fecha.split("-");
-        
-        fecha = partes[2]+"/"+partes[1]+"/"+partes[0];
-         //System.out.println(mierda1) ;
+            String nombre = session.getAttribute("nombre").toString() ;
+            String apellido = session.getAttribute("apellido").toString() ;
+            String fecha =  session.getAttribute("fechaNac").toString() ;
+            String email =  session.getAttribute("email").toString() ;
+            String partes[]=fecha.split("-");
+
+            fecha = partes[2]+"/"+partes[1]+"/"+partes[0];
+            //System.out.println(mierda1) ;
             /*Date fecha1 = new Date(10, 11, 2012);
             Cliente usu = new Cliente("juan", "Perez", "Juanpe", "contrasenia", "alfalfa@gmail.com", fecha1, "aca la imagen");
             Integer dia = usu.getNacimiento().getDia();
@@ -87,7 +84,7 @@
         %>  
         <br>
         <br>
-        <div class="section">
+        <div class="section minimo">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -130,69 +127,65 @@
                         </div>
                     </div>
                     <div id="reservas" class="tab-pane fade">
-                          
-                    <table class="default table table-bordered table-hover table-striped">
-                      <tbody>
-                        <tr class="default">
-                          <td class="default" width="20" align="center"><b>numero</b></td>
-                          <td class="default" width="200" align="center"><b>id de reserva</b></td>
-                          <td class="default" width="200" align="center"><b>Creada</b></td>
-                          <td class="default" width="200" align="center"><b>Estado</b></td>
-                          <td class="default" width="200" align="center"><b>total</b></td>
-                          
-                        </tr>
-                        <% DtReserva dtRes = null;
-                           List<DtReserva> reservas;
-                           Consultas con = new Consultas();
-                           reservas = con.listarReservasUsuario(nick) ;
-                           Iterator<DtReserva> iter = reservas.iterator();
-                           Integer i=0;
-                           while (iter.hasNext()){
-                               i++;
-                               dtRes = iter.next();
-                               String numero = i.toString();
-                               Long id  = dtRes.getId();
-                               String estado="";
-                               if (dtRes.getEstado().compareTo(Reserva.eEstado.REGISTRADA)==0) 
-                                estado= "REGISTRADA";
-                                else 
-                                   if (dtRes.getEstado().compareTo(Reserva.eEstado.CANCELADA)==0) 
-                                        estado= "CANCELADA";
-                                        else 
-                                            if (dtRes.getEstado().compareTo(Reserva.eEstado.FACTURADA)==0) 
-                                                 estado= "FACTURADA";
-                                                 else 
-                                                    if (dtRes.getEstado().compareTo(Reserva.eEstado.PAGADA)==0) 
-                                                         estado= "PAGADA";
-                              
-                               String idres = id.toString();
-                               String creada = dtRes.getCreada().getFecha("/") ;
-                               
-                               String partesCre[]=creada.split("/");
-        
-                               creada = partesCre[2]+"/"+partesCre[1]+"/"+partesCre[0];
-                               String total = String.valueOf(dtRes.getTotal());
-                               out.println("<tr class=\"default\">");
-                               out.println("<td class=\"default\" align=\"center\" width=\"20\"id=\"numero\">"+numero+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"idres\">"+idres+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"creada\">"+creada+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"estado\">"+estado+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"total\">"+total+"</td>");
-                               out.println("</tr>");
-                           }                           
-                        %>                       
-                      </tbody>
-                    </table>
-                    <ul class="list-group"></ul>
-                  </div>                  
-                  
-                         </div>
-                       </div>
+                        <table class="default table table-bordered table-hover table-striped">
+                          <tbody>
+                            <tr class="default">
+                              <td class="default" width="20" align="center"><b>numero</b></td>
+                              <td class="default" width="200" align="center"><b>id de reserva</b></td>
+                              <td class="default" width="200" align="center"><b>Creada</b></td>
+                              <td class="default" width="200" align="center"><b>Estado</b></td>
+                              <td class="default" width="200" align="center"><b>total</b></td>
 
+                            </tr>
+                            <% DtReserva dtRes = null;
+                               List<DtReserva> reservas;
+                               Consultas con = new Consultas();
+                               reservas = con.listarReservasUsuario(nick) ;
+                               Iterator<DtReserva> iter = reservas.iterator();
+                               Integer i=0;
+                               while (iter.hasNext()){
+                                   i++;
+                                   dtRes = iter.next();
+                                   String numero = i.toString();
+                                   Long id  = dtRes.getId();
+                                   String estado="";
+                                   if (dtRes.getEstado().compareTo(Reserva.eEstado.REGISTRADA)==0) 
+                                    estado= "REGISTRADA";
+                                    else 
+                                       if (dtRes.getEstado().compareTo(Reserva.eEstado.CANCELADA)==0) 
+                                            estado= "CANCELADA";
+                                            else 
+                                                if (dtRes.getEstado().compareTo(Reserva.eEstado.FACTURADA)==0) 
+                                                     estado= "FACTURADA";
+                                                     else 
+                                                        if (dtRes.getEstado().compareTo(Reserva.eEstado.PAGADA)==0) 
+                                                             estado= "PAGADA";
 
-  </div>
-       
-         
-    
-    <footer class="section section-primary" id="footer"></footer>
+                                   String idres = id.toString();
+                                   String creada = dtRes.getCreada().getFecha("/") ;
+
+                                   String partesCre[]=creada.split("/");
+
+                                   creada = partesCre[2]+"/"+partesCre[1]+"/"+partesCre[0];
+                                   String total = String.valueOf(dtRes.getTotal());
+                                   out.println("<tr class=\"default\">");
+                                   out.println("<td class=\"default\" align=\"center\" width=\"20\"id=\"numero\">"+numero+"</td>");
+                                   out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"idres\">"+idres+"</td>");
+                                   out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"creada\">"+creada+"</td>");
+                                   out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"estado\">"+estado+"</td>");
+                                   out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"total\">"+total+"</td>");
+                                   out.println("</tr>");
+                               }                           
+                            %>                       
+                          </tbody>
+                        </table>
+                        <ul class="list-group"></ul>
+                    </div>                  
+                </div>
+            </div>
+        </div>
+        <footer class="section section-primary" id="footer"></footer>
+    </body>
+</html>
+   
 

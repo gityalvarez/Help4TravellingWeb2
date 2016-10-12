@@ -8,45 +8,42 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="js/jquery-3.1.0.min.js"></script>
-    <script src="js/includes.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="css\test.css" rel="stylesheet" type="text/css">
-    <script src="js/jquery-3.1.1.js"></script>
-    <script src="js/jstree.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            setTimeout(function(){
-                <%if ((String) session.getAttribute("nickname") != null) {%>
-                    $('#idIniciar').hide();
-                    $('#idRegistrar').hide();
-                <%} else {%> 
-                    $('#idPerfil').hide();
-                    $('#idReservas').hide();
-                    $('#idSalir').hide();
-                <%}%>;
-            }, 100);
-            
-            $("#selector").jstree();
-            $("#selector").on("select_node.jstree",
-                    function (evt, data) {
-                        //hacemos lo que queremos con la categoria seleccionada
-                    }
-            );
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="js/jquery-3.1.0.min.js"></script>
+        <script src="js/includes.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="css\test.css" rel="stylesheet" type="text/css">
+        <script src="js/jquery-3.1.1.js"></script>
+        <script src="js/jstree.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                setTimeout(function(){
+                    <%if ((String) session.getAttribute("nickname") != null) {%>
+                        $('#idIniciar').hide();
+                        $('#idRegistrar').hide();
+                    <%} else {%> 
+                        $('#idPerfil').hide();
+                        $('#idReservas').hide();
+                        $('#idSalir').hide();
+                    <%}%>;
+                }, 100);
 
-        });
-    </script>
-</head>
+                $("#selector").jstree();
+                $("#selector").on("select_node.jstree",
+                        function (evt, data) {
+                            //hacemos lo que queremos con la categoria seleccionada
+                        }
+                );
 
-
-<!--p>A</p-->
-<!--/div-->
-<div class="section">
+            });
+        </script>
+    </head>
+    <div class="section">
     <div>
         <div><!--div class="row"-->
             <div><!--div class="col-md-12"-->
@@ -153,5 +150,7 @@
             </div>
         </div>
     </div>
-</div>    
+    </div>    
+</html>
+
 

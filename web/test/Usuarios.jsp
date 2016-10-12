@@ -20,13 +20,25 @@
     <script src="js/jquery-3.1.0.min.js"></script>
     <script src="js/includes.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="css\test.css" rel="stylesheet" type="text/css">    
+    <link href="css\test.css" rel="stylesheet" type="text/css">
+    <script>
+        $(document).ready(function () {   
+            setTimeout(function(){
+                <%if ((String) session.getAttribute("nickname") != null) {%>
+                    $('#idIniciar').hide();
+                    $('#idRegistrar').hide();
+                <%} else {%> 
+                    $('#idPerfil').hide();
+                    $('#idReservas').hide();
+                    $('#idSalir').hide();
+                <%}%>;
+            }, 100);
+        });
+    </script>    
   </head>
-  <title>Listado de Usuarios</title>
+  <body>    
+    <title>Listado de Usuarios</title>
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
-    <div>
-      <p>AAA</p>
-    </div>
     <div class="section">
       <div class="container">
         <div class="row">
@@ -74,7 +86,10 @@
                 </div>
               </div>
             </div>
-          </div>
         </div>
-      </div>    
+      </div>
+    </div> 
     <footer class="section section-primary" id="footer"></footer>
+  </body>
+       
+    

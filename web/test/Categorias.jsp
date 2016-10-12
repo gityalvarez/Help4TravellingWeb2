@@ -21,6 +21,17 @@
     <script src="js/jstree.min.js"></script>
     <script>
         $(document).ready(function () {
+            setTimeout(function(){
+                <%if ((String) session.getAttribute("nickname") != null) {%>
+                    $('#idIniciar').hide();
+                    $('#idRegistrar').hide();
+                <%} else {%> 
+                    $('#idPerfil').hide();
+                    $('#idReservas').hide();
+                    $('#idSalir').hide();
+                <%}%>;
+            }, 100);
+            
             $("#selector").jstree();
             $("#selector").on("select_node.jstree",
                     function (evt, data) {
@@ -29,8 +40,6 @@
             );
 
         });
-
-
     </script>
 </head>
 

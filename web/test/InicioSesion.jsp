@@ -19,67 +19,62 @@
     <link href="css\test.css" rel="stylesheet" type="text/css">
   </head>
         <script type="text/javascript">
-                $(document).ready(function () {
+            $(document).ready(function () {
                 $("#registro_completo_form").hide();
 
+                <%if ((String) session.getAttribute("registra") == "true") {%>;
 
-            <%if ((String) session.getAttribute("registra") == "true") {%>;
+                    <%String nick = "\"" + session.getAttribute("nickname").toString() + "\"";
+                    String email = "\"" + session.getAttribute("email").toString() + "\"";%>
+                    alert("El usuario " + <%=nick%> + " está disponiblie. Complete los campos con sus datos personales");
 
-            <%String nick = "\"" + session.getAttribute("nickname").toString() + "\"";
-                String email = "\"" + session.getAttribute("email").toString() + "\"";%>
-                alert("El usuario " + <%=nick%> + " está disponiblie. Complete los campos con sus datos personales");
-
-                $("#registro_completo_form").show();
-                $("#ingreso_usuario").hide();
-                $("#registrar_bn").hide();
-                $("#nickname_registro").val(<%=nick%>);
-                $("#nickname_registro").attr("readonly", true);
-                $("#email_in").val(<%=email%>);
-                $("#email_in").attr("readonly", true);
-                $("#fecha").datepicker();
-                $("#fecha").datepicker('option', {dateFormat: 'yy/mm/dd'});
-                $("#startDate").datepicker({dateFormat: 'yy/mm/dd'});
-            <%} else if ((String) session.getAttribute("registra") == "false") {%>;
-                alert("Lo siento. El usuario o el email ya han sido registrados");
-
-            <%} else if ((String) session.getAttribute("inicia") == "true") {%>;
-            <% String mensaje = "\"" + session.getAttribute("mensaje").toString() + "\"";%>
-                alert(<%=mensaje%>);
-                
+                    $("#registro_completo_form").show();
+                    $("#ingreso_usuario").hide();
+                    $("#registrar_bn").hide();
+                    $("#nickname_registro").val(<%=nick%>);
+                    $("#nickname_registro").attr("readonly", true);
+                    $("#email_in").val(<%=email%>);
+                    $("#email_in").attr("readonly", true);
+                    $("#fecha").datepicker();
+                    $("#fecha").datepicker('option', {dateFormat: 'yy/mm/dd'});
+                    $("#startDate").datepicker({dateFormat: 'yy/mm/dd'});
+                <%} else if ((String) session.getAttribute("registra") == "false") {%>;
+                    alert("Lo siento. El usuario o el email ya han sido registrados");
+                <%} else if ((String) session.getAttribute("inicia") == "true") {%>;
+                <% String mensaje = "\"" + session.getAttribute("mensaje").toString() + "\"";%>
+                    alert(<%=mensaje%>);
+                <%}%>;
                     
-            <%}%>;
-                });
+                setTimeout(function(){
+                    <%if ((String) session.getAttribute("nickname") != null) {%>
+                        $('#idIniciar').hide();
+                        $('#idRegistrar').hide();
+                    <%} else {%> 
+                        $('#idPerfil').hide();
+                        $('#idReservas').hide();
+                        $('#idSalir').hide();
+                    <%}%>;
+                }, 100);
+            });
         </script>
 </head>
 <body>
        
     <div class="navbar navbar-default navbar-fixed-top" id="header">
     </div>
-    <div class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <hr>
-                </div>
-            </div>
-        </div>
-    </div>
-    <%
-            
-                            Cookie [] todoslosCookies = request.getCookies();
-                            if(todoslosCookies != null ){
-                            for(int i=0;i<todoslosCookies.length;i++){
-                                Cookie unCookie=todoslosCookies[i];
-                                if (unCookie.getName().equals("nick")){
-                                    String nicknameCookie=unCookie.getValue();
-                                        
-                                    out.println("<div><h1> "+nicknameCookie +"</h1></div>");
-                                    }
-                            }
-                            }
+    <%  
+        Cookie [] todoslosCookies = request.getCookies();
+        if(todoslosCookies != null ){
+            for(int i=0;i<todoslosCookies.length;i++){
+                Cookie unCookie=todoslosCookies[i];
+                if (unCookie.getName().equals("nick")){
+                    String nicknameCookie=unCookie.getValue();
+                    out.println("<div><h1> "+nicknameCookie +"</h1></div>");
+                }
+            }
+        }
     %> 
-    <div class="section"></div>
-    <div class="section">
+    <div class="section minimo">
         <div class="container">
             <div class="row">
                 <div class="col-md-4" id="ingreso_usuario">
@@ -186,16 +181,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <hr>
-                </div>
-            </div>
-        </div>
-        
     </div>
     <footer class="section section-primary" id="footer">
     </footer>

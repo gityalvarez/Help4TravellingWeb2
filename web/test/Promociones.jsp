@@ -12,7 +12,7 @@
 <%@page import="Logica.DtPromocion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -21,13 +21,25 @@
     <script src="js/includes.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
-  </head>  
+    <script>
+        $(document).ready(function () {   
+            setTimeout(function(){
+                <%if ((String) session.getAttribute("nickname") != null) {%>
+                    $('#idIniciar').hide();
+                    $('#idRegistrar').hide();
+                <%} else {%> 
+                    $('#idPerfil').hide();
+                    $('#idReservas').hide();
+                    $('#idSalir').hide();
+                <%}%>;
+            }, 100);
+        });
+    </script>
+</head>
+<body>
     <title>Listado de Promociones</title>    
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
-    <div>
-      <p>AAA</p>
-    </div>
-    <div class="section">
+    <div class="section minimo">
       <div class="container">
         <div class="row">
           <p class="default">Ofertas en Hoteles, Paquetes de viaje y más</p>
@@ -82,3 +94,5 @@
         </div>
       </div>    
     <footer class="section section-primary" id="footer"></footer>
+</body> 
+    

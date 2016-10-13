@@ -46,6 +46,12 @@ $(document).ready(function () {
                     $(location).attr('href','InicioSesion.jsp');
                 });
                 
+                //Carrito
+                $("#idCarrito").click(function () {
+                    $(location).attr('href','Carrito.jsp');
+                });
+                
+                
                 
                
             }, 100);

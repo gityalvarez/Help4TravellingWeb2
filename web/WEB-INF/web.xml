@@ -12,6 +12,10 @@
         <servlet-name>Registro</servlet-name>
         <servlet-class>PruebaServlets.Registro</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>agregarCarrito</servlet-name>
+        <servlet-class>PruebaServlets.agregarCarrito</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Validacion</servlet-name>
         <url-pattern>/Autenticacion</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/Registro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>agregarCarrito</servlet-name>
+        <url-pattern>/agregarCarrito</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -152,10 +152,11 @@
                     <h3><%=dtServ.getDescripcion()%><h3>
                     <hr>
                     <h3>U$D <%=dtServ.getPrecio()%></h3>
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" action="../agregarCarrito" method="post">
                       <div class="form-group">
                         <div class="col-sm-4">
-                          <input type="text" class="form-control input-lg" id="inputEmail3" placeholder="Cantidad">
+                          <input type="text" class="form-control input-lg" id="cantidad_in" name="cantidad_in"  placeholder="Cantidad">
+                          <input type="hidden" class="hiddden" id="servicio_in" name="servicio_in" value="<%=nombre%>">
                         </div>
                         <button type="submit" width="5000" class="active btn btn-info btn-lg">Agregar al Carrito</button>
                       </div>
@@ -181,5 +182,3 @@
       </div>
     </div>
     <footer class="section section-primary" id="footer"></footer>
-  
-

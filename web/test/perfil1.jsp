@@ -171,15 +171,18 @@
                                String partesCre[]=creada.split("/");
         
                                creada = partesCre[2]+"/"+partesCre[1]+"/"+partesCre[0];
-                               String total = String.valueOf(dtRes.getTotal());
-                               out.println("<tr class=\"default\">");
-                               out.println("<td class=\"default\" align=\"center\" width=\"20\"id=\"numero\">"+numero+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"idres\">"+idres+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"creada\">"+creada+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"estado\">"+estado+"</td>");
-                               out.println("<td class=\"default\" align=\"center\" width=\"200\"id=\"total\">"+total+"</td>");
-                               out.println("</tr>");
-                           }                           
+                               String total = String.valueOf(dtRes.getTotal());%>
+                              
+                                <tr class="default">
+                                    <td class="default" align="center" width="20" id="numero"><%=numero%></td>                                       
+                                    <td class="default" align="center" width="400" id="descripcion"><a href="Reserva.jsp?idReserva=<% out.print(idres); %>"><%=idres%></a></td>                             
+                                    <td class="default" align="center" width="200" id="proveedor"><%=creada%></td>
+                                    <td class="default" align="center" width="100" id="precio"><%=estado%></td>
+                                    <td class="default" align="center" width="100" id="origen"><%=total%></td>
+                               </tr>
+                             
+                              
+                           <%}                           
                         %>                       
                       </tbody>
                     </table>

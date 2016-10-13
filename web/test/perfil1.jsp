@@ -14,8 +14,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-    <head>
+<html>
+     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css\test.css" rel="stylesheet" type="text/css">
            
@@ -60,23 +60,20 @@
                 }, 100);
             });
         </script>
-        
         <title>Ver Perfil</title>
     </head>
-    
- <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
+    <body>
+        <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
         <%
             String nick = session.getAttribute("nickname").toString();
-               String nombre = session.getAttribute("nombre").toString() ;
-               String apellido = session.getAttribute("apellido").toString() ;
-               String fecha =  session.getAttribute("fechaNac").toString() ;
-               String email =  session.getAttribute("email").toString() ;
-               
-               
-        String partes[]=fecha.split("-");
-        
-        fecha = partes[2]+"/"+partes[1]+"/"+partes[0];
-         //System.out.println(mierda1) ;
+            String nombre = session.getAttribute("nombre").toString() ;
+            String apellido = session.getAttribute("apellido").toString() ;
+            String fecha =  session.getAttribute("fechaNac").toString() ;
+            String email =  session.getAttribute("email").toString() ;
+            String partes[]=fecha.split("-");
+
+            fecha = partes[2]+"/"+partes[1]+"/"+partes[0];
+            //System.out.println(mierda1) ;
             /*Date fecha1 = new Date(10, 11, 2012);
             Cliente usu = new Cliente("juan", "Perez", "Juanpe", "contrasenia", "alfalfa@gmail.com", fecha1, "aca la imagen");
             Integer dia = usu.getNacimiento().getDia();
@@ -87,7 +84,7 @@
         %>  
         <br>
         <br>
-        <div class="section">
+        <div class="section minimo">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -130,6 +127,7 @@
                         </div>
                     </div>
                     <div id="reservas" class="tab-pane fade">
+
                           
                     <table class="default table table-bordered table-hover table-striped">
                       <tbody>
@@ -182,20 +180,17 @@
                                </tr>
                              
                               
-                           <%}                           
+                          <%}                           
                         %>                       
                       </tbody>
-                    </table>
-                    <ul class="list-group"></ul>
-                  </div>                  
-                  
-                         </div>
-                       </div>
-
-
-  </div>
-       
-         
-    
-    <footer class="section section-primary" id="footer"></footer>
-
+                                        
+                          
+                        </table>
+                        <ul class="list-group"></ul>
+                    </div>                  
+                </div>
+            </div>
+        </div>
+        <footer class="section section-primary" id="footer"></footer>
+    </body>
+</html>

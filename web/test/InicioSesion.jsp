@@ -64,12 +64,13 @@
     </div>
     <%  
         Cookie [] todoslosCookies = request.getCookies();
+        String nicknameCookie="";
         if(todoslosCookies != null ){
             for(int i=0;i<todoslosCookies.length;i++){
                 Cookie unCookie=todoslosCookies[i];
                 if (unCookie.getName().equals("nick")){
-                    String nicknameCookie=unCookie.getValue();
-                    out.println("<div><h1> "+nicknameCookie +"</h1></div>");
+                    nicknameCookie=unCookie.getValue();
+                   // out.println("<div><h1> "+nicknameCookie +"</h1></div>");
                 }
             }
         }
@@ -87,7 +88,7 @@
                                 </label>
                             </div>
                             <div class="col-sm-10" id="nickname_ingreso">
-                                <input type="text" class="form-control" name="nickname_ingreso" id="nickname_ingreso" placeholder="Ingrese su Nickname" required="true">
+                                <input type="text" class="form-control" name="nickname_ingreso" id="nickname_ingreso" placeholder="Ingrese su Nickname" required="true" value="<%=nicknameCookie%>">
                             </div>
                         </div>
                         <div class="form-group">

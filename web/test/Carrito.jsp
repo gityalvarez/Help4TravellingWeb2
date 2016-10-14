@@ -87,11 +87,15 @@
                                     out.println("<td><h2>" + reserva.getServicio() + "</h2></td>"
                                             + "<td><h2>" + reserva.getPrecio() + "</h2></td>"
                                             + "<td><h2>" + reserva.getCantidad() + "</h2></td>"
+                                            +"<form action='../eliminarCarrito' method=post>"
                                             + "<td width='80' align='center'>"
+                                            
                                             + "<input type='submit' name='comprar' id='comprar' value='Comprar' align='center' width='80' class='active btn btn-info btn-lg'></td>"
                                             + "<td width='80' align='center'>"
-                                            + "<input type='submit' name='eliminar' id='eliminar' value='Eliminar del Carrito' align='center' width='80' class='active btn btn-info btn-lg'></td>"
-                                            + "</tr>");
+                                            +"<input type='hidden' id='servicio_in' name='servicio_in' value='"+reserva.getServicio()+"'>"
+                                            + "<input type='submit' name='eliminar' id='eliminar' value='Eliminar del Carrito' align='center' width='80' class='active btn btn-info btn-lg'></a></td>"
+                                            + "</tr>"
+                                            +"</form>");
                                 }
 
                                 out.println(

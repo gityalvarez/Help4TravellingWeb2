@@ -24,7 +24,22 @@
             <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
             <link href="css\test.css" rel="stylesheet" type="text/css">
             <title><%out.println("reserva numero "+request.getParameter("idReserva"));%> </title>
+             <script>
+        $(document).ready(function () {   
+            setTimeout(function(){
+                <%if ((String) session.getAttribute("nickname") != null) {%>
+                    $('#idIniciar').hide();
+                    $('#idRegistrar').hide();
+                <%} else {%> 
+                    $('#idPerfil').hide();
+                    $('#idReservas').hide();
+                    $('#idSalir').hide();
+                <%}%>;
+            }, 100);
+        });
+    </script>
     </head>
+    
     <body>
        <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
     
@@ -46,7 +61,7 @@ proveedor al que se solicitó el pedido, qué cantidades se
 eligieron para cada servicio y el total general de la reserva
  */      
     %>    
-    <div class="section">
+    <div class="section minimo">
       <div class="container">
         <div class="row">
           <p class="default">Ofertas en Hoteles, Paquetes de viaje y más</p>

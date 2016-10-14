@@ -157,6 +157,7 @@
                         <div class="col-sm-4">
                           <input type="text" class="form-control input-lg" id="cantidad_in" name="cantidad_in"  placeholder="Cantidad">
                           <input type="hidden" class="hiddden" id="servicio_in" name="servicio_in" value="<%=nombre%>">
+                          <input type="hidden" class="hiddden" id="precio_in" name="precio_in" value="<%=dtServ.getPrecio()%>">
                         </div>
                         <button type="submit" width="5000" class="active btn btn-info btn-lg">Agregar al Carrito</button>
                       </div>

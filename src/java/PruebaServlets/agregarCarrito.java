@@ -16,6 +16,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import PruebaServlets.Reserva;
+import java.util.Iterator;
 
 /**
  *
@@ -37,52 +40,50 @@ public class agregarCarrito extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String servicio = request.getParameter("servicio_in");
+        String precio = request.getParameter("precio_in");
         System.out.println(servicio);
+        System.out.println(precio);
         String cantidad = request.getParameter("cantidad_in");
         System.out.println(cantidad);
 
-        Cookie[] todoslosCookies = request.getCookies();
-        boolean existe = false;
-        System.out.println("Cantidad de Cookies" + todoslosCookies.length);
-        if (todoslosCookies != null) {
+        Reserva reserva = new Reserva();
+        reserva.getServicio(servicio);
+        reserva.setPrecio(Float.parseFloat(precio));
+        reserva.setCantidad(Integer.parseInt(cantidad));
 
-            for (int i = 0; i < todoslosCookies.length; i++) {
-                Cookie unCookie = todoslosCookies[i];
-                if (unCookie.getName().equals(servicio)) {
-                    Integer cantidadint = Integer.parseInt(cantidad) + Integer.parseInt(unCookie.getValue());
-                    unCookie.setValue(cantidadint.toString());
-                    System.out.println(unCookie.getValue());
-                    response.addCookie(unCookie);
+        List<Reserva> reservas = new ArrayList<Reserva>();
+        boolean existe = false;
+        HttpSession sesion = request.getSession();
+        if (sesion.getAttribute("carrito") != null) {
+            reservas = (List<Reserva>) sesion.getAttribute("carrito");
+            float preciototal = (float)sesion.getAttribute("preciototal");
+            sesion.setAttribute("preciototal",preciototal + Integer.parseInt(cantidad)*Float.parseFloat(precio));
+            Iterator<Reserva> iter = reservas.iterator();
+            Reserva res;
+            while (iter.hasNext()) {
+                res = iter.next();
+                if (servicio.equals(res.getServicio())) {
+                    int cant = Integer.parseInt(cantidad) + res.getCantidad();
+                    reserva.setCantidad(cant);
+                    reservas.remove(res);
                     existe = true;
                     break;
                 }
             }
-        }
-        if (!existe) {
-            System.out.println("Entre al if ! existe");
-            Cookie nuevoCookie = new Cookie(servicio, cantidad);
-            System.out.println("Cree la cookie");
-            nuevoCookie.setMaxAge(60 * 60 * 24 * 7);
-            response.addCookie(nuevoCookie);
-            System.out.println(nuevoCookie.getName());
-            System.out.println(nuevoCookie.getValue());
-            for (int i = 0; i < todoslosCookies.length; i++) {
-                Cookie unCookie = todoslosCookies[i];
-                if (unCookie.getName().equals("contador")){
-                    Integer contador = Integer.parseInt(unCookie.getValue()) + 1;
-                    unCookie.setValue(contador.toString());
-                    System.out.println("El contador de servicios me da" +contador);
-                }
-                else{
-                    Cookie contadorCookie = new Cookie("contador","1");
-                    System.out.println("El contador de servicios me da " + contadorCookie.getValue());
-                }
-                    
-            
-        }
+            if (!existe) {
+                int contador = (int) (sesion.getAttribute("contador"));
+                sesion.setAttribute("contador", contador + 1);
+            }
 
-        
-    }
+        }
+        else{
+            sesion.setAttribute("contador",1);
+            sesion.setAttribute("preciototal",Integer.parseInt(cantidad)*Float.parseFloat(precio));
+        }
+        reservas.add(reserva);
+        sesion.setAttribute("carrito", reservas);
+
+        System.out.println(sesion.getAttribute("preciototal"));
         response.sendRedirect("test/Carrito.jsp");
     }
 

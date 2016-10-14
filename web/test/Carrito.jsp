@@ -9,6 +9,7 @@
 <%@page import="java.util.LinkedList"%>
 <%@page import="PruebaModelo.Consultas"%>
 <%@page import="Logica.DtUsuario"%>
+<%@page import="PruebaServlets.Reserva"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,16 +23,26 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
     <script>
-
-
-    </script>    
+        $(document).ready(function () {
+            setTimeout(function () {
+        <%if ((String) session.getAttribute("nickname") != null) {%>
+                $('#idIniciar').hide();
+                $('#idRegistrar').hide();
+        <%} else {%>
+                $('#idPerfil').hide();
+                $('#idReservas').hide();
+                $('#idSalir').hide();
+        <%}%>;
+            }, 100);
+        });
+    </script>
 </head>
 
 <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
 <div>
     <p>A</p>
 </div>
-<div class="section">
+<div class="section minimo">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -40,53 +51,65 @@
                         <div class="row default"><h2><b>Carrito de Compras</b></h2></div>
                         <hr>
                         <%
-                            
-                            Cookie[] todoslosCookies = request.getCookies();
-                            String nickCookie;
-                            nickCookie = "";
-                            if (todoslosCookies !=null ){
-                            for (int i = 0; i < todoslosCookies.length; i++) {
-                                Cookie unCookie = todoslosCookies[i];
-                                if (unCookie.getName().equals("nick")) {
-                                    nickCookie = unCookie.getValue();
-                                    break;
-                                }
-                            }
-                            }
-                            out.print("<div class='row default'>"
-                                    + "<table class='default table table-bordered table-hover table-striped'>"
-                                    + "<tbody>"
-                                    + "<tr class='default'>"
-                                    + "<td class='default' width='300' align='center'><b><h1>Reservas de " + nickCookie + "</h1></b></td>"
-                                    + " </tr>");
+                            String nickname;
+                            nickname = "";
+                            HttpSession sesion = request.getSession();
 
-                            out.print("<table class='table'>"
-                                    + "<thead>"
-                                    + "<tr>"
-                                    + "<th><h2>Reserva</h2></th>"
-                                    + "<th><h2>Cantidad</h2></th>"
-                                    + "</tr>"
-                                    + "</thead>"
-                                    + "<tbody>"
-                                    + "<tr>");
-                            for (int i = 0; i < todoslosCookies.length; i++) {
-                                Cookie unCookie = todoslosCookies[i];
-                                if (!unCookie.getName().equals("nick") && (!unCookie.getName().equals("JSESSIONID"))) {
+                            if (sesion.getAttribute("nickname") != null) {
+                                nickname = (String) sesion.getAttribute("nickname");
+                            }
 
-                                    out.println("<td><h2>" + unCookie.getName() + "</h2></td>"
-                                            + "<td><h2>" + unCookie.getValue() + "</h2></td>"
+                            if (sesion.getAttribute("carrito") != null) {
+
+                                List<Reserva> reservas = (List<Reserva>) sesion.getAttribute("carrito");
+                                Iterator<Reserva> iter = reservas.iterator();
+                                Reserva reserva = null;
+
+                                out.print("<div class='row default'>"
+                                        + "<table class='default table table-bordered table-hover table-striped'>"
+                                        + "<tbody>"
+                                        + "<tr class='default'>"
+                                        + "<td class='default' width='300' align='center'><b><h1>Reservas de " + nickname + "</h1></b></td>"
+                                        + " </tr>");
+
+                                out.print("<table class='table'>"
+                                        + "<thead>"
+                                        + "<tr>"
+                                        + "<th><h2>Reserva</h2></th>"
+                                        + "<th><h2>Precio</h2></th>"
+                                        + "<th><h2>Cantidad</h2></th>"
+                                        + "</tr>"
+                                        + "</thead>"
+                                        + "<tbody>"
+                                        + "<tr>");
+                                while (iter.hasNext()) {
+                                    reserva = iter.next();
+                                    out.println("<td><h2>" + reserva.getServicio() + "</h2></td>"
+                                            + "<td><h2>" + reserva.getPrecio() + "</h2></td>"
+                                            + "<td><h2>" + reserva.getCantidad() + "</h2></td>"
                                             + "<td width='80' align='center'>"
                                             + "<input type='submit' name='comprar' id='comprar' value='Comprar' align='center' width='80' class='active btn btn-info btn-lg'></td>"
                                             + "<td width='80' align='center'>"
                                             + "<input type='submit' name='eliminar' id='eliminar' value='Eliminar del Carrito' align='center' width='80' class='active btn btn-info btn-lg'></td>"
                                             + "</tr>");
                                 }
-                            }
 
-                            out.println("</tbody>"
-                                    + "</table>");
+                                out.println(
+                                        "<th><h2>Total</h2></th>"
+                                        +"<td><h2> U$U " + sesion.getAttribute("preciototal") + "</h2></td>"
+                                        + "</tbody>"
+                                        + "</table>");
+                                } else {
+                                    
+                                    out.println("<tbody>"
+                                            + "<table>"
+                                            +"<th><h2> Carrito Vacío </h2></th>"
+                                            +"</tbody>"
+                                            + "</table>");
+                                }
 
-        
+                                
+                            
                         %>                       
                         </tbody>
                         </table>

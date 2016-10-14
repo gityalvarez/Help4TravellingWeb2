@@ -13,6 +13,7 @@ import Logica.DtPromocion;
 import Logica.DtProveedor;
 import Logica.DtReserva;
 import Logica.DtServicio;
+import Logica.ManejadorCategoria;
 import Logica.DtUsuario;
 import Logica.ItemReserva;
 import Logica.Proveedor;
@@ -401,11 +402,7 @@ public class Consultas {
         return servicios;
     }*/
      public List<DtItemReserva> listarItems(Integer reserva) {
-        //List<DtItemReserva> listaItems = new ArrayList<>();
-        //List<ItemReserva> itemsReserva = this.itemsId.get(reserva);
-        
-                   List<DtItemReserva> items = new ArrayList<DtItemReserva>();
-
+        List<DtItemReserva> items = new ArrayList<DtItemReserva>();
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
@@ -437,17 +434,30 @@ public class Consultas {
         }
         return items;
     }
-
-     /*   if (itemsReserva != null) {
-            Iterator<ItemReserva> iter = itemsReserva.iterator();
-            while (iter.hasNext()) {
-                ItemReserva item = iter.next();
-                listaItems.add(item.getDtItem());
+     
+    public String getNkProveedorServicio(String servicio) {
+        String prov = null;
+        ResultSet rs;
+        Statement st;
+        try {
+            Connection con = Conexion.getInstance().getConnection();        
+            String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + servicio + "'";
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                prov = rs.getString("proveedor");
             }
+            rs.close();
+            st.close();
+            con.close();
+        } 
+        catch (SQLException e) {
+            System.out.println("No pude obtener Proveedor :(");
         }
+        return prov;
+    }     
+    
 
-        return listaItems;
-    }*/
 }
 
         

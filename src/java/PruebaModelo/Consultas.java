@@ -8,6 +8,7 @@ package PruebaModelo;
 import Logica.Conexion;
 import Logica.Date;
 import Logica.DtCategoria;
+import Logica.DtItemReserva;
 import Logica.DtPromocion;
 import Logica.DtProveedor;
 import Logica.DtReserva;
@@ -21,12 +22,15 @@ import static Logica.Reserva.eEstado.CANCELADA;
 import static Logica.Reserva.eEstado.FACTURADA;
 import static Logica.Reserva.eEstado.PAGADA;
 import static Logica.Reserva.eEstado.REGISTRADA;
+import Logica.Servicio;
+import PruebaServlets.Oferta;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -396,7 +400,54 @@ public class Consultas {
 
         return servicios;
     }*/
-    
+     public List<DtItemReserva> listarItems(Integer reserva) {
+        //List<DtItemReserva> listaItems = new ArrayList<>();
+        //List<ItemReserva> itemsReserva = this.itemsId.get(reserva);
+        
+                   List<DtItemReserva> items = new ArrayList<DtItemReserva>();
+
+        ResultSet rs;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        String sql;
+        sql = "SELECT * FROM help4traveling.reservasitems WHERE reserva='" +reserva+ "'";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String oferta = rs.getString("oferta");
+                String proveedorOferta = rs.getString("proveedorOferta");
+                String inicio = rs.getString("inicio");
+                String fin = rs.getString("fin");
+                String cantidad = rs.getString("cantidad");
+                Date iniciodate = new Date(inicio);
+                Date findate = new Date(fin);
+                Proveedor prov = new Proveedor(proveedorOferta); 
+                Servicio ofertatype = new Servicio(oferta,prov,null,null,0,null);
+                
+                DtItemReserva item = new DtItemReserva(reserva,Integer.parseInt(cantidad),iniciodate,findate,ofertatype);
+                
+                items.add(item);
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("No pude obtener categorias :(");
+        }
+        return items;
+    }
+
+     /*   if (itemsReserva != null) {
+            Iterator<ItemReserva> iter = itemsReserva.iterator();
+            while (iter.hasNext()) {
+                ItemReserva item = iter.next();
+                listaItems.add(item.getDtItem());
+            }
+        }
+
+        return listaItems;
+    }*/
 }
 
         

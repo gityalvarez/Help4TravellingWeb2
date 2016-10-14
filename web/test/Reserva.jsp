@@ -1,5 +1,7 @@
 
 
+<%@page import="PruebaModelo.Consultas"%>
+<%@page import="Logica.ManejadorReserva"%>
 <%@page import="Logica.Proveedor"%>
 <%@page import="Logica.Date"%>
 <%@page import="Logica.Oferta"%>
@@ -29,9 +31,11 @@
     <% String IdReserva = request.getParameter("idReserva");
     Fabrica fab= Fabrica.getInstance();
     Integer numRes=Integer.parseInt(IdReserva);
+    System.out.println("Este es el numero de reserva" +numRes);
     List<DtItemReserva> itemsReserva;
     
-    itemsReserva= fab.getIControladorReserva().listarItems(numRes);
+    //itemsReserva= fab.getIControladorReserva().listarItems(numRes);
+    //itemsReserva= ManejadorReserva.getInstance().listarItems(numRes);
      //aca recibe como parametro la id de reservay devuelve los items vinculados
   //   out.println("la cantidad devuelta es: "+itemsReserva.size());
  /*      
@@ -60,16 +64,20 @@ eligieron para cada servicio y el total general de la reserva
                       <tbody>
                         <tr class="default">
                           <td class="default" width="20" align="center"><b>nombre</b></td>
-                          <td class="default" width="200" align="center"><b>tipo</b></td>
-                          <td class="default" width="200" align="center"><b>proevedor</b></td>
+                          <td class="default" width="200" align="center"><b>proveedor</b></td>
                           <td class="default" width="200" align="center"><b>cantidad</b></td>
+                          <td class="default" width="200" align="center"><b>inicio</b></td>
+                          <td class="default" width="200" align="center"><b>fin</b></td>
+                          
                         
                           
                         </tr>
                         <% 
-                            
+                           Consultas con = new Consultas();
+                           
                             ///declaraciones
-                           Iterator<DtItemReserva> iter = itemsReserva.iterator();
+                           Iterator<DtItemReserva> iter = con.listarItems(Integer.parseInt(IdReserva)).iterator();
+                           System.out.println("cargue el iter");
                            
                            DtItemReserva ItRes;
                            
@@ -86,13 +94,16 @@ eligieron para cada servicio y el total general de la reserva
                                ItRes = iter.next();
                                
                             //  saco las caracteristicas del item
+                                System.out.println("entre al while");
                                cant  = ItRes.getCantidad();
+                               System.out.println(cant);
                                ofertaVinculada= ItRes.getOferta();
                                inicio=ItRes.getInicio().getFecha("/");
                                fin=ItRes.getFin().getFecha("/");
                                NombOfr = ofertaVinculada.getNombre();
                                Prov = ofertaVinculada.getProveedor();
-                               NombProv=Prov.getNickname();
+                               NombProv= Prov.getNombre();
+                               //System.out.println(NombProv);
                                servoprom =ofertaVinculada.getClass().getName();
                                //invierto fecha inicio
                                partesfech=inicio.split("/");
@@ -103,9 +114,12 @@ eligieron para cada servicio y el total general de la reserva
                                %>
                                <tr class="default">
                                     <td class="default" align="center" width="20" id="numero"><%=NombOfr%></td>                                       
+                                    <td class="default" align="center" width="20" id="numero"><%=NombProv%></td>                                       
                                     <%--     <td class="default" align="center" width="400" id="descripcion"><%=servoprom%></td>      --%>                       
-                                    <td class="default" align="center" width="200" id="proveedor"><%=NombProv%></td>
+                                    <%--<td class="default" align="center" width="200" id="proveedor"><%=NombProv%></td>--%>
                                     <td class="default" align="center" width="100" id="precio"><%=cant%></td>
+                                    <td class="default" align="center" width="100" id="precio"><%=inicio%></td>
+                                    <td class="default" align="center" width="100" id="precio"><%=fin%></td>
                                     <%-- <td class="default" align="center" width="100" id="origen"><%=total%></td>--%>
                                </tr>
                              

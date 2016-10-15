@@ -38,9 +38,9 @@
  <body>
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>    
     <div>        
-        <iframe name="categorias" src="Categorias.jsp" style="position:relative; left:20px;top:60px;width:300px;height:440px;" scrolling="auto" frameborder="0">
+        <iframe name="categorias" src="Categorias.jsp" style="position:relative; left:20px;top:60px;width:310px;height:440px;" scrolling="auto" frameborder="0">
         </iframe>
-        <iframe name="servicios" src="ListarServicios.jsp?categoria=null" style="position:relative; left:20px;top:50px;width:1031px;height:440px;" scrolling="auto" frameborder="0">
+        <iframe name="servicios" src="ListarServicios.jsp?categoria=null" style="position:relative; left:20px;top:60px;width:1021px;height:440px;" scrolling="auto" frameborder="0">
         </iframe>  
     </div>
     <div><footer class="section section-primary" id="footer"></footer></div>

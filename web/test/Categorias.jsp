@@ -39,10 +39,11 @@
     <script>	
         $(document).ready(function () {
             $("#selector").jstree();
-            $("#selector").on("select_node.jstree", function (evt, data) {
-                        //alert(data.node.text);                       
-                    }
-            );
+            $("#selector").on(("select_node.jstree", function (e, data) {
+            var href = data.node.a_attr.href;
+            var target = data.node.a_attr.target;
+            document.location.href = href;        
+                
         });
     </script>
 </head>
@@ -57,35 +58,35 @@
                             <div id="selector">
                                 <ul>
                                     <%  String catn0 = "Categorias"; %>
-                                        <li class="jstree-open"><a><%=catn0%></a><%
+                                        <li class="jstree-open"><a href="ListarServicios.jsp?categoria=<% out.print(catn0); %>" target="servicios"><%=catn0%></a><%
                                         List<String> listaNivel1 = ManejadorCategoria.getInstance().obtenerCategoriasHijas(catn0);
                                         if (!listaNivel1.isEmpty()) {
                                             %><ul><%
                                             Iterator<String> icatn1 = listaNivel1.iterator();
                                             while (icatn1.hasNext()) {
                                                 String catn1 = icatn1.next();
-                                                %><li><a><%=catn1%></a><%
+                                                %><li><a href="ListarServicios.jsp?categoria=<% out.print(catn1); %>" target="servicios"><%=catn1%></a><%
                                                 List<String> listaNivel2 = ManejadorCategoria.getInstance().obtenerCategoriasHijas(catn1);
                                                 if (!listaNivel2.isEmpty()) {
                                                     %><ul><%
                                                     Iterator<String> icatn2 = listaNivel2.iterator();
                                                     while (icatn2.hasNext()) {
                                                         String catn2 = icatn2.next();
-                                                        %><li><a><%=catn2%></a><%
+                                                        %><li><a href="ListarServicios.jsp?categoria=<% out.print(catn2); %>" target="servicios"><%=catn2%></a><%                                                            
                                                         List<String> listaNivel3 = ManejadorCategoria.getInstance().obtenerCategoriasHijas(catn2);
                                                         if (!listaNivel3.isEmpty()) {
                                                             %><ul><%
                                                             Iterator<String> icatn3 = listaNivel3.iterator();
                                                             while (icatn3.hasNext()) {
                                                                 String catn3 = icatn3.next();
-                                                                %><li><a><%=catn3%></a><%                                                                    
+                                                            %><li><a href="ListarServicios.jsp?categoria=<%=catn3%>" target="servicios"><%=catn3%></a><%                                                                
                                                                 List<String> listaNivel4 = ManejadorCategoria.getInstance().obtenerCategoriasHijas(catn3);
                                                                 if (!listaNivel4.isEmpty()) {
                                                                     %><ul><%
                                                                     Iterator<String> icatn4 = listaNivel4.iterator();
                                                                     while (icatn4.hasNext()) {
                                                                         String catn4 = icatn4.next();
-                                                                        %><li><a><%=catn4%></a></li><%
+                                                                        %><li><a href="ListarServicios.jsp?categoria=<% out.print(catn4); %>" target="servicios"><%=catn4%></a></li><%
                                                                     }
                                                                     %></ul><%
                                                                 }

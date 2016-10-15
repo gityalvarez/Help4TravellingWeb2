@@ -41,7 +41,7 @@
                 </thead>
                 <tbody>    
                     <%  //DtServicio dtServ = null;
-                        List<DtServicio> servicios = null;
+                        List<DtServicio> servicios = new LinkedList<DtServicio>();
                         /*Consultas con = new Consultas();
                         servicios = con.listarServiciosSistema();*/
                         String categoria = (String) request.getParameter("categoria");
@@ -50,7 +50,7 @@
                             nombres = ManejadorServicio.getInstance().listarServiciosCategoria(categoria);
                             if (!nombres.isEmpty()){
                                 Iterator<String> inom = nombres.iterator();
-                                servicios = new LinkedList<DtServicio>();
+                                //servicios = new LinkedList<DtServicio>();
                                 while (inom.hasNext()) {
                                     Consultas con = new Consultas();
                                     String nombre = inom.next();
@@ -59,6 +59,7 @@
                                     servicios.add(dtServ);
                                 }
                             }
+                            
                         }
                         else {
                             servicios = ManejadorServicio.getInstance().listarServicios();

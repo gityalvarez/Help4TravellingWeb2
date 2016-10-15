@@ -29,28 +29,17 @@
         <div class="row">
             <div class="row default"><h2><b>Listado de Servicios</b></h2></div>
             <hr>
-            <table class="default table table-bordered table-hover table-striped">
-                <thead>
-                    <tr class="default">
-                        <td class="default" width="100" align="center"><b>Nombre</b></td>
-                        <td class="default" width="300" align="center"><b>Descripcion</b></td>
-                        <td class="default" width="100" align="center"><b>Proveedor</b></td>
-                        <td class="default" width="100" align="center"><b>Precio</b></td>
-                        <td class="default" width="100" align="center"><b>Origen</b></td>                          
-                    </tr>
-                </thead>
-                <tbody>    
+                
                     <%  //DtServicio dtServ = null;
                         List<DtServicio> servicios = new LinkedList<DtServicio>();
                         /*Consultas con = new Consultas();
                         servicios = con.listarServiciosSistema();*/
                         String categoria = (String) request.getParameter("categoria");
                         if (!categoria.equals("null")) {                            
-                            List<String> nombres = null;
+                            List<String> nombres = new LinkedList<String>();
                             nombres = ManejadorServicio.getInstance().listarServiciosCategoria(categoria);
                             if (!nombres.isEmpty()){
                                 Iterator<String> inom = nombres.iterator();
-                                //servicios = new LinkedList<DtServicio>();
                                 while (inom.hasNext()) {
                                     Consultas con = new Consultas();
                                     String nombre = inom.next();
@@ -65,8 +54,19 @@
                             servicios = ManejadorServicio.getInstance().listarServicios();
                         }
                         if (!servicios.isEmpty()) {
-                            Iterator<DtServicio> iserv = servicios.iterator();
-                            while (iserv.hasNext()){
+                            Iterator<DtServicio> iserv = servicios.iterator(); %>
+                            <table class="default table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr class="default">
+                                        <td class="default" width="100" align="center"><b>Nombre</b></td>
+                                        <td class="default" width="300" align="center"><b>Descripcion</b></td>
+                                        <td class="default" width="100" align="center"><b>Proveedor</b></td>
+                                        <td class="default" width="100" align="center"><b>Precio</b></td>
+                                        <td class="default" width="100" align="center"><b>Origen</b></td>                          
+                                    </tr>
+                                </thead>
+                                <tbody>                           
+                            <% while (iserv.hasNext()){
                                 DtServicio dtServ = iserv.next();                                                        
                                 String nombre = dtServ.getNombre();
                                 String proveedor = dtServ.getNkProveedor();
@@ -74,16 +74,19 @@
                                 float precio = dtServ.getPrecio();
                                 String origen = dtServ.getNomCiuOrigen();  %>     
                                 <tr class="default">
-                                <td class="default" align="center" width="100" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(nombre); %>&proveedor=<% out.print(proveedor); %>&categoria=<% out.print(categoria); %>" target="_blank"><%=nombre%></a></td>                                       
-                                <td class="default" align="center" width="300" id="descripcion"><%=descripcion%></td>                             
-                                <td class="default" align="center" width="100" id="proveedor"><%=proveedor%></td>
-                                <td class="default" align="center" width="100" id="precio"><%=precio%></td>
-                                <td class="default" align="center" width="100" id="origen"><%=origen%></td>
+                                    <td class="default" align="center" width="100" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(nombre); %>&proveedor=<% out.print(proveedor); %>&categoria=<% out.print(categoria); %>" target="_blank"><%=nombre%></a></td>                                       
+                                    <td class="default" align="center" width="300" id="descripcion"><%=descripcion%></td>                             
+                                    <td class="default" align="center" width="100" id="proveedor"><%=proveedor%></td>
+                                    <td class="default" align="center" width="100" id="precio"><%=precio%></td>
+                                    <td class="default" align="center" width="100" id="origen"><%=origen%></td>
                                 </tr>
-                         <% } 
-                        } %>                       
-                </tbody>
-            </table>
+                         <% } %>
+                                </tbody>
+                            </table>
+                     <% } 
+                        else { %>
+                            <div class="row default"><h2><b>La categoría seleccionada no tiene servicios asociados.</b></h2></div>   
+                     <% } %>
             <ul class="list-group"></ul>
         </div>                  
     </div>

@@ -40,15 +40,18 @@
     <body>
         <title>Listado de Promociones</title>    
         <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
-        <div class="section minimo">
+        <div>
+            <p>AAA</p>
+        </div>
+        <!--div class="section minimo"-->
           <div class="container">
-            <div class="row">
-              <p class="default">Ofertas en Hoteles, Paquetes de viaje y más</p>
-            </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="section">
                   <div class="container">
+                    <div class="row">
+                        <p class="default">Ofertas en Hoteles, Paquetes de viaje y más</p>
+                    </div>
                     <div class="row default">
                         <div class="row default"><h2><b>Listado de Promociones</b></h2></div>
                         <hr>
@@ -78,7 +81,7 @@
                                    String descuento = dtProm.getDescuento();
                                    String total = dtProm.getDescuento();  %>
                                    <tr class="default">
-                                   <td class="default" align="center" width="200" id="nombre"><%=nombre%></td>
+                                   <td class="default" align="center" width="200" id="nombre"><a href="Promocion.jsp?nombre=<% out.print(nombre); %>&proveedor=<% out.print(proveedor); %>" target="_blank"><%=nombre%></a></td>
                                    <td class="default" align="center" width="200" id="proveedor"><%=proveedor%></td>
                                    <td class="default" align="center" width="200" id="descuento"><%=descuento%></td>
                                    <td class="default" align="center" width="200" id="total"><%=total%></td>
@@ -93,7 +96,7 @@
                 </div>
               </div>
             </div>
-          </div>    
+          <!--/div-->    
         <footer class="section section-primary" id="footer"></footer>
     </body>
 </html>

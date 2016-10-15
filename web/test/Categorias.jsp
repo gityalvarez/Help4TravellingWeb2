@@ -5,7 +5,6 @@
 --%>
 
 
-
 <%@page import="java.util.Iterator"%>
 <%@page import="Logica.ManejadorCategoria"%>
 <%@page import="java.util.List"%>
@@ -22,7 +21,7 @@
     <link href="css\test.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-3.1.1.js"></script>
     <script src="js/jstree.min.js"></script>
-    <!--script>
+    <script>
         $(document).ready(function () {
                 setTimeout(function(){
                     <%if ((String) session.getAttribute("nickname") != null) {%>
@@ -35,24 +34,23 @@
                     <%}%>;
                 }, 100);
         );
-    </script-->
+    </script>
     <script>	
         $(document).ready(function () {
             $("#selector").jstree();
             $("#selector").on(("select_node.jstree", function (e, data) {
             var href = data.node.a_attr.href;
             var target = data.node.a_attr.target;
-            document.location.href = href;        
-                
+            document.location.href = href;    
         });
     </script>
 </head>
 <div class="section">
-            <div class="col-md-12"><!--div class="col-md-12"-->
+            <div class="col-md-12">
                 <div>
                     <div>
                         <p>Ofertas en Hoteles, Paquetes de viaje y más</p>
-                        <div><!--div class="row default"--><h2><b>Arbol de Categorías</b></h2></div>
+                        <div><h2><b>Arbol de Categorías</b></h2></div>
                         <hr>
                         <div><!--div class="row default"-->     
                             <div id="selector">

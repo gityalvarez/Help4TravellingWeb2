@@ -12,6 +12,7 @@
 <%@page import="Logica.DtServicio"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,29 +23,20 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-3.1.1.js"></script>
-    <script src="js/jstree.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#selector").jstree();
-            $("#selector").on("select_node.jstree",
-                    function (evt, data) {
-                        //hacemos lo que queremos con la categoria seleccionada
-                    }
-            );
-        });
-    </script>  
+    <script src="js/jstree.min.js"></script>     
   </head>
   <title>Listado de Servicios</title>
  <body>
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>    
     <div>        
-        <iframe name="categorias" src="Categorias.jsp" style="position:relative; left:20px;top:60px;width:310px;height:440px;" scrolling="auto" frameborder="0">
+        <iframe name="categorias" src="Categorias.jsp" style="position:relative; left:20px;top:60px;width:310px;height:470px;" scrolling="auto" frameborder="0">
         </iframe>
-        <iframe name="servicios" src="ListarServicios.jsp?categoria=null" style="position:relative; left:20px;top:60px;width:1021px;height:440px;" scrolling="auto" frameborder="0">
+        <iframe name="servicios" src="ListarServicios.jsp?categoria=Categorias" style="position:relative; left:20px;top:60px;width:1021px;height:470px;" scrolling="auto" frameborder="0">
         </iframe>  
     </div>
     <div><footer class="section section-primary" id="footer"></footer></div>
   </body>
+</html>
 
   
   

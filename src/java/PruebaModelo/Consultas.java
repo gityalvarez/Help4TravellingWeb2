@@ -458,7 +458,31 @@ public class Consultas {
         return prov;
     }     
     
-
+    public List<String> listarServiciosDePromociones(String nombre, String prov) {
+        List<String> listaServicios = new LinkedList<String>();
+        ResultSet rs;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        String sql = "SELECT * FROM help4traveling.promocionesservicios WHERE promocion='" + nombre + "' AND proveedorPromocion='" + prov + "'";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String servicio = rs.getString("servicio");
+                String proveedor = rs.getString("proveedorServicio");
+                listaServicios.add(servicio);
+            }
+            rs.close();
+            st.close();
+            con.close();
+            System.out.println("servicios cargados :)");
+        } catch (SQLException e) {
+            System.out.println("No pude cargar servicios :(");
+        }
+        return listaServicios;
+    }
+    
+    
 }
 
         

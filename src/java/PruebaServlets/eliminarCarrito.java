@@ -5,10 +5,21 @@
  */
 package PruebaServlets;
 
+import Logica.Date;
+import Logica.DtItemReserva;
+import Logica.ItemReserva;
+import Logica.ManejadorReserva;
+import Logica.Proveedor;
+import Logica.Oferta;
+import static Logica.Reserva.eEstado.REGISTRADA;
+import Logica.Servicio;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +47,6 @@ public class eliminarCarrito extends HttpServlet {
         
         HttpSession sesion = request.getSession();
         String servicio = request.getParameter("servicio_in");
-        String boton = request.getParameter("");
         
         System.out.println(servicio);
         float precio =0;
@@ -69,7 +79,28 @@ public class eliminarCarrito extends HttpServlet {
             while (iter.hasNext()) {
                 res = iter.next();
                 if (servicio.equals(res.getServicio())) {
+                    
+                    
+                    
                     cantidad = res.getCantidad(); 
+                    Proveedor prov= new Proveedor("yama");
+                    Servicio ofertatype = new Servicio(servicio,prov);
+                    Date iniciodate = new Date("1988-08-01");
+                    ItemReserva item = new ItemReserva(28,cantidad ,iniciodate, iniciodate,ofertatype);
+                    System.out.println("llegue hasta aca");        
+                    Map<Integer,ItemReserva> items = new HashMap<Integer,ItemReserva>();
+                    items.put(cantidad,item);
+                    Logica.Reserva reserva1 = new Logica.Reserva(iniciodate, REGISTRADA, res.getPrecio()*cantidad, (String)sesion.getAttribute("nickname"),items);
+                    
+                    ManejadorReserva man = ManejadorReserva.getInstance();
+                    man.altaReserva(reserva1);
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     precio = res.getPrecio(); 
                     System.out.println("esta es la cantidad"+cantidad);
                     System.out.println(servicio);

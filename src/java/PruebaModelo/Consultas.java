@@ -98,6 +98,7 @@ public class Consultas {
         }
             //String fecha = (anio+ "-" + mes + "-" + dia);
             String fechaNac = fecha.replaceAll("/", "-");
+            
             String sqlau = "INSERT INTO help4traveling.usuarios (nickname,nombre,apellido,password,email,imagen,fechaNac) VALUES ('"+nickname + "','" + nombre + "','" + apellido + "','" + password + "','" + email + "'," + imagen + ",'" + fechaNac + "')";
             System.out.println(sqlau);
             String sqlac = "INSERT INTO help4traveling.clientes (nickname) VALUES ('" + nickname + "')";

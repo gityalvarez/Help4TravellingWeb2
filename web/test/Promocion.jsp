@@ -92,7 +92,7 @@
                                         String origen = dtServ1.getNomCiuOrigen();
                                         total = total + precio; %> 
                                         <tr class="default">
-                                            <td class="default" align="center" width="200" id="nombre"><%=nomserv%></td>
+                                            <td class="default" align="center" width="200" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(nomserv); %>&proveedor=<% out.print(provserv); %>&categoria=<% out.print(""); %>" target="_blank"><%=nomserv%></a></td>                                           
                                             <td class="default" align="center" width="50" id="proveedor"><%=provserv%></td>
                                             <td class="default" align="center" width="400" id="descripcion"><%=descripcion%></td>                             
                                             <td class="default" align="center" width="50" id="precio"><%=precio%></td>

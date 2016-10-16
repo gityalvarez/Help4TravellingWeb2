@@ -33,9 +33,9 @@
                         $('#idSalir').hide();
                     <%}%>;
                 }, 100);
-        );
+            });
     </script>
-    <script>	
+    <!--script>	
         $(document).ready(function () {
             $("#selector").jstree();
             $("#selector").on(("select_node.jstree", function (e, data) {
@@ -43,7 +43,7 @@
             var target = data.node.a_attr.target;
             document.location.href = href;    
         });
-    </script>
+    </script-->
 </head>
 <div class="section">
             <div class="col-md-12">

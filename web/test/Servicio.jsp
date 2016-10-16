@@ -158,11 +158,20 @@
                     <form class="form-horizontal" role="form" action="../agregarCarrito" method="post">
                       <div class="form-group">
                         <div class="col-sm-4">
-                          <input type="text" class="form-control input-lg" id="cantidad_in" name="cantidad_in"  placeholder="Cantidad">
                           <input type="hidden" class="hiddden" id="servicio_in" name="servicio_in" value="<%=nombre%>">
                           <input type="hidden" class="hiddden" id="precio_in" name="precio_in" value="<%=dtServ.getPrecio()%>">
+                          <!--input type="hidden" class="hiddden" id="tipo_in" name="tipo_in" value="Servicio"-->
+                        <% if ((String) session.getAttribute("nickname") != null) {%>
+                            <input type="text" class="form-control input-lg" id="cantidad_in" name="cantidad_in"  placeholder="Cantidad">
+                      <%} else {%>
+                        <input type="text" disabled="true"class="form-control input-lg" id="cantidad_in" name="cantidad_in"  placeholder="Cantidad"> 
+                      <%}%>
                         </div>
-                        <button type="submit" width="5000" class="active btn btn-info btn-lg">Agregar al Carrito</button>
+                        <% if ((String) session.getAttribute("nickname") != null) {%>
+                            <button type="submit" width="5000" class="active btn btn-info btn-lg">Agregar al Carrito</button>
+                      <%} else {%>
+                            <button type="submit" width="5000" disabled="true" class="active btn btn-info btn-lg">Agregar al Carrito</button>
+                        <%}%>                                                
                       </div>
                     </form>
                     <hr>

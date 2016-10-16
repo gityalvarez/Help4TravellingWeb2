@@ -29,6 +29,31 @@
     <script src="js/includes.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
+    <script>
+        $(document).ready(function () {
+            setTimeout(function(){
+                <%if ((String) session.getAttribute("nickname") != null) {%>
+                    $('#idIniciar').hide();
+                    $('#idRegistrar').hide();
+                <%} else {%> 
+                    $('#idPerfil').hide();
+                    $('#idReservas').hide();
+                    $('#idSalir').hide();
+                <%}%>;
+                    
+                    
+                $("#frmAgregar").submit(function( event ) {
+                    var Cantidad = $("#cantidad_in").val();
+                    if ((Cantidad === "") || (parseInt(Cantidad) === 0)) {
+                        alert("Debe ingresar una cantidad valida.");
+                        event.preventDefault();
+                    }else {
+                        return;
+                    }
+                });
+            }, 100);
+        });
+    </script>
   </head>
   <title>Detalle de Promoción</title>
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
@@ -116,7 +141,7 @@
                         <h3><%=dtProm.getPrecio()%>% de Descuento</h3> 
                     <% } %>
                     <hr>
-                    <form class="form-horizontal" role="form" action="../agregarCarrito" method="post">
+                    <form id="frmAgregar" class="form-horizontal" role="form" action="../agregarCarrito" method="post">
                       <div class="form-group">
                         <div class="col-sm-4">
                           <input type="hidden" class="hiddden" id="servicio_in" name="servicio_in" value="<%=nombre%>">

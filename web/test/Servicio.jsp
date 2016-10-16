@@ -28,6 +28,13 @@
     <script src="js/includes.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
+    	<script>
+            function cambiar(obj) {
+                var img = obj.id; // Obtenemos la ID del objeto
+                var img_dos = document.getElementById(img).src // Obtenemos la ruta del objeto con ID obtenida atrás
+                document.getElementById('principal').src = img_dos; // Cambiamos la ruta de la imagen por la obtenida antes
+            }
+        </script>
   </head>
   <title>Detalle de Servicio</title>
     <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
@@ -40,10 +47,7 @@
        String categoria = (String) request.getParameter("categoria");
        String padre = null;
        String abuelo = null;
-       /*Consultas con = new Consultas();
-       padre = con.obtenerPadre(categoria);
-       con = new Consultas();       
-       DtServicio dtServ = con.getDtServicio(nombre,proveedor);*/    
+       String bisabuelo = null;       
        padre = ManejadorCategoria.getInstance().obtenerPadre(categoria);
        DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(nombre,proveedor);
     %>    
@@ -56,14 +60,16 @@
           <div class="col-md-12">
             <ul class="breadcrumb">
             <%  if (padre != null) {
-                    /*con = new Consultas();
-                    abuelo = con.obtenerPadre(padre);*/
                     abuelo = ManejadorCategoria.getInstance().obtenerPadre(padre);                    
-                    if (abuelo != null){ %>
-                        <li><% out.print(abuelo); %></li>
-                 <% } %>
-                    <li><% out.print(padre); %></li>    
-            <%  }  %>
+                    if (abuelo != null) { 
+                        bisabuelo = ManejadorCategoria.getInstance().obtenerPadre(abuelo);
+                        if ((bisabuelo != null) && (!bisabuelo.equals("Categorias"))) { %>
+                            <li><% out.print(bisabuelo); %></li>
+                     <% } %>
+                        <li><% out.print(abuelo); %></li>    
+                <%  }  %>
+                    <li><% out.print(padre); %></li>
+            <% } %>                    
             <li class="active"><%=categoria%></li>
             </ul>
           </div>
@@ -89,30 +95,30 @@
                     <% }
                        else if (cantimgs == 2){ %>
                                 <div class="col-md-6">                   
-                                    <a href="#"><img src="<% out.print(imagenes.get(0)); %>" class="img-responsive"></a>
+                                    <img src="<% out.print(imagenes.get(0)); %>" alt="Imagen" id="principal" class="img-responsive">
                                     <hr> 
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <a href="#"><img src="<% out.print(imagenes.get(0)); %>" class="img-responsive"></a>
+                                            <a href="#"><img src="<% out.print(imagenes.get(0)); %>" alt="Imagen" id="img0" onclick="cambiar(this);" class="img-responsive"></a>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="#"><img src="<% out.print(imagenes.get(1)); %>" class="img-responsive"></a>
-                                        </div>
+                                            <a href="#"><img src="<% out.print(imagenes.get(1)); %>" alt="Imagen" id="img1" onclick="cambiar(this);" class="img-responsive"></a>
+                                        </div>                                            
                                     </div>
                          <% }
                             else if (cantimgs == 3){ %>
                                     <div class="col-md-6">                   
-                                        <a href="#"><img src="<% out.print(imagenes.get(0)); %>" class="img-responsive"></a>
+                                        <img src="<% out.print(imagenes.get(0)); %>" alt="Imagen" id="principal" class="img-responsive">
                                         <hr> 
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <a href="#"><img src="<% out.print(imagenes.get(0)); %>" class="img-responsive"></a>
+                                                <a href="#"><img src="<% out.print(imagenes.get(0)); %>" alt="Imagen" id="img0" onclick="cambiar(this);" class="img-responsive"></a>
                                             </div>
                                             <div class="col-md-4">
-                                                <a href="#"><img src="<% out.print(imagenes.get(1)); %>" class="img-responsive"></a>
+                                                <a href="#"><img src="<% out.print(imagenes.get(1)); %>" alt="Imagen" id="img1" onclick="cambiar(this);" class="img-responsive"></a>
                                             </div>
                                             <div class="col-md-4">
-                                                <a href="#"><img src="<% out.print(imagenes.get(2)); %>" class="img-responsive"></a>
+                                                <a href="#"><img src="<% out.print(imagenes.get(2)); %>" alt="Imagen" id="img2" onclick="cambiar(this);" class="img-responsive"></a>
                                             </div>
                                         </div>
                               <% } %>  
@@ -122,8 +128,6 @@
                         <tr class="default">
                           <td class="default" width="200">Proveedor</td>
                           <% String nickname = dtServ.getNkProveedor();
-                             /*con = new Consultas();
-                             DtUsuario prov = con.getDtProveedor(nickname);*/
                              DtUsuario prov = ManejadorProveedor.getInstance().getDtProveedor(nickname);
                              %> 
                           <td id="nomprov"><% out.print(prov.getNombre()); out.print(" "); out.print(prov.getApellido()); %></td>
@@ -148,7 +152,6 @@
                   </div>
                   <div class="col-md-6">
                     <h1><%=nombre%></h1>                    
-                    <!--h2>Descripción:</h2-->
                     <h3><%=dtServ.getDescripcion()%><h3>
                     <hr>
                     <h3>U$D <%=dtServ.getPrecio()%></h3>
@@ -173,7 +176,6 @@
                      <% } %>  
                  <% } %>   
                         </h4>
-                    <!--p class="lead">Categoría 1 | Categoría 2 | Categoría 3</p-->
                   </div>
                 </div>
               </div>

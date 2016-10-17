@@ -42,39 +42,37 @@
             <div id="fullcarousel-example" data-interval="false" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="item active">
-                  <img src="../img/carrusel1.jpg">
-                  <div class="carousel-caption">
-                    <h2 class="text-muted">Promoci贸n 1</h2>
-                    <p class="text-muted">Descripci贸n</p>
-                  </div>
+                  <img src="http://www.saldevacaciones.com/wp-content/uploads/2016/01/Agencia-de-viaje-online-1.jpg">
+                  <!--div class="carousel-caption">
+                    <h2 class="text-muted">Promoci髇 1</h2>
+                    <p class="text-muted">Descripci髇</p>
+                  </div-->
                 </div>
                 <div class="item">
-                  <img src="../img/carrusel2.jpg">
-                  <div class="carousel-caption">
-                    <h2 class="text-muted">Promoci贸n 2</h2>
-                    <p class="text-muted">Descripci贸n</p>
-                  </div>
+                  <img src="http://www.udgtravel.com/wp-content/uploads/2016/08/i3_20160203142344.jpg">
+                  <!--div class="carousel-caption">
+                    <h2 class="text-muted">Promoci髇 2</h2>
+                    <p class="text-muted">Descripci髇</p>
+                  </div-->
                 </div>
                 <div class="item">
-                  <img src="../img/carrusel3.jpg">
-                  <div class="carousel-caption">
-                    <h2 class="text-muted">Promoci贸n 2</h2>
-                    <p class="text-muted">Descripci贸n</p>
-                  </div>
-                </div>  
+                  <img src="http://touratabex.com/wp-content/uploads/2014/12/agencia_de_viaje.jpg">
+                  <!--div class="carousel-caption">
+                    <h2 class="text-muted">Promoci髇 2</h2>
+                    <p class="text-muted">Descripci髇</p>
+                  </div-->
+                </div>
+                <div class="item">
+                  <img src="http://guiamexico.com.mx/Imagenes/b/206744977-2-agencia-de-viajes-trending-travel-business.png">
+                  <!--div class="carousel-caption">
+                    <h2 class="text-muted">Promoci髇 2</h2>
+                    <p class="text-muted">Descripci髇</p>
+                  </div-->
+                </div>
               </div>
               <a class="left carousel-control" href="#fullcarousel-example" data-slide="prev"><i class="icon-prev fa fa-angle-left"></i></a>
               <a class="right carousel-control" href="#fullcarousel-example" data-slide="next"><i class="icon-next fa fa-angle-right"></i></a>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <hr>
           </div>
         </div>
       </div>

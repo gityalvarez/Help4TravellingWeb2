@@ -102,7 +102,7 @@ public class Consultas {
             String sqlau = "INSERT INTO help4traveling.usuarios (nickname,nombre,apellido,password,email,imagen,fechaNac) VALUES ('" + nickname + "','" + nombre + "','" + apellido + "','" + password + "','" + email + "'," + imagen + ",'" + fechaNac + "')";
             System.out.println(sqlau);
             String sqlac = "INSERT INTO help4traveling.clientes (nickname) VALUES ('" + nickname + "')";
-            String sqlai = "INSERT INTO help4traveling.usuariosimagenes (usuario,imagen) VALUES ('" + nickname + "','" + imagen + "')";
+            String sqlai = "INSERT INTO help4traveling.usuariosimagenes (usuario,imagen) VALUES ('" + nickname + "'," + imagen + ")";
             try {
                 Connection con = Conexion.getInstance().getConnection();
                 st = con.createStatement();
@@ -110,12 +110,12 @@ public class Consultas {
                 System.out.println("sentencia de insertar" + sqlai);
                 st.executeUpdate(sqlau);
                 st.executeUpdate(sqlac);
-                if ((imagen.equals(null)) && (!imagen.equals(""))) {
-                    //st.executeUpdate(sqlai);
-                    con.prepareStatement(sqlai);
-                }
-                con.close();
+                //if ((imagen.equals(null)) && (!imagen.equals(""))) {
+                    st.executeUpdate(sqlai);
+                    //con.prepareStatement(sqlai);
+                //}
                 st.close();
+                con.close();                
                 System.out.println("INSERTE :)");
             } catch (SQLException e) {
                 System.out.println("No pude INSERTAR :(");
@@ -483,7 +483,7 @@ public class Consultas {
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
-        String sql = "SELECT * FROM help4traveling.usuarios WHERE nickname='" + nickname + "'";
+        String sql = "SELECT * FROM help4traveling.usuariosimagenes WHERE usuario='" + nickname + "'";
         try {
             st = con.createStatement();
             rs = st.executeQuery(sql);

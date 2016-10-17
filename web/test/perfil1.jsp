@@ -73,6 +73,8 @@
             String partes[]=fecha.split("-");
 
             fecha = partes[2]+"/"+partes[1]+"/"+partes[0];
+            Consultas con1 = new Consultas();            
+            String imagen = con1.imagenPerfilUsuario(nick);
             //System.out.println(mierda1) ;
             /*Date fecha1 = new Date(10, 11, 2012);
             Cliente usu = new Cliente("juan", "Perez", "Juanpe", "contrasenia", "alfalfa@gmail.com", fecha1, "aca la imagen");
@@ -90,10 +92,10 @@
                     <div class="col-md-12">
                         <ul class="media-list">
                             <li class="media">
-                                <a class="pull-left" href="#"><img class="media-object" src="../img/user.png" height="64" width="64"></a>
+                                <a class="pull-left" href="#"><img class="media-object" src="<% out.print(imagen); %>" height="130" width="130"></a>
                                 <div class="media-body">
-                                    <h2 class="media-heading"><%= nick%></h2>
-                                    <p><%= email%></p>
+                                    <h2 class="media-heading"><%=nick%></h2>
+                                    <p><%=email%></p>
                                 </div>
                             </li>
                             <li class="media"></li>

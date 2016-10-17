@@ -146,11 +146,15 @@
                     <h3><% DtUsuario prov = ManejadorProveedor.getInstance().getDtProveedor(proveedor);
                         out.print(prov.getNombre()); out.print(" "); out.print(prov.getApellido()); %></h3>
                     <hr>
-                    <h3>U$D <%=total%></h3>                    
-                    <hr>
-                    <% if (Float.parseFloat(dtProm.getPrecio()) > 0) { %>
-                        <h3><%=dtProm.getPrecio()%>% de Descuento</h3> 
+                    <%  float descuento = Float.parseFloat(dtProm.getPrecio());
+                        if (descuento > 0) { %>
+                        <h3><%=descuento%>% de Descuento</h3> 
                     <% } %>
+                    <hr>
+                    <% if (descuento > 0) { 
+                            total = total - (total * descuento / 100);
+                       } %>
+                    <h3>U$D <%=total%><% if (descuento > 0) { %> (con Descuento aplicado) <% } %></h3>                    
                     <hr>
                     <form id="frmAgregar" class="form-horizontal" role="form" action="../agregarCarrito" method="post">
                       <div class="form-group">

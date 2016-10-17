@@ -84,43 +84,39 @@
                     <h1>Ingreso de Usuario:</h1>
                     <form role="form" class="form-horizontal" action="../Autenticacion" method="post" id="ingreso_form">
                         <div class="form-group">
-                            <div class="col-sm-2">
+                            <!--div class="col-sm-2"-->
                                 <label for="nickname_ingreso" class="control-label">Nickname
                                 <br>
                                 </label>
-                            </div>
-                            <div class="col-sm-10" id="nickname_ingreso">
+                            <!--/div-->
+                            <!--div class="col-sm-10" id="nickname_ingreso"-->
                                 <input type="text" class="form-control" name="nickname_ingreso" id="nickname_ingreso" placeholder="Ingrese su Nickname" required="true" value="<%=nicknameCookie%>">
-                            </div>
+                            <!--/div-->
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-2">
+                            <!--div class="col-sm-2"-->
                                 <label for="password_ingreso" class="control-label">Password
                                 <br>
                                 </label>
-                            </div>
-                            <div class="col-sm-10" id="password_ingreso">
+                            <!--/div-->
+                            <!--div class="col-sm-10" id="password_ingreso"-->
                                 <input type="password" class="form-control" name="password_ingreso" id="password_ingreso" placeholder="Password" required="true">
-                            </div>
+                            <!--/div-->
                         </div>
                         <div class="form-group" action="InicioSesion.jsp">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <!--div class="col-sm-offset-2 col-sm-10"-->
                                 <div class="checkbox" id="Recordarme">
                                     <label>
                                         <input type="checkbox"  name="Recordarme" > Recordarme
                                         <br>
-                                    </label>
-
-                                   
+                                    </label>                                  
                                 </div>
-                            </div>
-                        </div>
-                        
-                        
+                            <!--/div-->
+                        </div>               
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <!--div class="col-sm-offset-2 col-sm-10"-->
                                 <button type="submit" class="btn btn-default" id="entrar_bn">Entrar</button>
-                            </div>
+                            <!--/div-->
                         </div>
                     </form>
                 </div>

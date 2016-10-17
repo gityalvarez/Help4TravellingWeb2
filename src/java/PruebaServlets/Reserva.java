@@ -14,14 +14,17 @@ package PruebaServlets;
         private String servicio;
         private float precio;
         private int cantidad;
+        private String fechaini;
+        private String fechafin;
 
-        public void Reserva(String servicio, float precio, int cantidad) {
+        public void Reserva(String servicio, float precio, int cantidad,String fechaini,String fechafin) {
             this.servicio = servicio;
             this.precio = precio;
             this.cantidad = cantidad;
-            
+            this.fechaini=fechaini;
+            this.fechafin=fechafin;
         }
-        public void getServicio(String servicio){
+        public void setServicio(String servicio){
             this.servicio= servicio;
         }
         
@@ -32,8 +35,15 @@ package PruebaServlets;
             this.cantidad= cantidad;
         }
         
+        public void setFechaini(String fechaini){
+            this.fechaini = fechaini;
+            
+        }
         
-        
+        public void setFechafin(String fechafin){
+            this.fechafin = fechafin;
+            
+        }
         
         public String getServicio(){
             return servicio;
@@ -46,4 +56,11 @@ package PruebaServlets;
             return cantidad;
         }
         
+        public String getFechaini(){
+            return fechaini;
+        }
+        
+         public String getFechafin(){
+            return fechafin;
+        }
     }

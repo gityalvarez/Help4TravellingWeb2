@@ -45,11 +45,18 @@ public class agregarCarrito extends HttpServlet {
         System.out.println(precio);
         String cantidad = request.getParameter("cantidad_in");
         System.out.println(cantidad);
-
+        String fechaini = request.getParameter("fechaIni");
+        System.out.println(fechaini);
+        String fechafin = request.getParameter("fechaFin");
+        System.out.println(fechafin);
         Reserva reserva = new Reserva();
-        reserva.getServicio(servicio);
+        reserva.setServicio(servicio);
         reserva.setPrecio(Float.parseFloat(precio));
         reserva.setCantidad(Integer.parseInt(cantidad));
+        reserva.setFechaini(fechaini);
+        reserva.setFechafin(fechafin);
+        
+        
 
         List<Reserva> reservas = new ArrayList<Reserva>();
         boolean existe = false;

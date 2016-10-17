@@ -537,7 +537,7 @@ public class Consultas {
                             String fin = key.getFin().getAno() + "-" + key.getFin().getMes() + "-" + key.getFin().getDia();
                             System.out.println(sid+" "+oferta+" "+proveedor+" "+cantidad+" "+inicio+" "+fin);
                             sql = "INSERT INTO help4traveling.reservasitems (reserva, oferta, proveedorOferta, cantidad, inicio, fin) "
-                                    + "VALUES (" + sid + ",'" + oferta + "','Remus'," + cantidad + ",'" + inicio + "','" + fin + "')";
+                                    + "VALUES (" + sid + ",'" + oferta + "','remus'," + cantidad + ",'" + inicio + "','" + fin + "')";
                             
                             st.executeUpdate(sql);
                         }

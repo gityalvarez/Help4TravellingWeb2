@@ -105,7 +105,7 @@
                                         + "<td><h2> U$U " + sesion.getAttribute("preciototal") + "</h2></td>"
                                         + "<form action='../eliminarCarrito' method=post>"
                                         + "<td width='80' align='center'>"
-                                        + "<input type='hidden' id='servicio_in' name='servicio_in' value='" + reserva.getServicio() + "'>"
+                                        
                                         + "<input type='submit' name='comprar' id='comprar' value='Comprar' align='center' width='80' class='active btn btn-info btn-lg'></a></td>"
                                         + "</tr>"
                                         + " </form>"

@@ -72,6 +72,9 @@ public class eliminarCarrito extends HttpServlet {
             sesion.setAttribute("carrito", reservas);
             float preciototal = (float) sesion.getAttribute("preciototal");
             sesion.setAttribute("preciototal", preciototal - (precio * cantidad));
+            if ((float)sesion.getAttribute("preciototal")==0){
+                 sesion.setAttribute("carrito",null);
+            }
 
         } else if (request.getParameter("comprar") != null) {
             List<Reserva> itemsCarrito = (List<Reserva>) sesion.getAttribute("carrito");
@@ -96,17 +99,17 @@ public class eliminarCarrito extends HttpServlet {
                 prov.setEmpresa("yama");
                 prov.setNickname("yama");
                 Servicio ofertatype = new Servicio(servicio, prov);
-                Date iniciodate = new Date();
-                iniciodate.setAno(2006);
-                iniciodate.setMes(8);
-                iniciodate.setDia(05);
-                
+                Date iniciodate = new Date(res.getFechaini());
+                //iniciodate.setAno(2006);
+                //iniciodate.setMes(8);
+                //iniciodate.setDia(05);
+                Date findate = new Date(res.getFechafin());
                 //Date findate = new Date("1988-08-07");
 
                 System.out.println("llegue hasta aca");
                 System.out.println("Intento agregar un item con cantidad "+ cantidad + " inicio "+iniciodate.getAno()+"-"+iniciodate.getMes()+"-"+iniciodate.getDia()+" fin "+iniciodate.getAno()+"-"+iniciodate.getMes()+"-"+iniciodate.getDia()+" servicio de nombre "+ofertatype.getNombre()+" de proveedor "+ofertatype.getProveedor().toString());
 
-                reserva.agregarItem(cantidad, iniciodate, iniciodate, ofertatype);
+                reserva.agregarItem(cantidad, iniciodate, findate, ofertatype);
                 System.out.println("agregue un item");
                 System.out.println("la cantidad de items es "+reserva.getItems().size());
                 

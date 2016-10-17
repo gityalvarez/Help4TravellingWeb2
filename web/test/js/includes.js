@@ -46,6 +46,8 @@ $(document).ready(function () {
                     $(location).attr('href','InicioSesion.jsp');
                 });
                 
+                $("#idReservas").hide();
+                
                 //Carrito
                 $("#idCarrito").click(function () {
                     $(location).attr('href','Carrito.jsp');

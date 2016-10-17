@@ -82,38 +82,45 @@
                                         + "</thead>"
                                         + "<tbody>"
                                         + "<tr>");
+                                
                                 while (iter.hasNext()) {
                                     reserva = iter.next();
                                     out.println("<td><h2>" + reserva.getServicio() + "</h2></td>"
                                             + "<td><h2>" + reserva.getPrecio() + "</h2></td>"
                                             + "<td><h2>" + reserva.getCantidad() + "</h2></td>"
-                                            +"<form action='../eliminarCarrito' method=post>"
+                                            + "<form action='../eliminarCarrito' method=post>"
+                                            //+ "<td width='80' align='center'>"
+
+                                            //+ "<input type='submit' name='comprar' id='comprar' value='Comprar' align='center' width='80' class='active btn btn-info btn-lg'></td>"
                                             + "<td width='80' align='center'>"
+                                            + "<input type='hidden' id='servicio_in' name='servicio_in' value='" + reserva.getServicio() + "'>"
                                             
-                                            + "<input type='submit' name='comprar' id='comprar' value='Comprar' align='center' width='80' class='active btn btn-info btn-lg'></td>"
-                                            + "<td width='80' align='center'>"
-                                            +"<input type='hidden' id='servicio_in' name='servicio_in' value='"+reserva.getServicio()+"'>"
                                             + "<input type='submit' name='eliminar' id='eliminar' value='Eliminar del Carrito' align='center' width='80' class='active btn btn-info btn-lg'></a></td>"
                                             + "</tr>"
-                                            +"</form>");
+                                            + "</form>");
                                 }
 
                                 out.println(
                                         "<th><h2>Total</h2></th>"
-                                        +"<td><h2> U$U " + sesion.getAttribute("preciototal") + "</h2></td>"
+                                        + "<td><h2> U$U " + sesion.getAttribute("preciototal") + "</h2></td>"
+                                        + "<form action='../eliminarCarrito' method=post>"
+                                        + "<td width='80' align='center'>"
+                                        + "<input type='hidden' id='servicio_in' name='servicio_in' value='" + reserva.getServicio() + "'>"
+                                        + "<input type='submit' name='comprar' id='comprar' value='Comprar' align='center' width='80' class='active btn btn-info btn-lg'></a></td>"
+                                        + "</tr>"
+                                        + " </form>"
                                         + "</tbody>"
                                         + "</table>");
-                                } else {
-                                    
-                                    out.println("<tbody>"
-                                            + "<table>"
-                                            +"<th><h2> Carrito Vacío </h2></th>"
-                                            +"</tbody>"
-                                            + "</table>");
-                                }
+                            } else {
 
-                                
-                            
+                                out.println("<tbody>"
+                                        + "<table>"
+                                        + "<th><h2> Carrito Vacío </h2></th>"
+                                        + "</tbody>"
+                                        + "</table>");
+                            }
+
+
                         %>                       
                         </tbody>
                         </table>

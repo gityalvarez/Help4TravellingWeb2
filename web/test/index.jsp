@@ -42,19 +42,26 @@
             <div id="fullcarousel-example" data-interval="false" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="item active">
-                  <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png">
+                  <img src="../img/carrusel1.jpg">
                   <div class="carousel-caption">
                     <h2 class="text-muted">Promoción 1</h2>
                     <p class="text-muted">Descripción</p>
                   </div>
                 </div>
                 <div class="item">
-                  <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png">
+                  <img src="../img/carrusel2.jpg">
                   <div class="carousel-caption">
                     <h2 class="text-muted">Promoción 2</h2>
                     <p class="text-muted">Descripción</p>
                   </div>
                 </div>
+                <div class="item">
+                  <img src="../img/carrusel3.jpg">
+                  <div class="carousel-caption">
+                    <h2 class="text-muted">Promoción 2</h2>
+                    <p class="text-muted">Descripción</p>
+                  </div>
+                </div>  
               </div>
               <a class="left carousel-control" href="#fullcarousel-example" data-slide="prev"><i class="icon-prev fa fa-angle-left"></i></a>
               <a class="right carousel-control" href="#fullcarousel-example" data-slide="next"><i class="icon-next fa fa-angle-right"></i></a>

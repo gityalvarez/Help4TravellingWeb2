@@ -13,6 +13,8 @@ import Logica.Proveedor;
 import Logica.Oferta;
 import static Logica.Reserva.eEstado.REGISTRADA;
 import Logica.Servicio;
+import Logica.Usuario;
+import PruebaModelo.Consultas;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -44,20 +46,19 @@ public class eliminarCarrito extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         HttpSession sesion = request.getSession();
         String servicio = request.getParameter("servicio_in");
-        
+
         System.out.println(servicio);
-        float precio =0;
-        int cantidad =0;
-        
-        if (request.getParameter("eliminar")!=null){
-        
-        
-        List<Reserva> reservas = (List<Reserva>)sesion.getAttribute("carrito");
-        Iterator<Reserva> iter = reservas.iterator();
-        
+        float precio = 0;
+        int cantidad = 0;
+
+        if (request.getParameter("eliminar") != null) {
+
+            List<Reserva> reservas = (List<Reserva>) sesion.getAttribute("carrito");
+            Iterator<Reserva> iter = reservas.iterator();
+
             Reserva res;
             while (iter.hasNext()) {
                 res = iter.next();
@@ -68,51 +69,63 @@ public class eliminarCarrito extends HttpServlet {
                     break;
                 }
             }
-        sesion.setAttribute("carrito",reservas);
-        
-        }
-        
-        else if(request.getParameter("comprar")!=null){
-            List<Reserva> reservas = (List<Reserva>)sesion.getAttribute("carrito");
-            Iterator<Reserva> iter = reservas.iterator();
+            sesion.setAttribute("carrito", reservas);
+            float preciototal = (float) sesion.getAttribute("preciototal");
+            sesion.setAttribute("preciototal", preciototal - (precio * cantidad));
+
+        } else if (request.getParameter("comprar") != null) {
+            List<Reserva> itemsCarrito = (List<Reserva>) sesion.getAttribute("carrito");
+            Iterator<Reserva> iter = itemsCarrito.iterator();
+
             Reserva res;
+            Logica.Reserva reserva = new Logica.Reserva();
+            reserva.setCliente((String) sesion.getAttribute("nickname"));
+            reserva.setEstado(REGISTRADA);
+            reserva.setTotal((float) sesion.getAttribute("preciototal"));
+            
+            System.out.println(itemsCarrito.size());
+            int contador = 0;
             while (iter.hasNext()) {
                 res = iter.next();
-                if (servicio.equals(res.getServicio())) {
-                    
-                    
-                    
-                    cantidad = res.getCantidad(); 
-                    Proveedor prov= new Proveedor("yama");
-                    Servicio ofertatype = new Servicio(servicio,prov);
-                    Date iniciodate = new Date("1988-08-01");
-                    ItemReserva item = new ItemReserva(28,cantidad ,iniciodate, iniciodate,ofertatype);
-                    System.out.println("llegue hasta aca");        
-                    Map<Integer,ItemReserva> items = new HashMap<Integer,ItemReserva>();
-                    items.put(cantidad,item);
-                    Logica.Reserva reserva1 = new Logica.Reserva(iniciodate, REGISTRADA, res.getPrecio()*cantidad, (String)sesion.getAttribute("nickname"),items);
-                    
-                    ManejadorReserva man = ManejadorReserva.getInstance();
-                    man.altaReserva(reserva1);
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    precio = res.getPrecio(); 
-                    System.out.println("esta es la cantidad"+cantidad);
-                    System.out.println(servicio);
-                    reservas.remove(res);
-                    break;
-                }
+                
+
+                //if (servicio.equals(res.getServicio())) {
+                cantidad = res.getCantidad();
+                servicio = res.getServicio();
+                Proveedor prov = new Proveedor("yama");
+                prov.setEmpresa("yama");
+                prov.setNickname("yama");
+                Servicio ofertatype = new Servicio(servicio, prov);
+                Date iniciodate = new Date();
+                iniciodate.setAno(2006);
+                iniciodate.setMes(8);
+                iniciodate.setDia(05);
+                
+                //Date findate = new Date("1988-08-07");
+
+                System.out.println("llegue hasta aca");
+                System.out.println("Intento agregar un item con cantidad "+ cantidad + " inicio "+iniciodate.getAno()+"-"+iniciodate.getMes()+"-"+iniciodate.getDia()+" fin "+iniciodate.getAno()+"-"+iniciodate.getMes()+"-"+iniciodate.getDia()+" servicio de nombre "+ofertatype.getNombre()+" de proveedor "+ofertatype.getProveedor().toString());
+
+                reserva.agregarItem(cantidad, iniciodate, iniciodate, ofertatype);
+                System.out.println("agregue un item");
+                System.out.println("la cantidad de items es "+reserva.getItems().size());
+                
+                contador++;
+
+                //itemsCarrito.remove(res);
             }
+            //ManejadorReserva man = ManejadorReserva.getInstance();
+            //man.altaReserva(reserva);
+            Consultas con = new Consultas();
+            con.altaReserva(reserva);
             
-        sesion.setAttribute("carrito",reservas);
+            sesion.setAttribute("preciototal", 0);
+            for (int i = 0; i < itemsCarrito.size(); i++) {
+                itemsCarrito.remove(i);
+            }
+            sesion.setAttribute("carrito", null);
         }
-        float preciototal = (float)sesion.getAttribute("preciototal");
-        sesion.setAttribute("preciototal",preciototal-(precio*cantidad));       
+
         response.sendRedirect("test/Carrito.jsp");
     }
 

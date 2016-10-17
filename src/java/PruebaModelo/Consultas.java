@@ -483,6 +483,62 @@ public class Consultas {
     }
     
     
+    
+    public void altaReserva(Reserva nueva) {
+        //conexion = new Conexion();
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        ResultSet rsId;
+        String sid;
+
+        String sql = "INSERT INTO help4traveling.reservas (fecha,total,estado,cliente) "
+                + "VALUES ('" + nueva.getCreada() + "'," + nueva.getTotal() + ",'" + nueva.getEstado() + "','" + nueva.getCliente() + "')";
+
+        try {
+            st = con.createStatement();
+            st.executeUpdate(sql);
+
+            try {
+                sql = "SELECT MAX(numero) AS id FROM help4traveling.reservas";
+                rsId = st.executeQuery(sql);
+                rsId.next();
+                sid = rsId.getString("id");
+
+                try {
+                    if (nueva.getItems().size() > 0) {
+                        System.out.println("entre al if 1");
+                        for (Map.Entry<Integer, ItemReserva> entry : nueva.getItems().entrySet()) {
+                            System.out.println("entre al for 1");
+                            ItemReserva key = entry.getValue();
+                            String oferta = key.getOferta().getNombre();
+                            String proveedor = key.getOferta().getProveedor().getNombre();
+                            String cantidad = String.valueOf(key.getCantidad());
+                            String inicio = key.getInicio().getAno() + "-" + key.getInicio().getMes() + "-" + key.getInicio().getDia();
+                            String fin = key.getFin().getAno() + "-" + key.getFin().getMes() + "-" + key.getFin().getDia();
+                            System.out.println(sid+" "+oferta+" "+proveedor+" "+cantidad+" "+inicio+" "+fin);
+                            sql = "INSERT INTO help4traveling.reservasitems (reserva, oferta, proveedorOferta, cantidad, inicio, fin) "
+                                    + "VALUES (" + sid + ",'" + oferta + "','Remus'," + cantidad + ",'" + inicio + "','" + fin + "')";
+                            
+                            st.executeUpdate(sql);
+                        }
+                        con.close();
+                        st.close();
+                        System.out.println("Reserva creada con exito :)");
+                    }
+                } catch (SQLException e) {
+                    System.out.println("No se pudo insertar item reserva :(");
+                    System.err.println(e);
+                }
+            } catch (SQLException e) {
+                System.out.println("No se pudo obtener id :(");
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo crear reserva :(");
+        }
+    }
+
+    
+    
 }
 
         

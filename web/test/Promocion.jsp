@@ -77,7 +77,7 @@
        DtPromocion dtProm = ManejadorServicio.getInstance().getDTPromocion(nombre,proveedor); 
        out.print(dtProm.getNombre()); 
     %>    
-    <div class="section">
+    <div class="section minimo">
       <div class="container">
         <div class="row">
           <p class="default">Ofertas en Hoteles, Paquetes de viaje y más</p>

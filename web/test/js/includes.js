@@ -51,7 +51,10 @@ $(document).ready(function () {
                     $(location).attr('href','Carrito.jsp');
                 });
                 
-                
+                //Cerrar Sesion
+                $("#idSalir").click(function () {
+                    $(location).attr('href','CierreSesion.jsp');
+                });       
                 
                
             }, 100);

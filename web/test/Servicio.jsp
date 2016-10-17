@@ -87,7 +87,7 @@
        padre = ManejadorCategoria.getInstance().obtenerPadre(categoria);
        DtServicio dtServ = ManejadorServicio.getInstance().getDtServicio(nombre,proveedor);
     %>    
-    <div class="section">
+    <div class="section minimo">
       <div class="container">
         <div class="row">
           <p class="default">Ofertas en Hoteles, Paquetes de viaje y más</p>

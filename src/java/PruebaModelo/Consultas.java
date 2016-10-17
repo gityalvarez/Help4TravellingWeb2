@@ -99,17 +99,18 @@ public class Consultas {
             //String fecha = (anio+ "-" + mes + "-" + dia);
             String fechaNac = fecha.replaceAll("/", "-");
             
-            String sqlau = "INSERT INTO help4traveling.usuarios (nickname,nombre,apellido,password,email,imagen,fechaNac) VALUES ('"+nickname + "','" + nombre + "','" + apellido + "','" + password + "','" + email + "'," + imagen + ",'" + fechaNac + "')";
+            String sqlau = "INSERT INTO help4traveling.usuarios (nickname,nombre,apellido,password,email,imagen,fechaNac) VALUES ('" + nickname + "','" + nombre + "','" + apellido + "','" + password + "','" + email + "'," + imagen + ",'" + fechaNac + "')";
             System.out.println(sqlau);
             String sqlac = "INSERT INTO help4traveling.clientes (nickname) VALUES ('" + nickname + "')";
-            String sqlai = "INS\"INSERT INTO help4traveling.usuarios (nickname,nombre,apellido,password,email,imagen,fechaNac) \"ERT INTO help4traveling.usuariosimagenes (usuario,imagen) VALUES ('" + nickname + "','" + imagen + "')";
+            String sqlai = "INSERT INTO help4traveling.usuariosimagenes (usuario,imagen) VALUES ('" + nickname + "','" + imagen + "')";
             try {
                 Connection con = Conexion.getInstance().getConnection();
                 st = con.createStatement();
-                //System.out.println("antes de insertar");
+                System.out.println("anted de insertar" + imagen);
+                System.out.println("sentencia de insertar" + sqlai);
                 st.executeUpdate(sqlau);
                 st.executeUpdate(sqlac);
-                if ((imagen != null) && (!imagen.equals(""))) {
+                if ((imagen.equals(null)) && (!imagen.equals(""))) {
                     //st.executeUpdate(sqlai);
                     con.prepareStatement(sqlai);
                 }
@@ -168,48 +169,41 @@ public class Consultas {
         return nuevo;        
     }*/
     
-    /*public DtUsuario getDtProveedor(String nickname) {
-        ResultSet rsUsu, rsProv, rsImg;
+    public DtUsuario getDtUsuario(String nickname) {
+        ResultSet rsUsu, rsImg;
         DtUsuario nuevo = null;
-        Statement stUsu, stProv, stImg;
+        Statement stUsu, stImg;
         try {
             Connection con = Conexion.getInstance().getConnection();
             stUsu = con.createStatement();
             String sql = "SELECT * FROM help4traveling.usuarios WHERE nickname='" + nickname + "'";
             rsUsu = stUsu.executeQuery(sql);
-            stProv = con.createStatement();
-            sql = "SELECT * FROM help4traveling.proveedores WHERE nickname='" + nickname + "'";
-            rsProv = stProv.executeQuery(sql);
-            if (rsUsu.next() && rsProv.next()) {
+            if (rsUsu.next()) {
                 String nombre = rsUsu.getString("nombre");
                 String apellido = rsUsu.getString("apellido");
                 String correo = rsUsu.getString("email");      
                 Date fecha = new Date(rsUsu.getString("fechaNac"));
                 String imagen = null;
                 stImg = con.createStatement();
-                sql = "SELECT * FROM help4traveling.usuariosimagenes WHERE usuario='" + nickname + "'";
+                sql = "SELECT * FROM help4traveling.usuariosimagenes WHERE nickname='" + nickname + "'";
                 rsImg = stImg.executeQuery(sql);
                 if (rsImg.next())
                     imagen = rsImg.getString("imagen");
                 rsImg.close();
-                stImg.close();
-                String empresa = rsProv.getString("empresa");
-                String enlace = rsProv.getString("link");
-                nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, imagen, "Proveedor", empresa, enlace);                            
+                stImg.close();                
+                nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, imagen, "tipo", "empresa", "link");                            
             }
-            rsProv.close();
-            stProv.close();
             rsUsu.close();
             stUsu.close();
             con.close();
-            System.out.println("Se obtuvo Proveedor :)");
+            System.out.println("Se obtuvo Usuario :)");
         } 
         catch (SQLException e) {
-            System.out.println("No obtuve Proveedor :(");
+            System.out.println("No obtuve Usuario :(");
             System.err.println(e.getMessage());
         }
         return nuevo;        
-    }    */
+    }   
         
     /*public List<DtPromocion> listarPromociones() throws SQLException {
         List<DtPromocion> promociones = null;
@@ -238,6 +232,8 @@ public class Consultas {
         }
         return promociones;
     }*/
+    
+        
     
     
     public List<DtUsuario> listarUsuariosSistema() throws SQLException {
@@ -469,7 +465,7 @@ public class Consultas {
             rs = st.executeQuery(sql);
             while (rs.next()) {
                 String servicio = rs.getString("servicio");
-                String proveedor = rs.getString("proveedorServicio");
+                //String proveedor = rs.getString("proveedorServicio");
                 listaServicios.add(servicio);
             }
             rs.close();
@@ -480,6 +476,30 @@ public class Consultas {
             System.out.println("No pude cargar servicios :(");
         }
         return listaServicios;
+    }
+    
+    public String imagenPerfilUsuario(String nickname){
+        String imagen = null;
+        ResultSet rs;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        String sql = "SELECT * FROM help4traveling.usuarios WHERE nickname='" + nickname + "'";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
+                imagen = rs.getString("imagen");                
+            }
+            if (imagen.equals(null))
+                imagen = "../img/user.png";
+            rs.close();
+            st.close();
+            con.close();
+            System.out.println("Imagenes cargadas :)");
+        } catch (SQLException e) {
+            System.out.println("No pude cargar Imagenes :(");
+        }
+        return imagen;
     }
     
     

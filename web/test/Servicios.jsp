@@ -23,7 +23,21 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-3.1.1.js"></script>
-    <script src="js/jstree.min.js"></script>     
+    <script src="js/jstree.min.js"></script>
+    <script>
+            $(document).ready(function () {   
+                setTimeout(function(){
+                    <%if ((String) session.getAttribute("nickname") != null) {%>
+                        $('#idIniciar').hide();
+                        $('#idRegistrar').hide();
+                    <%} else {%> 
+                        $('#idPerfil').hide();
+                        $('#idReservas').hide();
+                        $('#idSalir').hide();
+                    <%}%>;
+                }, 100);
+            });
+    </script>
   </head>
   <title>Listado de Servicios</title>
  <body>

@@ -80,6 +80,7 @@ eligieron para cada servicio y el total general de la reserva
                         <tr class="default">
                           <td class="default" width="20" align="center"><b>nombre</b></td>
                           <td class="default" width="200" align="center"><b>proveedor</b></td>
+                            <td class="default" width="200" align="center"><b>tipo</b></td>
                           <td class="default" width="200" align="center"><b>cantidad</b></td>
                           <td class="default" width="200" align="center"><b>inicio</b></td>
                           <td class="default" width="200" align="center"><b>fin</b></td>
@@ -125,11 +126,20 @@ eligieron para cada servicio y el total general de la reserva
                                inicio = partesfech[2]+"/"+partesfech[1]+"/"+partesfech[0];
                                partesfech=fin.split("/");
                                fin = partesfech[2]+"/"+partesfech[1]+"/"+partesfech[0];
+                               boolean esservicio= con.esservicio(NombOfr);
                                
                                %>
                                <tr class="default">
                                     <td class="default" align="center" width="20" id="numero"><%=NombOfr%></td>                                       
-                                    <td class="default" align="center" width="20" id="numero"><%=NombProv%></td>                                       
+                                    <td class="default" align="center" width="20" id="numero"><%=NombProv%></td>   
+                                 <% if(esservicio){%>
+                                    
+                                        <td class="default" align="center" width="200" id="tipo">servicio</td>
+                                    <%}
+                                    else 
+                                        {%>
+                                    <td class="default" align="center" width="200" id="tipo">promocion</td>
+                                    <%}%>                                    
                                     <%--     <td class="default" align="center" width="400" id="descripcion"><%=servoprom%></td>      --%>                       
                                     <%--<td class="default" align="center" width="200" id="proveedor"><%=NombProv%></td>--%>
                                     <td class="default" align="center" width="100" id="precio"><%=cant%></td>

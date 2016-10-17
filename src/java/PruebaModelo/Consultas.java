@@ -556,7 +556,30 @@ public class Consultas {
             System.out.println("No se pudo crear reserva :(");
         }
     }
-
+    
+ public boolean esservicio(String nombre){
+         boolean es = false;
+        ResultSet rs;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + nombre + "'";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            if (!rs.next()){
+                es =true;
+            }
+            
+            rs.close();
+            st.close();
+            con.close();
+            System.out.println("consula servicio realizada :)");
+        } catch (SQLException e) {
+            System.out.println("consula servicio NO realizada :(");
+        }
+        return es;
+        
+    }
     
     
 }

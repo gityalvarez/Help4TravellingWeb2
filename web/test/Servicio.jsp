@@ -26,8 +26,10 @@
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="js/jquery-3.1.0.min.js"></script>
     <script src="js/includes.js"></script>
+    <script type="text/javascript" src="calendario/calendario_dw/calendario_dw.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
+    <link href="calendario/calendario_dw/calendario_dw-estilos.css" type="text/css" rel="stylesheet">
     <script>
         function cambiar(obj) {
             var img = obj.id; // Obtenemos la ID del objeto
@@ -38,6 +40,9 @@
     <script>
         $(document).ready(function () {
             setTimeout(function(){
+                $("#fechaIni").calendarioDW();
+                $("#fechaFin").calendarioDW();
+                
                 <%if ((String) session.getAttribute("nickname") != null) {%>
                     $('#idIniciar').hide();
                     $('#idRegistrar').hide();
@@ -52,6 +57,12 @@
                     var Cantidad = $("#cantidad_in").val();
                     if ((Cantidad === "") || (parseInt(Cantidad) === 0)) {
                         alert("Debe ingresar una cantidad valida.");
+                        event.preventDefault();
+                    }else if ($("#fechaIni").val() === "") {
+                        alert("Debe ingresar fecha de inicio.");
+                        event.preventDefault();
+                    }else if ($("#fechaFin").val() === "") {
+                        alert("Debe ingresar fecha de finalizacion.");
                         event.preventDefault();
                     }else {
                         return;
@@ -186,17 +197,29 @@
                           <input type="hidden" class="hiddden" id="servicio_in" name="servicio_in" value="<%=nombre%>">
                           <input type="hidden" class="hiddden" id="precio_in" name="precio_in" value="<%=dtServ.getPrecio()%>">
                           <!--input type="hidden" class="hiddden" id="tipo_in" name="tipo_in" value="Servicio"-->
-                        <% if ((String) session.getAttribute("nickname") != null) {%>
+                          <div class="form-group" style="width: 100%; margin-left: 0.5px">
+                            <label for="fecha">Fecha inicio</label>
+                            <br>
+                            <input type="text"  class="form-control input-lg" id="fechaIni" name="fecha" value="" />
+                          </div>
+                          <% if ((String) session.getAttribute("nickname") != null) {%>
                             <input type="text" class="form-control input-lg" id="cantidad_in" name="cantidad_in"  placeholder="Cantidad">
-                      <%} else {%>
-                        <input type="text" disabled="true"class="form-control input-lg" id="cantidad_in" name="cantidad_in"  placeholder="Cantidad"> 
-                      <%}%>
+                          <%} else {%>
+                            <input type="text" disabled="true"class="form-control input-lg" id="cantidad_in" name="cantidad_in"  placeholder="Cantidad"> 
+                          <%}%>
                         </div>
-                        <% if ((String) session.getAttribute("nickname") != null) {%>
-                            <button type="submit" width="5000" class="active btn btn-info btn-lg">Agregar al Carrito</button>
-                      <%} else {%>
-                            <button type="submit" width="5000" disabled="true" class="active btn btn-info btn-lg">Agregar al Carrito</button>
-                        <%}%>                                                
+                        <div class="col-sm-4">
+                            <div class="form-group" style="width: 100%; margin-left: 0.5px">
+                              <label for="fecha">Fecha fin</label>
+                              <br>
+                              <input type="text"  class="form-control input-lg" id="fechaFin" name="fecha" value="" />
+                            </div>
+                            <% if ((String) session.getAttribute("nickname") != null) {%>
+                                <button type="submit" width="5000" class="active btn btn-info btn-lg">Agregar al Carrito</button>
+                            <%} else {%>
+                                <button type="submit" width="5000" disabled="true" class="active btn btn-info btn-lg">Agregar al Carrito</button>
+                            <%}%>
+                        </div>
                       </div>
                     </form>
                     <hr>

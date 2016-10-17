@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Lato');
 @import url('https://fonts.googleapis.com/css?family=Lobster|Lobster');
+@import url('https://fonts.googleapis.com/css?family=Lobster+Two|Lobster2');
 /*!
  * Default theme for Pingendo
  * Homepage: http://pingendo.com
@@ -22,6 +23,14 @@
 
 .logo {
     font-family: Lobster;
+}
+
+.logo2 {
+    font-family: Lobster Two;
+}
+
+#footer {
+    padding: 0px 0;
 }
 
 html {
@@ -4177,7 +4186,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     border-width: 1px 0 0;
 }
 .navbar-brand {
-    float: left;
+    float: right;
     padding: 15px 15px;
     font-size: 24px;
     line-height: 20px;

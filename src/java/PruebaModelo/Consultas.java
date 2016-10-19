@@ -564,7 +564,13 @@ public class Consultas {
                             System.out.println("entre al for 1");
                             ItemReserva key = entry.getValue();
                             String oferta = key.getOferta().getNombre();
-                            String proveedor = getNkProveedorServicio(oferta);
+                            String proveedor="";
+                            if (esservicio(oferta)){
+                             proveedor = getNkProveedorServicio(oferta);
+                            }
+                            else{
+                               proveedor = getNkProveedorPromocion(oferta);
+                            }
                             String cantidad = String.valueOf(key.getCantidad());
                             String inicio = key.getInicio().getAno() + "-" + key.getInicio().getMes() + "-" + key.getInicio().getDia();
                             String fin = key.getFin().getAno() + "-" + key.getFin().getMes() + "-" + key.getFin().getDia();

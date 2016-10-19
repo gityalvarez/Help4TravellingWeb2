@@ -144,7 +144,7 @@
                         <% DtReserva dtRes = null;
                            List<DtReserva> reservas;
                            Consultas con = new Consultas();
-                           reservas = con.listarReservasUsuario(nick) ;
+                           reservas = con.listarReservasUsuario(nick);
                            Iterator<DtReserva> iter = reservas.iterator();
                            Integer i=0;
                            while (iter.hasNext()){

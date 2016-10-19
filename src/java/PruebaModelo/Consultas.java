@@ -30,6 +30,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -512,9 +513,13 @@ public class Consultas {
         Statement st;
         ResultSet rsId;
         String sid;
-
+        Calendar c = Calendar.getInstance();
+        int dia = c.get(Calendar.DATE);        
+        int mes = c.get(Calendar.MONTH);
+        int anio = c.get(Calendar.YEAR);
+        String creada = Integer.toString(anio) + "-" + Integer.toString(mes) + "-" + Integer.toString(dia); 
         String sql = "INSERT INTO help4traveling.reservas (fecha,total,estado,cliente) "
-                + "VALUES ('" + nueva.getCreada() + "'," + nueva.getTotal() + ",'" + nueva.getEstado() + "','" + nueva.getCliente() + "')";
+                + "VALUES ('" + creada + "'," + nueva.getTotal() + ",'" + nueva.getEstado() + "','" + nueva.getCliente() + "')";
 
         try {
             st = con.createStatement();
@@ -533,13 +538,13 @@ public class Consultas {
                             System.out.println("entre al for 1");
                             ItemReserva key = entry.getValue();
                             String oferta = key.getOferta().getNombre();
-                            String proveedor = key.getOferta().getProveedor().getNombre();
+                            String proveedor = getNkProveedorServicio(oferta);
                             String cantidad = String.valueOf(key.getCantidad());
                             String inicio = key.getInicio().getAno() + "-" + key.getInicio().getMes() + "-" + key.getInicio().getDia();
                             String fin = key.getFin().getAno() + "-" + key.getFin().getMes() + "-" + key.getFin().getDia();
                             System.out.println(sid+" "+oferta+" "+proveedor+" "+cantidad+" "+inicio+" "+fin);
                             sql = "INSERT INTO help4traveling.reservasitems (reserva, oferta, proveedorOferta, cantidad, inicio, fin) "
-                                    + "VALUES (" + sid + ",'" + oferta + "','remus'," + cantidad + ",'" + inicio + "','" + fin + "')";
+                                    + "VALUES (" + sid + ",'" + oferta + "','" + proveedor + "'," + cantidad + ",'" + inicio + "','" + fin + "')";
                             
                             st.executeUpdate(sql);
                         }

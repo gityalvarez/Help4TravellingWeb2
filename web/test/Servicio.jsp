@@ -196,7 +196,6 @@
                         <div class="col-sm-4">
                           <input type="hidden" class="hiddden" id="servicio_in" name="servicio_in" value="<%=nombre%>">
                           <input type="hidden" class="hiddden" id="precio_in" name="precio_in" value="<%=dtServ.getPrecio()%>">
-                          <!--input type="hidden" class="hiddden" id="tipo_in" name="tipo_in" value="Servicio"-->
                           <div class="form-group" style="width: 100%; margin-left: 0.5px">
                             <label for="fecha">Fecha inicio</label>
                             <br>

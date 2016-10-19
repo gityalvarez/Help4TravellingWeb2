@@ -164,7 +164,7 @@
                           <div class="form-group" style="width: 100%; margin-left: 0.5px">
                             <label for="fecha">Fecha inicio</label>
                             <br>
-                            <input type="text"  class="form-control input-lg" id="fechaIni" name="fecha" value="" />
+                            <input type="text"  class="form-control input-lg" id="fechaIni" name="fechaIni" value="" />
                           </div>
                         <% if ((String) session.getAttribute("nickname") != null) {%>
                             <input type="text" class="form-control input-lg" id="cantidad_in" name="cantidad_in"  placeholder="Cantidad">
@@ -176,7 +176,7 @@
                             <div class="form-group" style="width: 100%; margin-left: 0.5px">
                               <label for="fecha">Fecha fin</label>
                               <br>
-                              <input type="text"  class="form-control input-lg" id="fechaFin" name="fecha" value="" />
+                              <input type="text"  class="form-control input-lg" id="fechaFin" name="fechaFin" value="" />
                             </div>
                             <% if ((String) session.getAttribute("nickname") != null) {%>
                               <button type="submit" width="5000" class="active btn btn-info btn-lg">Agregar al Carrito</button>

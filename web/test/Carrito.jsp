@@ -75,9 +75,11 @@
                                 out.print("<table class='table'>"
                                         + "<thead>"
                                         + "<tr>"
-                                        + "<th><h2>Reserva</h2></th>"
-                                        + "<th><h2>Precio</h2></th>"
-                                        + "<th><h2>Cantidad</h2></th>"
+                                        + "<th><h3>Reserva</h3></th>"
+                                        + "<th><h3>Precio</h3></th>"
+                                        + "<th><h3>Cantidad</h3></th>"
+                                        + "<th><h3>Fecha Inicial</h3></th>"
+                                        + "<th><h3>Fecha Final</h3></th>"
                                         + "</tr>"
                                         + "</thead>"
                                         + "<tbody>"
@@ -85,9 +87,11 @@
                                 
                                 while (iter.hasNext()) {
                                     reserva = iter.next();
-                                    out.println("<td><h2>" + reserva.getServicio() + "</h2></td>"
-                                            + "<td><h2>" + reserva.getPrecio() + "</h2></td>"
-                                            + "<td><h2>" + reserva.getCantidad() + "</h2></td>"
+                                    out.println("<td><h3>" + reserva.getServicio() + "</h3></td>"
+                                            + "<td><h3>" + reserva.getPrecio() + "</h3></td>"
+                                            + "<td><h3>" + reserva.getCantidad() + "</h3></td>"
+                                            + "<td><h3>" + reserva.getFechaini() + "</h3></td>"
+                                            + "<td><h3>" + reserva.getFechafin() + "</h3></td>"
                                             + "<form action='../eliminarCarrito' method=post>"
                                             //+ "<td width='80' align='center'>"
 

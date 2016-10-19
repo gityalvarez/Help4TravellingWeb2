@@ -17,6 +17,9 @@
         <script src="js/includes.js"></script>
         <script type="text/javascript" src="calendario/calendario_dw/calendario_dw.js"></script>
 
+
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <link type="text/css" href="css/jquery-ui.css" rel="Stylesheet" />
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <link type="text/css" href="css/jquery-ui.css" rel="Stylesheet" /> 
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -24,16 +27,16 @@
         <link href="calendario/calendario_dw/calendario_dw-estilos.css" type="text/css" rel="stylesheet">
     </head>
     <script type="text/javascript">
-      
+
         $(document).ready(function () {
             $("#registro_completo_form").hide();
 
-            
+
 
         <%if ((String) session.getAttribute("registra") == "true") {%>;
 
         <%String nick = "\"" + session.getAttribute("nickname").toString() + "\"";
-                    String email = "\"" + session.getAttribute("email").toString() + "\"";%>
+            String email = "\"" + session.getAttribute("email").toString() + "\"";%>
             alert("El usuario " + <%=nick%> + " está disponiblie. Complete los campos con sus datos personales");
 
             $("#registro_completo_form").show();

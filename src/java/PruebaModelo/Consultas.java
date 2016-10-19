@@ -457,6 +457,32 @@ public class Consultas {
         return prov;
     }     
     
+        public String getNkProveedorPromocion(String promocion) {
+        String prov = null;
+        ResultSet rs;
+        Statement st;
+        try {
+            Connection con = Conexion.getInstance().getConnection();        
+            String sql = "SELECT * FROM help4traveling.promociones WHERE nombre='" + promocion + "'";
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                prov = rs.getString("proveedor");
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } 
+        catch (SQLException e) {
+            System.out.println("No pude obtener Proveedor :(");
+        }
+        return prov;
+    }  
+    
+    
+    
+    
+    
     public List<String> listarServiciosDePromociones(String nombre, String prov) {
         List<String> listaServicios = new LinkedList<String>();
         ResultSet rs;
@@ -573,7 +599,7 @@ public class Consultas {
         try {
             st = con.createStatement();
             rs = st.executeQuery(sql);
-            if (!rs.next()){
+            if (rs.next()){
                 es =true;
             }
             
@@ -581,6 +607,7 @@ public class Consultas {
             st.close();
             con.close();
             System.out.println("consula servicio realizada :)");
+            System.out.println(es);
         } catch (SQLException e) {
             System.out.println("consula servicio NO realizada :(");
         }

@@ -27,6 +27,8 @@
     <script src="js/jquery-3.1.0.min.js"></script>
     <script src="js/includes.js"></script>
     <script type="text/javascript" src="calendario/calendario_dw/calendario_dw.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <link type="text/css" href="css/jquery-ui.css" rel="Stylesheet" />
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
     <link href="calendario/calendario_dw/calendario_dw-estilos.css" type="text/css" rel="stylesheet">

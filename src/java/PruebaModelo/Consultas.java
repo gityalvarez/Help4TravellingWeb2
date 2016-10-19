@@ -90,11 +90,11 @@ public class Consultas {
         return true;
     }    
     
-    public void Registrar(String nickname,String nombre,String apellido, String password, String email, String imagen, String fecha) throws SQLException{        
+     public boolean Registrar(String nickname,String nombre,String apellido, String password, String email, String imagen, String fecha) throws SQLException{        
         Statement st;
         if (imagen != null) {
             imagen = "'" + imagen + "'";
-            imagen = imagen.replace("\\", "\\\\");
+            //imagen = imagen.replace("\\", "\\\\");
         }
             //String fecha = (anio+ "-" + mes + "-" + dia);
             String fechaNac = fecha.replaceAll("/", "-");
@@ -117,9 +117,11 @@ public class Consultas {
                 st.close();
                 con.close();                
                 System.out.println("INSERTE :)");
+                return true;
             } catch (SQLException e) {
                 System.out.println("No pude INSERTAR :(");
                 System.out.println(e);
+                return false;
             }
     }    
     

@@ -47,7 +47,16 @@ public class Registro extends HttpServlet {
         String imagen = (String)request.getParameter("imagen_registro");
         System.out.println(imagen);
         Consultas con = new Consultas();
-        con.Registrar(nickname,nombre,apellido,contrasenia,mail,imagen,fecha);
+        if (con.Registrar(nickname,nombre,apellido,contrasenia,mail,imagen,fecha)){
+            sesion.setAttribute("nombre",nombre);
+            sesion.setAttribute("email",mail);
+            sesion.setAttribute("apellido",apellido);
+            sesion.setAttribute("fechaNac",fecha);            
+        } 
+        else{
+            sesion.invalidate();
+        }
+        
        
         
         /* DEBO CARGARLE TODOS LOS ATRIBUTOS A SESION*/

@@ -457,7 +457,7 @@ public class Consultas {
         return prov;
     }     
     
-        public String getNkProveedorPromocion(String promocion) {
+    public String getNkProveedorPromocion(String promocion) {
         String prov = null;
         ResultSet rs;
         Statement st;
@@ -566,7 +566,7 @@ public class Consultas {
                             String oferta = key.getOferta().getNombre();
                             String proveedor="";
                             if (esservicio(oferta)){
-                             proveedor = getNkProveedorServicio(oferta);
+                                proveedor = getNkProveedorServicio(oferta);
                             }
                             else{
                                proveedor = getNkProveedorPromocion(oferta);
@@ -607,8 +607,7 @@ public class Consultas {
             rs = st.executeQuery(sql);
             if (rs.next()){
                 es =true;
-            }
-            
+            }            
             rs.close();
             st.close();
             con.close();

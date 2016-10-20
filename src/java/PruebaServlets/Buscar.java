@@ -8,6 +8,7 @@ package PruebaServlets;
 import PruebaModelo.Consultas;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,22 +32,14 @@ public class Buscar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String servicio = request.getParameter("buscar");
-        System.out.println("es el servicio "+servicio);
+        String oferta = (String) request.getParameter("buscar");
         Consultas con = new Consultas();
-        String proveedor = "";
-        if (con.esservicio(servicio)) {
-            proveedor = con.getNkProveedorServicio(servicio);
-            System.out.println("entre con servicio "+servicio);
-            response.sendRedirect("test/ListarServicios.jsp?categoria=null");
-            //?name=" + servicio + "&proveedor=" + proveedor + "&categoria=null"
+        if (con.esservicio(oferta)) {
+            String proveedor = con.getNkProveedorServicio(oferta);
+            response.sendRedirect("test/Servicio.jsp?nombre="+oferta+"&proveedor="+proveedor+"&categoria="); 
         } else {
-            System.out.println("entre con promocion "+servicio);
-            proveedor = con.getNkProveedorPromocion(servicio);
-
-            response.sendRedirect("test/Promociones.jsp");
-            //?name=" + servicio + "&proveedor=" + proveedor"
+            String proveedor = con.getNkProveedorPromocion(oferta);
+            response.sendRedirect("test/Promocion.jsp?nombre="+oferta+"&proveedor="+proveedor); 
         }
     }
 

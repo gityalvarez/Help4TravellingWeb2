@@ -1,11 +1,11 @@
 <script>
     $(document).ready(function () {
-        
-        
+
+
         var arrayValoresAutocompletar = [
-            "Air-France-FC","Casa para p4 BsAs","Coche-Miami","Euro-Car-1","Euro-Car-2","Euro-Car-3","Euro-Vuelo-FC","Euro-Vuelo-LC","Euro-Vuelo-S",
-            "Floripa G.House","Luxury south beach corner apartment","TAM-FC","Euro-Cars-E-F","Euro-Cars-E-S","Euro-Cars-S-F","Euro-Vuelos-LC-FC",
-            "Euro-Vuelos-S-LC","Miami-Viaje","Sudamerica-Casas"];
+            "Air-France-FC", "Casa para p4 BsAs", "Coche-Miami", "Euro-Car-1", "Euro-Car-2", "Euro-Car-3", "Euro-Vuelo-FC", "Euro-Vuelo-LC", "Euro-Vuelo-S",
+            "Floripa G.House", "Luxury south beach corner apartment", "TAM-FC", "Euro-Cars-E-F", "Euro-Cars-E-S", "Euro-Cars-S-F", "Euro-Vuelos-LC-FC",
+            "Euro-Vuelos-S-LC", "Miami-Viaje", "Sudamerica-Casas"];
 
         $("#buscar").autocomplete({
             source: arrayValoresAutocompletar
@@ -34,9 +34,25 @@
             <li class="active">
                 <a href="#" id="idHome"><span class="glyphicon glyphicon-home"></span> Principal<br></a>
             </li>
+
+            <li class="dropdown">
+                <ul class="dropdown-menu" role="menu">
+                    <li id="idListaUsuarios">
+                        <a href="#"><span class="glyphicon glyphicon-heart"></span> Clientes</a>
+                    </li>
+                    <li id="idProveedores">
+                        <a href="#"><span class="glyphicon glyphicon-star"></span> Proveedores</a>
+                    </li>
+                </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-th-list"></span> Usuarios <i class="fa fa-caret-down"></i></a>
+            </li>
+
+            <!--
             <li class="dropdown" id="idListaUsuarios">
                 <a href="#"><span class="glyphicon glyphicon-th-list"></span> Listado de Usuarios<br></a>
             </li>
+            -->
+
             <li class="dropdown">
                 <ul class="dropdown-menu" role="menu">
                     <li id="idServicios">
@@ -75,9 +91,10 @@
 
         <form class="navbar-form navbar-left" role="search" action="../Buscar" method="post">
             <div class="form-group" >
-                <input type="search" id="buscar" name="buscar" class="form-control" placeholder="Servicios y Promociones"> 
-
+                <input type="search" id="buscar" name="buscar" class="form-control" placeholder="Servicios y Promociones">
+                <!--
                 <button type="submit" class="btn btn-default" id="buscar_bn" name="buscar_bn" ><span class="glyphicon glyphicon-search"></span> Buscar</button>
+                -->
 
             </div>
         </form>

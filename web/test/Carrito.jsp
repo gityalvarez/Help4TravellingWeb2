@@ -89,11 +89,15 @@
                                 
                                 while (iter.hasNext()) {
                                     reserva = iter.next();
+                                    String partesini[] = reserva.getFechaini().split("-");
+                                    String fechaini = partesini[2]+"/"+partesini[1]+"/"+partesini[0];
+                                    String partesfin[] = reserva.getFechafin().split("-");
+                                    String fechafin = partesfin[2]+"/"+partesfin[1]+"/"+partesfin[0];
                                     out.println("<td><h3>" + reserva.getServicio() + "</h3></td>"
                                             + "<td><h3>" + reserva.getPrecio() + "</h3></td>"
                                             + "<td><h3>" + reserva.getCantidad() + "</h3></td>"
-                                            + "<td><h3>" + reserva.getFechaini() + "</h3></td>"
-                                            + "<td><h3>" + reserva.getFechafin() + "</h3></td>"
+                                            + "<td><h3>" + fechaini + "</h3></td>"
+                                            + "<td><h3>" + fechafin + "</h3></td>"
                                             + "<form action='../eliminarCarrito' method=post>"
                                             //+ "<td width='80' align='center'>"
 

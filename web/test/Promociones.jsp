@@ -80,7 +80,7 @@
                                    dtProm = iter.next();
                                    String nombre = dtProm.getNombre();
                                    String proveedor = dtProm.getProveedor();
-                                   String descuento = dtProm.getDescuento();
+                                   String descuento = dtProm.getPrecio();
                                    String total = dtProm.getDescuento();  %>
                                    <tr class="default">
                                    <td class="default" align="center" width="200" id="nombre"><a href="Promocion.jsp?nombre=<% out.print(nombre); %>&proveedor=<% out.print(proveedor); %>" target="_blank"><%=nombre%></a></td>

@@ -619,7 +619,45 @@ public class Consultas {
         return es;
         
     }
-    
+ 
+ 
+ 
+ /*public List<String> ServyProm(){
+           List<String> listaServyProm = new LinkedList<String>();
+        ResultSet rs;
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        String sqlserv = "SELECT * FROM help4traveling.servicios";
+        String sqlprom = "SELECT * FROM help4traveling.promociones";
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sqlserv);
+            while (rs.next()) {
+                
+                String servicio = rs.getString("nombre");
+                System.out.println(servicio);
+
+                listaServyProm.add(servicio);
+            }
+            rs = st.executeQuery(sqlprom);
+            while (rs.next()) {
+                
+                String promocion = rs.getString("nombre");
+                System.out.println(promocion);
+
+                listaServyProm.add(promocion);
+            }
+            
+            rs.close();
+            st.close();
+            con.close();
+            System.out.println("servicios y promociones cargados :)");
+        } catch (SQLException e) {
+            System.out.println("No pude cargar :(");
+        }     
+return listaServyProm;
+ }
+  */  
     
 }
 

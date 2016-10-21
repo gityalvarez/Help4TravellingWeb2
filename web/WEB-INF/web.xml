@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>Comprobacion</servlet-name>
-        <servlet-class>PruebaServlets.Comprobacion</servlet-class>
+        <servlet-class>PruebaServlets.CancelarReserva</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Registro</servlet-name>

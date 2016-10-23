@@ -519,7 +519,7 @@ public class Consultas {
             if (rs.next()) {
                 imagen = rs.getString("imagen");                
             }
-            if (imagen.equals(null))
+            if ((imagen.equals(null))||(imagen.equals("")))
                 imagen = "../img/user.png";
             rs.close();
             st.close();

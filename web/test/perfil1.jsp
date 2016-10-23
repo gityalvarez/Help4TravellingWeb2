@@ -192,8 +192,7 @@
                                         </form>
                                         <form role="form" action='../CancelarReserva' method="post" style="float: right">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Está seguro de cancelar la reserva?')"
-                                                    <span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Está seguro de cancelar la reserva?')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
                                         </form>
                                         <% } %>
                                     </td>

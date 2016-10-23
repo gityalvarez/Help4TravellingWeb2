@@ -172,12 +172,12 @@
                                         creada = partesCre[2] + "/" + partesCre[1] + "/" + partesCre[0];
                                         String total = String.valueOf(dtRes.getTotal());%>
 
-                                <tr class="default">
-                                    <td class="default" align="center" width="20" id="numero"><%=numero%></td>
-                                    <td class="default" align="center" width="20" id="reserva"><a href="Reserva.jsp?idReserva=<% out.print(idres);%>"><%=idres%></a></td>
-                                    <td class="default" align="center" width="200" id="fecha"><%=creada%></td>
-                                    <td class="default" align="center" width="100" id="estado"><%=estado%></td>
-                                    <td class="default" align="center" width="100" id="total"><%=total%></td>
+                                <tr class="default" style="height:50px">
+                                    <td class="default" align="center" width="20" id="numero" style="vertical-align: middle"><%=numero%></td>
+                                    <td class="default" align="center" width="20" id="reserva" style="vertical-align: middle"><a href="Reserva.jsp?idReserva=<% out.print(idres);%>"><%=idres%></a></td>
+                                    <td class="default" align="center" width="200" id="fecha" style="vertical-align: middle"><%=creada%></td>
+                                    <td class="default" align="center" width="100" id="estado" style="vertical-align: middle"><%=estado%></td>
+                                    <td class="default" align="center" width="100" id="total" style="vertical-align: middle"><%=total%></td>
                                     <td class="default" align="center" width="200">
                                         <% if (estado == "FACTURADA") {%>
                                         <form role="form" action='' method="post">

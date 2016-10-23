@@ -135,11 +135,11 @@
                             <tbody>
                                 <tr class="default">
                                     <td class="default" width="20" align="center"><b>Número</b></td>
-                                    <td class="default" width="200" align="center"><b>Reserva</b></td>
+                                    <td class="default" width="20" align="center"><b>Reserva</b></td>
                                     <td class="default" width="200" align="center"><b>Fecha</b></td>
                                     <td class="default" width="200" align="center"><b>Estado</b></td>
                                     <td class="default" width="200" align="center"><b>Total</b></td>
-                                    <td class="default" width="50" align="center"><b></b></td>
+                                    <td class="default" width="200" align="center"><b>Acciones</b></td>
 
                                 </tr>
                                 <% DtReserva dtRes = null;
@@ -174,30 +174,27 @@
 
                                 <tr class="default">
                                     <td class="default" align="center" width="20" id="numero"><%=numero%></td>
-                                    <td class="default" align="center" width="400" id="descripcion"><a href="Reserva.jsp?idReserva=<% out.print(idres);%>"><%=idres%></a></td>
-                                    <td class="default" align="center" width="200" id="proveedor"><%=creada%></td>
-                                    <td class="default" align="center" width="100" id="precio"><%=estado%></td>
-                                    <td class="default" align="center" width="100" id="origen"><%=total%></td>
-                                    <td class="default" align="center" width="50" id="">
-                                        <form role="form" action='../CancelarReserva' method="post">
+                                    <td class="default" align="center" width="20" id="reserva"><a href="Reserva.jsp?idReserva=<% out.print(idres);%>"><%=idres%></a></td>
+                                    <td class="default" align="center" width="200" id="fecha"><%=creada%></td>
+                                    <td class="default" align="center" width="100" id="estado"><%=estado%></td>
+                                    <td class="default" align="center" width="100" id="total"><%=total%></td>
+                                    <td class="default" align="right" width="200">
+                                        <% if (estado == "FACTURADA") {%>
+                                        <form role="form" action='' method="post">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
-                                            <% if (estado == "REGISTRADA") {
-                                            %>
-                                            <button type="submit" class="btn btn-danger">Cancelar</button>
-                                            <!--
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" value=""></label>
-                                            </div>
-                                            -->
-                                            <% } else {%>
-                                            <button type="submit" class="btn btn-danger disabled">Cancelar</button>
-                                            <!--
-                                            <div class="checkbox disabled">
-                                                <label><input type="checkbox" value="" disabled="true"></label>
-                                            </div>
-                                            -->
-                                            <% } %>
+                                            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-credit-card"></span> Ver Factura</button>
                                         </form>
+                                        <% } %>
+                                        <% if (estado == "REGISTRADA") {%>
+                                        <form role="form" action='../PagarReserva' method="post" style="float: left">
+                                            <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
+                                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-piggy-bank"></span> Pagar</button>
+                                        </form>
+                                        <form role="form" action='../CancelarReserva' method="post" style="float: right">
+                                            <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
+                                            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                                        </form>
+                                        <% } %>
                                     </td>
                                 </tr>
                                 <%}

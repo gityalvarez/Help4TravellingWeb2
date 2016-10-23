@@ -178,7 +178,7 @@
                                     <td class="default" align="center" width="200" id="fecha"><%=creada%></td>
                                     <td class="default" align="center" width="100" id="estado"><%=estado%></td>
                                     <td class="default" align="center" width="100" id="total"><%=total%></td>
-                                    <td class="default" align="right" width="200">
+                                    <td class="default" align="center" width="200">
                                         <% if (estado == "FACTURADA") {%>
                                         <form role="form" action='' method="post">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
@@ -192,7 +192,8 @@
                                         </form>
                                         <form role="form" action='../CancelarReserva' method="post" style="float: right">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
-                                            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Está seguro de cancelar la reserva?')"
+                                                    <span class="glyphicon glyphicon-remove"></span> Cancelar</button>
                                         </form>
                                         <% } %>
                                     </td>

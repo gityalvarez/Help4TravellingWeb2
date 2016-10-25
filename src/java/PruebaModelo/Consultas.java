@@ -593,6 +593,7 @@ public class Consultas {
             }
         } catch (SQLException e) {
             System.out.println("No se pudo crear reserva :(");
+            System.err.println(e);
         }
     }
     

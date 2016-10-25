@@ -21,6 +21,14 @@
         <servlet-class>PruebaServlets.eliminarCarrito</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CancelarReserva</servlet-name>
+        <servlet-class>PruebaServlets.CancelarReserva</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PagarReserva</servlet-name>
+        <servlet-class>PruebaServlets.PagarReserva</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Buscar</servlet-name>
         <servlet-class>PruebaServlets.Buscar</servlet-class>
     </servlet>
@@ -43,6 +51,14 @@
     <servlet-mapping>
         <servlet-name>eliminarCarrito</servlet-name>
         <url-pattern>/eliminarCarrito</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelarReserva</servlet-name>
+        <url-pattern>/CancelarReserva</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PagarReserva</servlet-name>
+        <url-pattern>/PagarReserva</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Buscar</servlet-name>

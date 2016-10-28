@@ -434,16 +434,16 @@ public class Consultas {
     }
 
     public Boolean esProveedor(String nickname) {
-        Boolean esprov = false;
+        Boolean esProv = false;
         ResultSet rs;
         Statement st;
         try {
             Connection con = Conexion.getInstance().getConnection();
-            String sql = "SELECT * FROM help4traveling.proveedor WHERE nombre='" + nickname + "'";
+            String sql = "SELECT * FROM help4traveling.proveedores WHERE nickname='" + nickname + "'";
             st = con.createStatement();
             rs = st.executeQuery(sql);
-            if (rs.wasNull()) {
-                esprov = true;
+            if (rs.next()) {
+                esProv = true;
             }
             rs.close();
             st.close();
@@ -451,7 +451,7 @@ public class Consultas {
         } catch (SQLException e) {
             System.out.println("No pude obtener Proveedor :(");
         }
-        return esprov;
+        return esProv;
     }
 
     public String getNkProveedorPromocion(String promocion) {

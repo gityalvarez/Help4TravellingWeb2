@@ -541,7 +541,7 @@ public class Consultas {
         String sid;
         Calendar c = Calendar.getInstance();
         int dia = c.get(Calendar.DATE);        
-        int mes = c.get(Calendar.MONTH);
+        int mes = c.get(Calendar.MONTH) +1;
         int anio = c.get(Calendar.YEAR);
         String creada = Integer.toString(anio) + "-" + Integer.toString(mes) + "-" + Integer.toString(dia); 
         String sql = "INSERT INTO help4traveling.reservas (fecha,total,estado,cliente) "
@@ -593,6 +593,7 @@ public class Consultas {
             }
         } catch (SQLException e) {
             System.out.println("No se pudo crear reserva :(");
+            System.err.println(e);
         }
     }
     

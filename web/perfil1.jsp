@@ -186,7 +186,7 @@
                                     <td class="default" align="center" width="20" id="reserva" style="vertical-align: middle"><a href="Reserva.jsp?idReserva=<% out.print(idres);%>"><%=idres%></a></td>
                                         <% if (esProv) {%>
                                     <td class="default" align="center" width="100" id="cliente" style="vertical-align: middle"><%=cliente%></td>
-                                        <% }%>
+                                    <% }%>
                                     <td class="default" align="center" width="200" id="fecha" style="vertical-align: middle"><%=creada%></td>
                                     <td class="default" align="center" width="100" id="estado" style="vertical-align: middle"><%=estado%></td>
                                     <td class="default" align="center" width="100" id="total" style="vertical-align: middle"><%=total%></td>
@@ -196,13 +196,13 @@
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver Factura</button>
                                         </form>
-                                        <% } %>
+                                        <% } else %>
                                         <% if ((estado == "PAGADA") && (esProv)) {%>
                                         <form role="form" action='FacturarReserva' method="post">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-usd"></span> Facturar</button>
                                         </form>
-                                        <% } %>
+                                        <% } else %>
                                         <% if ((estado == "REGISTRADA") && !(esProv)) {%>
                                         <form role="form" action='PagarReserva' method="post" style="float: left">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>

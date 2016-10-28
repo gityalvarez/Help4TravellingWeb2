@@ -22,7 +22,7 @@
     </servlet>
     <servlet>
         <servlet-name>CancelarReserva</servlet-name>
-        <servlet-class>PruebaServlets.FacturarReserva</servlet-class>
+        <servlet-class>PruebaServlets.CancelarReserva</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PagarReserva</servlet-name>

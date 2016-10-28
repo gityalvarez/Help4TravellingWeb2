@@ -145,7 +145,12 @@
                                 <% DtReserva dtRes = null;
                                     List<DtReserva> reservas;
                                     Consultas con = new Consultas();
-                                    reservas = con.listarReservasUsuario(nick);
+                                    Boolean esProv = (Boolean) session.getAttribute("esProv");
+                                    if (esProv) {
+                                        reservas = con.listarReservasProveedor(nick);
+                                    } else {
+                                        reservas = con.listarReservasUsuario(nick);
+                                    }
                                     Iterator<DtReserva> iter = reservas.iterator();
                                     Integer i = 0;
                                     while (iter.hasNext()) {
@@ -185,13 +190,13 @@
                                             <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-credit-card"></span> Ver Factura</button>
                                         </form>
                                         <% } %>
-                                        <% if ((estado == "PAGADA") && ((Boolean) session.getAttribute("esProv"))) {%>
+                                        <% if ((estado == "PAGADA") && (esProv)) {%>
                                         <form role="form" action='../FacturarReserva' method="post">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-usd"></span> Facturar</button>
                                         </form>
                                         <% } %>
-                                        <% if ((estado == "REGISTRADA") && !((Boolean) session.getAttribute("esProv"))) {%>
+                                        <% if ((estado == "REGISTRADA") && !(esProv)) {%>
                                         <form role="form" action='../PagarReserva' method="post" style="float: left">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-piggy-bank"></span> Pagar</button>

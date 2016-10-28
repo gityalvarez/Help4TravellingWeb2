@@ -22,11 +22,15 @@
     </servlet>
     <servlet>
         <servlet-name>CancelarReserva</servlet-name>
-        <servlet-class>PruebaServlets.CancelarReserva</servlet-class>
+        <servlet-class>PruebaServlets.FacturarReserva</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PagarReserva</servlet-name>
         <servlet-class>PruebaServlets.PagarReserva</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FacturarReserva</servlet-name>
+        <servlet-class>PruebaServlets.FacturarReserva</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Buscar</servlet-name>
@@ -59,6 +63,10 @@
     <servlet-mapping>
         <servlet-name>PagarReserva</servlet-name>
         <url-pattern>/PagarReserva</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FacturarReserva</servlet-name>
+        <url-pattern>/FacturarReserva</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Buscar</servlet-name>

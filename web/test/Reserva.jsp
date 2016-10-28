@@ -80,12 +80,12 @@ eligieron para cada servicio y el total general de la reserva
                     <table class="default table table-bordered table-hover table-striped">
                       <tbody>
                         <tr class="default">
-                          <td class="default" width="20" align="center"><b>nombre</b></td>
-                          <td class="default" width="200" align="center"><b>proveedor</b></td>
-                            <td class="default" width="200" align="center"><b>tipo</b></td>
-                          <td class="default" width="200" align="center"><b>cantidad</b></td>
-                          <td class="default" width="200" align="center"><b>inicio</b></td>
-                          <td class="default" width="200" align="center"><b>fin</b></td>
+                          <td class="default" width="200" align="center"><b>nombre</b></td>
+                          <td class="default" width="100" align="center"><b>proveedor</b></td>
+                            <td class="default" width="100" align="center"><b>tipo</b></td>
+                          <td class="default" width="100" align="center"><b>cantidad</b></td>
+                          <td class="default" width="100" align="center"><b>inicio</b></td>
+                          <td class="default" width="100" align="center"><b>fin</b></td>
                           
                         
                           
@@ -132,15 +132,15 @@ eligieron para cada servicio y el total general de la reserva
                                
                                %>
                                <tr class="default">
-                                    <td class="default" align="center" width="20" id="numero"><%=NombOfr%></td>                                       
-                                    <td class="default" align="center" width="20" id="numero"><%=NombProv%></td>   
+                                    <td class="default" align="center" width="200" id="numero"><%=NombOfr%></td>                                       
+                                    <td class="default" align="center" width="100" id="numero"><%=NombProv%></td>   
                                  <% if(esservicio){%>
                                     
-                                        <td class="default" align="center" width="200" id="tipo">servicio</td>
+                                        <td class="default" align="center" width="100" id="tipo">servicio</td>
                                     <%}
                                     else 
                                         {%>
-                                    <td class="default" align="center" width="200" id="tipo">promocion</td>
+                                    <td class="default" align="center" width="100" id="tipo">promocion</td>
                                     <%}%>                                    
                                     <%--     <td class="default" align="center" width="400" id="descripcion"><%=servoprom%></td>      --%>                       
                                     <%--<td class="default" align="center" width="200" id="proveedor"><%=NombProv%></td>--%>

@@ -204,7 +204,7 @@
                             <input type="text"  class="form-control input-lg" id="fechaIni" name="fechaIni" value="" />
                           </div>
                           
-                          <% if ((String) session.getAttribute("nickname") != null) {%>
+                          <% if (((String) session.getAttribute("nickname") != null) && !((Boolean) session.getAttribute("esProv"))) {%>
                             <input type="text" class="form-control input-lg" id="cantidad_in" name="cantidad_in"  placeholder="Cantidad">
                           <%} else {%>
                             <input type="text" disabled="true"class="form-control input-lg" id="cantidad_in" name="cantidad_in"  placeholder="Cantidad"> 
@@ -216,7 +216,7 @@
                               <br>
                               <input type="text"  class="form-control input-lg" id="fechaFin" name="fechaFin" value="" />
                             </div>
-                            <% if ((String) session.getAttribute("nickname") != null) {%>
+                            <% if (((String) session.getAttribute("nickname") != null) && !((Boolean) session.getAttribute("esProv"))) {%>                            
                                 <button type="submit" width="5000" class="active btn btn-info btn-lg">Agregar al Carrito</button>
                             <%} else {%>
                                 <button type="submit" width="5000" disabled="true" class="active btn btn-info btn-lg">Agregar al Carrito</button>

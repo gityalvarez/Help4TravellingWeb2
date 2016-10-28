@@ -36,10 +36,10 @@ public class Buscar extends HttpServlet {
         Consultas con = new Consultas();
         if (con.esservicio(oferta)) {
             String proveedor = con.getNkProveedorServicio(oferta);
-            response.sendRedirect("test/Servicio.jsp?nombre="+oferta+"&proveedor="+proveedor+"&categoria="); 
+            response.sendRedirect("Servicio.jsp?nombre="+oferta+"&proveedor="+proveedor+"&categoria="); 
         } else {
             String proveedor = con.getNkProveedorPromocion(oferta);
-            response.sendRedirect("test/Promocion.jsp?nombre="+oferta+"&proveedor="+proveedor); 
+            response.sendRedirect("Promocion.jsp?nombre="+oferta+"&proveedor="+proveedor); 
         }
     }
 

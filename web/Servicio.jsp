@@ -193,7 +193,7 @@
                     <h3><%=dtServ.getDescripcion()%><h3>
                     <hr>
                     <h3>U$D <%=dtServ.getPrecio()%></h3>
-                    <form id="frmAgregar" class="form-horizontal" role="form" action="../agregarCarrito" method="post">
+                    <form id="frmAgregar" class="form-horizontal" role="form" action="agregarCarrito" method="post">
                       <div class="form-group">
                         <div class="col-sm-4">
                           <input type="hidden" class="hiddden" id="servicio_in" name="servicio_in" value="<%=nombre%>">

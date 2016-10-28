@@ -64,12 +64,12 @@ public class Validacion extends HttpServlet {
                     //falta terminar la gestion de las cookies
                 }
             }
-            response.sendRedirect("test/index.jsp");
+            response.sendRedirect("index.jsp");
         } else {
             sesion.setAttribute("mensaje", "Usuario o contraseña incorrectos");
-            response.sendRedirect("test/InicioSesion.jsp");
+            response.sendRedirect("InicioSesion.jsp");
         }
-        //response.sendRedirect("test/InicioSesion.jsp");
+        //response.sendRedirect("InicioSesion.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

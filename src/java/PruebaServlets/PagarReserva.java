@@ -39,7 +39,7 @@ public class PagarReserva extends HttpServlet {
         Fabrica fab = Fabrica.getInstance();
         fab.getIControladorReserva().actualizarEstadoDeReserva(reserva, "PAGADA");
 
-        response.sendRedirect("test/perfil1.jsp");
+        response.sendRedirect("perfil1.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

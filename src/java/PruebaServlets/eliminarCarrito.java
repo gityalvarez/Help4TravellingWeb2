@@ -129,7 +129,7 @@ public class eliminarCarrito extends HttpServlet {
             sesion.setAttribute("carrito", null);
         }
 
-        response.sendRedirect("test/Carrito.jsp");
+        response.sendRedirect("Carrito.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -91,7 +91,7 @@ public class agregarCarrito extends HttpServlet {
         sesion.setAttribute("carrito", reservas);
 
         System.out.println(sesion.getAttribute("preciototal"));
-        response.sendRedirect("test/Carrito.jsp");
+        response.sendRedirect("Carrito.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

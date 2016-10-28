@@ -91,7 +91,7 @@
             <div class="row">
                 <div class="col-md-4" id="ingreso_usuario">
                     <h1>Ingreso de Usuario:</h1>
-                    <form role="form" class="form-horizontal" action="../Autenticacion" method="post" id="ingreso_form">
+                    <form role="form" class="form-horizontal" action="Autenticacion" method="post" id="ingreso_form">
                         <div class="form-group">
                             <!--div class="col-sm-2"-->
                             <label for="nickname_ingreso" class="control-label">Nickname
@@ -132,7 +132,7 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4" id="registro_usuario" >
                     <h1>Registro de Usuario:</h1>
-                    <form role="form" id="registro_form" class="form" action="../Comprobacion" method="post" >
+                    <form role="form" id="registro_form" class="form" action="Comprobacion" method="post" >
                         <div class="form-group">
                             <label class="control-label" for="nickname_registro">Nickname
                                 <br>
@@ -151,7 +151,7 @@
                         <button type="submit" class="btn btn-default" id="registrar_bn">Registrar</button>
                     </form>
 
-                    <form role="form"  class="form"  action="../Registro" method="post" id="registro_completo_form" >
+                    <form role="form"  class="form"  action="Registro" method="post" id="registro_completo_form" >
                         <div class="form-group">
                             <label class="control-label" for="password_registro">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                 <br>

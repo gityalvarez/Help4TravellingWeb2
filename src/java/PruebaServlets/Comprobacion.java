@@ -48,11 +48,11 @@ public class Comprobacion extends HttpServlet {
             Boolean esProv = con.esProveedor(nickname);
             sesion.setAttribute("esProv", esProv);
 
-            response.sendRedirect("test/InicioSesion.jsp");
+            response.sendRedirect("InicioSesion.jsp");
 
         } else {
             sesion.setAttribute("registra", "false");
-            response.sendRedirect("test/InicioSesion.jsp");
+            response.sendRedirect("InicioSesion.jsp");
             //request.setAttribute("habilitado",false);
             //request.getRequestDispatcher("RegistrarClientes.jsp").forward(request,response);
         }

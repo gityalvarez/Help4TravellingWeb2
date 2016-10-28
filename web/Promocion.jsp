@@ -158,7 +158,7 @@
                        } %>
                     <h3>U$D <%=total%><% if (descuento > 0) { %> (con Descuento aplicado) <% } %></h3>                    
                     <hr>
-                    <form id="frmAgregar" class="form-horizontal" role="form" action="../agregarCarrito" method="post">
+                    <form id="frmAgregar" class="form-horizontal" role="form" action="agregarCarrito" method="post">
                       <div class="form-group">
                         <div class="col-sm-4">
                           <input type="hidden" class="hiddden" id="servicio_in" name="servicio_in" value="<%=nombre%>">

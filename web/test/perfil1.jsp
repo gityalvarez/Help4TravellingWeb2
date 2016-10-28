@@ -136,6 +136,10 @@
                                 <tr class="default">
                                     <td class="default" width="20" align="center"><b>Número</b></td>
                                     <td class="default" width="20" align="center"><b>Reserva</b></td>
+                                    <% Boolean esProv = (Boolean) session.getAttribute("esProv");
+                                        if (esProv) { %>
+                                    <td class="default" width="100" align="center"><b>Cliente</b></td>
+                                    <% } %>
                                     <td class="default" width="200" align="center"><b>Fecha</b></td>
                                     <td class="default" width="200" align="center"><b>Estado</b></td>
                                     <td class="default" width="200" align="center"><b>Total</b></td>
@@ -145,7 +149,6 @@
                                 <% DtReserva dtRes = null;
                                     List<DtReserva> reservas;
                                     Consultas con = new Consultas();
-                                    Boolean esProv = (Boolean) session.getAttribute("esProv");
                                     if (esProv) {
                                         reservas = con.listarReservasProveedor(nick);
                                     } else {
@@ -170,6 +173,7 @@
                                         }
 
                                         String idres = id.toString();
+                                        String cliente = dtRes.getCliente();
                                         String creada = dtRes.getCreada().getFecha("/");
 
                                         String partesCre[] = creada.split("/");
@@ -180,6 +184,9 @@
                                 <tr class="default" style="height:50px">
                                     <td class="default" align="center" width="20" id="numero" style="vertical-align: middle"><%=numero%></td>
                                     <td class="default" align="center" width="20" id="reserva" style="vertical-align: middle"><a href="Reserva.jsp?idReserva=<% out.print(idres);%>"><%=idres%></a></td>
+                                        <% if (esProv) {%>
+                                    <td class="default" align="center" width="100" id="cliente" style="vertical-align: middle"><%=cliente%></td>
+                                        <% }%>
                                     <td class="default" align="center" width="200" id="fecha" style="vertical-align: middle"><%=creada%></td>
                                     <td class="default" align="center" width="100" id="estado" style="vertical-align: middle"><%=estado%></td>
                                     <td class="default" align="center" width="100" id="total" style="vertical-align: middle"><%=total%></td>
@@ -187,7 +194,7 @@
                                         <% if (estado == "FACTURADA") {%>
                                         <form role="form" action='' method="post">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
-                                            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-credit-card"></span> Ver Factura</button>
+                                            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver Factura</button>
                                         </form>
                                         <% } %>
                                         <% if ((estado == "PAGADA") && (esProv)) {%>

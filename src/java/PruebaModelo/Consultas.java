@@ -322,6 +322,7 @@ public class Consultas {
                 String fecha1 = rs.getString("fecha");
                 String total = rs.getString("total");
                 String estado = rs.getString("estado");
+                String cliente = rs.getString("cliente");
 
                 String partes[] = fecha1.split("-");
 
@@ -331,16 +332,16 @@ public class Consultas {
                 DtReserva nueva = null;
                 switch (estado) {
                     case "REGISTRADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.REGISTRADA, Double.parseDouble(total), prov, items);
+                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.REGISTRADA, Double.parseDouble(total), cliente, items);
                         break;
                     case "CANCELADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.CANCELADA, Double.parseDouble(total), prov, items);
+                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.CANCELADA, Double.parseDouble(total), cliente, items);
                         break;
                     case "FACTURADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.FACTURADA, Double.parseDouble(total), prov, items);
+                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.FACTURADA, Double.parseDouble(total), cliente, items);
                         break;
                     case "PAGADA":
-                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.PAGADA, Double.parseDouble(total), prov, items);
+                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.PAGADA, Double.parseDouble(total), cliente, items);
                         break;
                 }
 

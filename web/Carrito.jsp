@@ -98,7 +98,7 @@
                                             + "<td><h3>" + reserva.getCantidad() + "</h3></td>"
                                             + "<td><h3>" + fechaini + "</h3></td>"
                                             + "<td><h3>" + fechafin + "</h3></td>"
-                                            + "<form action='../eliminarCarrito' method=post>"
+                                            + "<form action='eliminarCarrito' method=post>"
                                             //+ "<td width='80' align='center'>"
 
                                             //+ "<input type='submit' name='comprar' id='comprar' value='Comprar' align='center' width='80' class='active btn btn-info btn-lg'></td>"
@@ -113,7 +113,7 @@
                                 out.println(
                                         "<th><h2>Total</h2></th>"
                                         + "<td><h2> U$U " + sesion.getAttribute("preciototal") + "</h2></td>"
-                                        + "<form action='../eliminarCarrito' method=post>"
+                                        + "<form action='eliminarCarrito' method=post>"
                                         + "<td width='80' align='center'>"
                                         
                                         + "<input type='submit' name='comprar' id='comprar' value='Comprar' align='center' width='80' class='active btn btn-info btn-lg'></a></td>"

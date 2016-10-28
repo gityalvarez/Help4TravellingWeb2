@@ -198,17 +198,17 @@
                                         </form>
                                         <% } %>
                                         <% if ((estado == "PAGADA") && (esProv)) {%>
-                                        <form role="form" action='../FacturarReserva' method="post">
+                                        <form role="form" action='FacturarReserva' method="post">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-usd"></span> Facturar</button>
                                         </form>
                                         <% } %>
                                         <% if ((estado == "REGISTRADA") && !(esProv)) {%>
-                                        <form role="form" action='../PagarReserva' method="post" style="float: left">
+                                        <form role="form" action='PagarReserva' method="post" style="float: left">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-piggy-bank"></span> Pagar</button>
                                         </form>
-                                        <form role="form" action='../CancelarReserva' method="post" style="float: right">
+                                        <form role="form" action='CancelarReserva' method="post" style="float: right">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <button type="submit" class="btn btn-danger" onclick="return confirm('Está seguro de cancelar la reserva?')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
                                         </form>

@@ -31,12 +31,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="page-header">
-                            <h1><span class="logo">Help4Traveling</span>
+                            <h1 style="float: left"><span class="logo">Help4Traveling</span>
                                 <font color="#777777">
                                 <span style="font-size: 23.4px; line-height: 23.4px;">Recomendados</span>
                                 </font>
                             </h1>
                         </div>
+                        <%
+                            if ((String) session.getAttribute("nickname") != null) {
+                                String nick = (String) session.getAttribute("nickname");
+                        %>
+                        <span style="float: right"> Bienvenido/a <b><a href="perfil1.jsp"><%=nick%></a></b> </span>
+                                <% }%>
                     </div>
                 </div>
                 <div class="row">

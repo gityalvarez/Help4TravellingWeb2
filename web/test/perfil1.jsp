@@ -185,13 +185,13 @@
                                             <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-credit-card"></span> Ver Factura</button>
                                         </form>
                                         <% } %>
-                                        <% if (estado == "PAGADA") {%>
+                                        <% if ((estado == "PAGADA") && ((Boolean) session.getAttribute("esProv"))) {%>
                                         <form role="form" action='../FacturarReserva' method="post">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-usd"></span> Facturar</button>
                                         </form>
                                         <% } %>
-                                        <% if (estado == "REGISTRADA") {%>
+                                        <% if ((estado == "REGISTRADA") && !((Boolean) session.getAttribute("esProv"))) {%>
                                         <form role="form" action='../PagarReserva' method="post" style="float: left">
                                             <input type='hidden' id='reserva' name='reserva' value=<%=idres%>>
                                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-piggy-bank"></span> Pagar</button>

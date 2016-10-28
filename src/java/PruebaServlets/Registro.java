@@ -7,7 +7,6 @@ package PruebaServlets;
 
 import PruebaModelo.Consultas;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,32 +35,32 @@ public class Registro extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession sesion = request.getSession();
-        
-        
-        String nickname = (String)sesion.getAttribute("nickname");
-        String mail = (String)sesion.getAttribute("email");
-        String nombre = (String)request.getParameter("nombre_in");
-        String apellido = (String)request.getParameter("apellido_in");
-        String fecha = (String)request.getParameter("fecha");
-        String contrasenia = (String)request.getParameter("password_in");
-        String imagen = (String)request.getParameter("imagen_registro");
+
+        String nickname = (String) sesion.getAttribute("nickname");
+        String mail = (String) sesion.getAttribute("email");
+        String nombre = (String) request.getParameter("nombre_in");
+        String apellido = (String) request.getParameter("apellido_in");
+        String fecha = (String) request.getParameter("fecha");
+        String contrasenia = (String) request.getParameter("password_in");
+        String imagen = (String) request.getParameter("imagen_registro");
         System.out.println(imagen);
         Consultas con = new Consultas();
-        if (con.Registrar(nickname,nombre,apellido,contrasenia,mail,imagen,fecha)){
-            sesion.setAttribute("nombre",nombre);
-            sesion.setAttribute("email",mail);
-            sesion.setAttribute("apellido",apellido);
-            sesion.setAttribute("fechaNac",fecha);            
-        } 
-        else{
+        if (con.Registrar(nickname, nombre, apellido, contrasenia, mail, imagen, fecha)) {
+            sesion.setAttribute("nombre", nombre);
+            sesion.setAttribute("email", mail);
+            sesion.setAttribute("apellido", apellido);
+            sesion.setAttribute("fechaNac", fecha);
+
+            Boolean esProv = con.esProveedor(nickname);
+            sesion.setAttribute("esProv", esProv);
+
+        } else {
             sesion.invalidate();
         }
-        
-       
-        
+
         /* DEBO CARGARLE TODOS LOS ATRIBUTOS A SESION*/
         response.sendRedirect("test/index.jsp");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

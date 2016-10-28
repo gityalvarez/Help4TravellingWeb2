@@ -5,10 +5,8 @@
  */
 package PruebaServlets;
 
-import Logica.ManejadorCliente;
 import PruebaModelo.Consultas;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,43 +35,42 @@ public class Validacion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
+
         String nickname = request.getParameter("nickname_ingreso");
         String password = request.getParameter("password_ingreso");
         String recordar = request.getParameter("Recordarme");
-        
-            
-            
-        
-        System.out.println(nickname+ "   "+password+"  "+recordar);
+
+        System.out.println(nickname + "   " + password + "  " + recordar);
         Consultas con = new Consultas();
         //System.out.println(con.Autenticacion(usuario, contrasena));
         HttpSession sesion = request.getSession();
-        sesion.setAttribute("nickname",nickname);
-        sesion.setAttribute("password",password);
+        sesion.setAttribute("nickname", nickname);
+        sesion.setAttribute("password", password);
         sesion.setAttribute("inicia", "true");
 
-        if (con.Autenticacion(sesion)){ 
-            sesion.setAttribute("mensaje","Bienvenido usuario " + nickname );
-            if(!(request.getParameter("Recordarme")==null)){
-            if (recordar.equals("on")){
-                Cookie Galleta = new Cookie("nick",nickname);
-                Galleta.setMaxAge(60*60*24*7);
-                response.addCookie(Galleta);
-                System.out.println("se cre la galleta con nombre "+Galleta.getName());
-                System.out.println("entre al recordar");
-                //falta terminar la gestion de las cookies
-            }
+        if (con.Autenticacion(sesion)) {
+            sesion.setAttribute("mensaje", "Bienvenido usuario " + nickname);
+
+            Boolean esProv = con.esProveedor(nickname);
+            sesion.setAttribute("esProv", esProv);
+
+            if (!(request.getParameter("Recordarme") == null)) {
+                if (recordar.equals("on")) {
+                    Cookie Galleta = new Cookie("nick", nickname);
+                    Galleta.setMaxAge(60 * 60 * 24 * 7);
+                    response.addCookie(Galleta);
+                    System.out.println("se cre la galleta con nombre " + Galleta.getName());
+                    System.out.println("entre al recordar");
+                    //falta terminar la gestion de las cookies
+                }
             }
             response.sendRedirect("test/index.jsp");
-        } else{
-            sesion.setAttribute("mensaje","Usuario o contraseña incorrectos");
+        } else {
+            sesion.setAttribute("mensaje", "Usuario o contraseña incorrectos");
             response.sendRedirect("test/InicioSesion.jsp");
         }
         //response.sendRedirect("test/InicioSesion.jsp");
-        }   
-        
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

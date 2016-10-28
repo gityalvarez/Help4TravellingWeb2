@@ -7,7 +7,6 @@ package PruebaServlets;
 
 import PruebaModelo.Consultas;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,29 +33,30 @@ public class Comprobacion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        
+
         response.setContentType("text/html;charset=UTF-8");
         HttpSession sesion = request.getSession(true);
         String nickname = request.getParameter("nickname_registro");
         String email = request.getParameter("email_registro");
         sesion.setAttribute("nickname", nickname);
-        sesion.setAttribute("email",email);
+        sesion.setAttribute("email", email);
         sesion.setAttribute("registra", "true");
         //System.out.println(nickname+ "   "+email);
         Consultas con = new Consultas();
-        if (con.Comprobacion(nickname,email))
-        {
+        if (con.Comprobacion(nickname, email)) {
+
+            Boolean esProv = con.esProveedor(nickname);
+            sesion.setAttribute("esProv", esProv);
+
             response.sendRedirect("test/InicioSesion.jsp");
-            
-        }
-        else{
+
+        } else {
             sesion.setAttribute("registra", "false");
             response.sendRedirect("test/InicioSesion.jsp");
             //request.setAttribute("habilitado",false);
             //request.getRequestDispatcher("RegistrarClientes.jsp").forward(request,response);
         }
-        }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

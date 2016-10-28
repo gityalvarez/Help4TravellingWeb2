@@ -7,58 +7,44 @@ package PruebaModelo;
 
 import Logica.Conexion;
 import Logica.Date;
-import Logica.DtCategoria;
 import Logica.DtItemReserva;
-import Logica.DtPromocion;
-import Logica.DtProveedor;
 import Logica.DtReserva;
-import Logica.DtServicio;
-import Logica.ManejadorCategoria;
 import Logica.DtUsuario;
 import Logica.ItemReserva;
 import Logica.Proveedor;
 import Logica.Reserva;
-import Logica.Reserva.eEstado;
-import static Logica.Reserva.eEstado.CANCELADA;
-import static Logica.Reserva.eEstado.FACTURADA;
-import static Logica.Reserva.eEstado.PAGADA;
-import static Logica.Reserva.eEstado.REGISTRADA;
 import Logica.Servicio;
-import PruebaServlets.Oferta;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author yaman
  */
 public class Consultas {
-    
-    public boolean Autenticacion(HttpSession sesion) throws SQLException{
+
+    public boolean Autenticacion(HttpSession sesion) throws SQLException {
         Connection con = Conexion.getInstance().getConnection();
         try (Statement st = con.createStatement()) {
             ResultSet rs = null;
             String Consulta = "SELECT * FROM usuarios";
             rs = st.executeQuery(Consulta);
-            
-            while (rs.next()){
-                if (sesion.getAttribute("nickname").equals(rs.getString("nickname")) && sesion.getAttribute("password").equals(rs.getString("password"))){
+
+            while (rs.next()) {
+                if (sesion.getAttribute("nickname").equals(rs.getString("nickname")) && sesion.getAttribute("password").equals(rs.getString("password"))) {
                     //HttpSession sesion =request.getSession();
-                    sesion.setAttribute("nombre",rs.getString("nombre"));
-                    sesion.setAttribute("apellido",rs.getString("apellido"));
-                    sesion.setAttribute("email",rs.getString("email"));
-                    sesion.setAttribute("fechaNac",rs.getString("fechaNac"));
+                    sesion.setAttribute("nombre", rs.getString("nombre"));
+                    sesion.setAttribute("apellido", rs.getString("apellido"));
+                    sesion.setAttribute("email", rs.getString("email"));
+                    sesion.setAttribute("fechaNac", rs.getString("fechaNac"));
                     rs.close();
                     st.close();
                     return true;
@@ -68,19 +54,19 @@ public class Consultas {
         }
         return false;
     }
-    
-    public void SetearSesion(HttpSession sesion){
-        
+
+    public void SetearSesion(HttpSession sesion) {
+
     }
-    
-    public boolean Comprobacion(String nickname, String email) throws SQLException{   
+
+    public boolean Comprobacion(String nickname, String email) throws SQLException {
         Connection con = Conexion.getInstance().getConnection();
         try (Statement st = con.createStatement()) {
             ResultSet rs = null;
             String Consulta = "SELECT * FROM usuarios";
-            rs = st.executeQuery(Consulta);            
-            while (rs.next()){
-                if (nickname.equals(rs.getString("nickname")) || email.equals(rs.getString("email"))){
+            rs = st.executeQuery(Consulta);
+            while (rs.next()) {
+                if (nickname.equals(rs.getString("nickname")) || email.equals(rs.getString("email"))) {
                     rs.close();
                     st.close();
                     return false;
@@ -89,43 +75,43 @@ public class Consultas {
             rs.close();
         }
         return true;
-    }    
-    
-     public boolean Registrar(String nickname,String nombre,String apellido, String password, String email, String imagen, String fecha) throws SQLException{        
+    }
+
+    public boolean Registrar(String nickname, String nombre, String apellido, String password, String email, String imagen, String fecha) throws SQLException {
         Statement st;
         if (imagen != null) {
             imagen = "'" + imagen + "'";
             //imagen = imagen.replace("\\", "\\\\");
         }
-            //String fecha = (anio+ "-" + mes + "-" + dia);
-            String fechaNac = fecha.replaceAll("/", "-");
-            
-            String sqlau = "INSERT INTO help4traveling.usuarios (nickname,nombre,apellido,password,email,imagen,fechaNac) VALUES ('" + nickname + "','" + nombre + "','" + apellido + "','" + password + "','" + email + "'," + imagen + ",'" + fechaNac + "')";
-            System.out.println(sqlau);
-            String sqlac = "INSERT INTO help4traveling.clientes (nickname) VALUES ('" + nickname + "')";
-            String sqlai = "INSERT INTO help4traveling.usuariosimagenes (usuario,imagen) VALUES ('" + nickname + "'," + imagen + ")";
-            try {
-                Connection con = Conexion.getInstance().getConnection();
-                st = con.createStatement();
-                System.out.println("anted de insertar" + imagen);
-                System.out.println("sentencia de insertar" + sqlai);
-                st.executeUpdate(sqlau);
-                st.executeUpdate(sqlac);
-                //if ((imagen.equals(null)) && (!imagen.equals(""))) {
-                    st.executeUpdate(sqlai);
-                    //con.prepareStatement(sqlai);
-                //}
-                st.close();
-                con.close();                
-                System.out.println("INSERTE :)");
-                return true;
-            } catch (SQLException e) {
-                System.out.println("No pude INSERTAR :(");
-                System.out.println(e);
-                return false;
-            }
-    }    
-    
+        //String fecha = (anio+ "-" + mes + "-" + dia);
+        String fechaNac = fecha.replaceAll("/", "-");
+
+        String sqlau = "INSERT INTO help4traveling.usuarios (nickname,nombre,apellido,password,email,imagen,fechaNac) VALUES ('" + nickname + "','" + nombre + "','" + apellido + "','" + password + "','" + email + "'," + imagen + ",'" + fechaNac + "')";
+        System.out.println(sqlau);
+        String sqlac = "INSERT INTO help4traveling.clientes (nickname) VALUES ('" + nickname + "')";
+        String sqlai = "INSERT INTO help4traveling.usuariosimagenes (usuario,imagen) VALUES ('" + nickname + "'," + imagen + ")";
+        try {
+            Connection con = Conexion.getInstance().getConnection();
+            st = con.createStatement();
+            System.out.println("anted de insertar" + imagen);
+            System.out.println("sentencia de insertar" + sqlai);
+            st.executeUpdate(sqlau);
+            st.executeUpdate(sqlac);
+            //if ((imagen.equals(null)) && (!imagen.equals(""))) {
+            st.executeUpdate(sqlai);
+            //con.prepareStatement(sqlai);
+            //}
+            st.close();
+            con.close();
+            System.out.println("INSERTE :)");
+            return true;
+        } catch (SQLException e) {
+            System.out.println("No pude INSERTAR :(");
+            System.out.println(e);
+            return false;
+        }
+    }
+
     /*public DtServicio getDtServicio(String nombre, String proveedor) throws SQLException {
         ResultSet rsServ, rsCat, rsImg;
         DtServicio nuevo = null;
@@ -160,18 +146,17 @@ public class Consultas {
                 }
                 rsCat.close();
                 stCat.close();
-                nuevo = new DtServicio(nombre, proveedor, descripcion, imagenes, categorias, valor, origen, destino);                
+                nuevo = new DtServicio(nombre, proveedor, descripcion, imagenes, categorias, valor, origen, destino);
             }
             rsServ.close();
             con.close();
-            stServ.close();            
-        } 
-        catch (SQLException e) {
-            System.out.println("No pude crear Servicio :(");            
+            stServ.close();
         }
-        return nuevo;        
+        catch (SQLException e) {
+            System.out.println("No pude crear Servicio :(");
+        }
+        return nuevo;
     }*/
-    
     public DtUsuario getDtUsuario(String nickname) {
         ResultSet rsUsu, rsImg;
         DtUsuario nuevo = null;
@@ -184,34 +169,34 @@ public class Consultas {
             if (rsUsu.next()) {
                 String nombre = rsUsu.getString("nombre");
                 String apellido = rsUsu.getString("apellido");
-                String correo = rsUsu.getString("email");      
+                String correo = rsUsu.getString("email");
                 Date fecha = new Date(rsUsu.getString("fechaNac"));
                 String imagen = null;
                 stImg = con.createStatement();
                 sql = "SELECT * FROM help4traveling.usuariosimagenes WHERE nickname='" + nickname + "'";
                 rsImg = stImg.executeQuery(sql);
-                if (rsImg.next())
+                if (rsImg.next()) {
                     imagen = rsImg.getString("imagen");
+                }
                 rsImg.close();
-                stImg.close();                
-                nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, imagen, "tipo", "empresa", "link");                            
+                stImg.close();
+                nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, imagen, "tipo", "empresa", "link");
             }
             rsUsu.close();
             stUsu.close();
             con.close();
             System.out.println("Se obtuvo Usuario :)");
-        } 
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("No obtuve Usuario :(");
             System.err.println(e.getMessage());
         }
-        return nuevo;        
-    }   
-        
+        return nuevo;
+    }
+
     /*public List<DtPromocion> listarPromociones() throws SQLException {
         List<DtPromocion> promociones = null;
         ResultSet rs;
-        Statement st;        
+        Statement st;
         try {
             Connection con = Conexion.getInstance().getConnection();
             st = con.createStatement();
@@ -235,10 +220,6 @@ public class Consultas {
         }
         return promociones;
     }*/
-    
-        
-    
-    
     public List<DtUsuario> listarUsuariosSistema() throws SQLException {
         List<DtUsuario> usuarios = null;
         ResultSet rsUsu, rsImg;
@@ -259,30 +240,30 @@ public class Consultas {
                 stImg = con.createStatement();
                 sql = "SELECT * FROM help4traveling.usuariosimagenes WHERE usuario='" + nickname + "'";
                 rsImg = stImg.executeQuery(sql);
-                if (rsImg.next())
+                if (rsImg.next()) {
                     imagen = rsImg.getString("imagen");
+                }
                 rsImg.close();
                 stImg.close();
-                DtUsuario nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, imagen, "tipo", "empresa", "link");                                      
+                DtUsuario nuevo = new DtUsuario(nombre, apellido, nickname, "password", correo, fecha, imagen, "tipo", "empresa", "link");
                 usuarios.add(nuevo);
             }
             rsUsu.close();
             stUsu.close();
-            con.close();            
+            con.close();
             System.out.println("Usuarios cargados :)");
-        } 
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("No pude cargar Usuarios :(");
         }
         return usuarios;
     }
-    
-     public List<DtReserva> listarReservasUsuario(String cli) throws SQLException {
+
+    public List<DtReserva> listarReservasUsuario(String cli) throws SQLException {
         List<DtReserva> ReservaxUsuario = null;
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
-        String sql = "SELECT * FROM help4traveling.reservas where cliente ='"+cli+"'";
+        String sql = "SELECT * FROM help4traveling.reservas where cliente ='" + cli + "'";
         try {
             st = con.createStatement();
             rs = st.executeQuery(sql);
@@ -292,29 +273,28 @@ public class Consultas {
                 String fecha1 = rs.getString("fecha");
                 String total = rs.getString("total");
                 String estado = rs.getString("estado");
-                
-                String partes[]=fecha1.split("-");
-        
-       
-                Date fecha = new Date(Integer.valueOf(partes[2]),Integer.valueOf(partes[1]), Integer.valueOf(partes[0]));
-               Map<Integer, ItemReserva> items=null ;
-               
+
+                String partes[] = fecha1.split("-");
+
+                Date fecha = new Date(Integer.valueOf(partes[2]), Integer.valueOf(partes[1]), Integer.valueOf(partes[0]));
+                Map<Integer, ItemReserva> items = null;
+
                 DtReserva nueva = null;
-               switch (estado) {
-            case "REGISTRADA":
-                nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.REGISTRADA , Double.parseDouble(total), cli, items);
-                break;
-            case "CANCELADA":
-                nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.CANCELADA , Double.parseDouble(total), cli, items);
-                break;
-            case "FACTURADA":
-                nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.FACTURADA , Double.parseDouble(total), cli, items);
-                break;
-            case "PAGADA":
-                nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.PAGADA , Double.parseDouble(total), cli, items);
-                break;
-        }
-                
+                switch (estado) {
+                    case "REGISTRADA":
+                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.REGISTRADA, Double.parseDouble(total), cli, items);
+                        break;
+                    case "CANCELADA":
+                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.CANCELADA, Double.parseDouble(total), cli, items);
+                        break;
+                    case "FACTURADA":
+                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.FACTURADA, Double.parseDouble(total), cli, items);
+                        break;
+                    case "PAGADA":
+                        nueva = new DtReserva(Long.parseLong(numero), fecha, Reserva.eEstado.PAGADA, Double.parseDouble(total), cli, items);
+                        break;
+                }
+
                 ReservaxUsuario.add(nueva);
             }
             rs.close();
@@ -327,7 +307,6 @@ public class Consultas {
         return ReservaxUsuario;
     }
 
-       
     /*public List<DtServicio> listarServicios() throws SQLException {
         List<DtServicio> servicios = null;
         ResultSet rs;
@@ -337,7 +316,7 @@ public class Consultas {
             st = con.createStatement();
             String sql = "SELECT * FROM help4traveling.servicios";
             rs = st.executeQuery(sql);
-            servicios = new LinkedList<DtServicio>();            
+            servicios = new LinkedList<DtServicio>();
             while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String proveedor = rs.getString("proveedor");
@@ -356,8 +335,7 @@ public class Consultas {
         }
         return servicios;
     }*/
-    
-    /*public String obtenerPadre(String hijo) {
+ /*public String obtenerPadre(String hijo) {
         String padre = null;
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
@@ -378,8 +356,7 @@ public class Consultas {
         }
         return padre;
     }*/
-    
-    /*public List<String> listarServiciosCategoria(String categoria) {
+ /*public List<String> listarServiciosCategoria(String categoria) {
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
@@ -401,13 +378,13 @@ public class Consultas {
 
         return servicios;
     }*/
-     public List<DtItemReserva> listarItems(Integer reserva) {
+    public List<DtItemReserva> listarItems(Integer reserva) {
         List<DtItemReserva> items = new ArrayList<DtItemReserva>();
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
         String sql;
-        sql = "SELECT * FROM help4traveling.reservasitems WHERE reserva='" +reserva+ "'";
+        sql = "SELECT * FROM help4traveling.reservasitems WHERE reserva='" + reserva + "'";
         try {
             st = con.createStatement();
             rs = st.executeQuery(sql);
@@ -419,11 +396,11 @@ public class Consultas {
                 String cantidad = rs.getString("cantidad");
                 Date iniciodate = new Date(inicio);
                 Date findate = new Date(fin);
-                Proveedor prov = new Proveedor(proveedorOferta); 
-                Servicio ofertatype = new Servicio(oferta,prov,null,null,0,null);
-                
-                DtItemReserva item = new DtItemReserva(reserva,Integer.parseInt(cantidad),iniciodate,findate,ofertatype);
-                
+                Proveedor prov = new Proveedor(proveedorOferta);
+                Servicio ofertatype = new Servicio(oferta, prov, null, null, 0, null);
+
+                DtItemReserva item = new DtItemReserva(reserva, Integer.parseInt(cantidad), iniciodate, findate, ofertatype);
+
                 items.add(item);
             }
             rs.close();
@@ -434,13 +411,13 @@ public class Consultas {
         }
         return items;
     }
-     
+
     public String getNkProveedorServicio(String servicio) {
         String prov = null;
         ResultSet rs;
         Statement st;
         try {
-            Connection con = Conexion.getInstance().getConnection();        
+            Connection con = Conexion.getInstance().getConnection();
             String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + servicio + "'";
             st = con.createStatement();
             rs = st.executeQuery(sql);
@@ -450,19 +427,39 @@ public class Consultas {
             rs.close();
             st.close();
             con.close();
-        } 
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("No pude obtener Proveedor :(");
         }
         return prov;
-    }     
-    
+    }
+
+    public Boolean esProveedor(String nickname) {
+        Boolean esprov = false;
+        ResultSet rs;
+        Statement st;
+        try {
+            Connection con = Conexion.getInstance().getConnection();
+            String sql = "SELECT * FROM help4traveling.proveedor WHERE nombre='" + nickname + "'";
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.wasNull()) {
+                esprov = true;
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("No pude obtener Proveedor :(");
+        }
+        return esprov;
+    }
+
     public String getNkProveedorPromocion(String promocion) {
         String prov = null;
         ResultSet rs;
         Statement st;
         try {
-            Connection con = Conexion.getInstance().getConnection();        
+            Connection con = Conexion.getInstance().getConnection();
             String sql = "SELECT * FROM help4traveling.promociones WHERE nombre='" + promocion + "'";
             st = con.createStatement();
             rs = st.executeQuery(sql);
@@ -472,17 +469,12 @@ public class Consultas {
             rs.close();
             st.close();
             con.close();
-        } 
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("No pude obtener Proveedor :(");
         }
         return prov;
-    }  
-    
-    
-    
-    
-    
+    }
+
     public List<String> listarServiciosDePromociones(String nombre, String prov) {
         List<String> listaServicios = new LinkedList<String>();
         ResultSet rs;
@@ -506,8 +498,8 @@ public class Consultas {
         }
         return listaServicios;
     }
-    
-    public String imagenPerfilUsuario(String nickname){
+
+    public String imagenPerfilUsuario(String nickname) {
         String imagen = null;
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
@@ -517,10 +509,11 @@ public class Consultas {
             st = con.createStatement();
             rs = st.executeQuery(sql);
             if (rs.next()) {
-                imagen = rs.getString("imagen");                
+                imagen = rs.getString("imagen");
             }
-            if ((imagen.equals(null))||(imagen.equals("")))
+            if ((imagen.equals(null)) || (imagen.equals(""))) {
                 imagen = "../img/user.png";
+            }
             rs.close();
             st.close();
             con.close();
@@ -530,9 +523,7 @@ public class Consultas {
         }
         return imagen;
     }
-    
-    
-    
+
     public void altaReserva(Reserva nueva) {
         //conexion = new Conexion();
         Connection con = Conexion.getInstance().getConnection();
@@ -540,10 +531,10 @@ public class Consultas {
         ResultSet rsId;
         String sid;
         Calendar c = Calendar.getInstance();
-        int dia = c.get(Calendar.DATE);        
-        int mes = c.get(Calendar.MONTH) +1;
+        int dia = c.get(Calendar.DATE);
+        int mes = c.get(Calendar.MONTH) + 1;
         int anio = c.get(Calendar.YEAR);
-        String creada = Integer.toString(anio) + "-" + Integer.toString(mes) + "-" + Integer.toString(dia); 
+        String creada = Integer.toString(anio) + "-" + Integer.toString(mes) + "-" + Integer.toString(dia);
         String sql = "INSERT INTO help4traveling.reservas (fecha,total,estado,cliente) "
                 + "VALUES ('" + creada + "'," + nueva.getTotal() + ",'" + nueva.getEstado() + "','" + nueva.getCliente() + "')";
 
@@ -564,20 +555,19 @@ public class Consultas {
                             System.out.println("entre al for 1");
                             ItemReserva key = entry.getValue();
                             String oferta = key.getOferta().getNombre();
-                            String proveedor="";
-                            if (esservicio(oferta)){
+                            String proveedor = "";
+                            if (esservicio(oferta)) {
                                 proveedor = getNkProveedorServicio(oferta);
-                            }
-                            else{
-                               proveedor = getNkProveedorPromocion(oferta);
+                            } else {
+                                proveedor = getNkProveedorPromocion(oferta);
                             }
                             String cantidad = String.valueOf(key.getCantidad());
                             String inicio = key.getInicio().getAno() + "-" + key.getInicio().getMes() + "-" + key.getInicio().getDia();
                             String fin = key.getFin().getAno() + "-" + key.getFin().getMes() + "-" + key.getFin().getDia();
-                            System.out.println(sid+" "+oferta+" "+proveedor+" "+cantidad+" "+inicio+" "+fin);
+                            System.out.println(sid + " " + oferta + " " + proveedor + " " + cantidad + " " + inicio + " " + fin);
                             sql = "INSERT INTO help4traveling.reservasitems (reserva, oferta, proveedorOferta, cantidad, inicio, fin) "
                                     + "VALUES (" + sid + ",'" + oferta + "','" + proveedor + "'," + cantidad + ",'" + inicio + "','" + fin + "')";
-                            
+
                             st.executeUpdate(sql);
                         }
                         con.close();
@@ -596,9 +586,9 @@ public class Consultas {
             System.err.println(e);
         }
     }
-    
- public boolean esservicio(String nombre){
-         boolean es = false;
+
+    public boolean esservicio(String nombre) {
+        boolean es = false;
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
         Statement st;
@@ -606,9 +596,9 @@ public class Consultas {
         try {
             st = con.createStatement();
             rs = st.executeQuery(sql);
-            if (rs.next()){
-                es =true;
-            }            
+            if (rs.next()) {
+                es = true;
+            }
             rs.close();
             st.close();
             con.close();
@@ -618,12 +608,10 @@ public class Consultas {
             System.out.println("consula servicio NO realizada :(");
         }
         return es;
-        
+
     }
- 
- 
- 
- /*public List<String> ServyProm(){
+
+    /*public List<String> ServyProm(){
            List<String> listaServyProm = new LinkedList<String>();
         ResultSet rs;
         Connection con = Conexion.getInstance().getConnection();
@@ -634,7 +622,7 @@ public class Consultas {
             st = con.createStatement();
             rs = st.executeQuery(sqlserv);
             while (rs.next()) {
-                
+
                 String servicio = rs.getString("nombre");
                 System.out.println(servicio);
 
@@ -642,24 +630,21 @@ public class Consultas {
             }
             rs = st.executeQuery(sqlprom);
             while (rs.next()) {
-                
+
                 String promocion = rs.getString("nombre");
                 System.out.println(promocion);
 
                 listaServyProm.add(promocion);
             }
-            
+
             rs.close();
             st.close();
             con.close();
             System.out.println("servicios y promociones cargados :)");
         } catch (SQLException e) {
             System.out.println("No pude cargar :(");
-        }     
+        }
 return listaServyProm;
  }
-  */  
-    
+     */
 }
-
-        

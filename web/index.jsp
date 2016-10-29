@@ -41,7 +41,7 @@
                             if ((String) session.getAttribute("nickname") != null) {
                                 String nick = (String) session.getAttribute("nickname");
                         %>
-                        <span style="float: right"> Bienvenido/a <b><a href="perfil1.jsp"><%=nick%></a></b> </span>
+                        <span style="float: right"> Bienvenido/a <b><a href="Usuario.jsp"><%=nick%></a></b> </span>
                                 <% }%>
                     </div>
                 </div>
@@ -50,6 +50,13 @@
                         <div id="fullcarousel-example" data-interval="false" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="item active">
+                                    <img src="img/fondo.png">
+                                    <!--div class="carousel-caption">
+                                      <h2 class="text-muted">Promoción 1</h2>
+                                      <p class="text-muted">Descripción</p>
+                                    </div-->
+                                </div>
+                                <div class="item">
                                     <img src="http://www.saldevacaciones.com/wp-content/uploads/2016/01/Agencia-de-viaje-online-1.jpg">
                                     <!--div class="carousel-caption">
                                       <h2 class="text-muted">Promoción 1</h2>

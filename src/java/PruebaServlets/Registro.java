@@ -50,10 +50,7 @@ public class Registro extends HttpServlet {
             sesion.setAttribute("email", mail);
             sesion.setAttribute("apellido", apellido);
             sesion.setAttribute("fechaNac", fecha);
-
-            Boolean esProv = con.esProveedor(nickname);
-            sesion.setAttribute("esProv", esProv);
-
+            sesion.setAttribute("esProv", false);
         } else {
             sesion.invalidate();
         }

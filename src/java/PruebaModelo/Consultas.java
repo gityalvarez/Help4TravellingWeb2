@@ -8,6 +8,7 @@ package PruebaModelo;
 import Logica.Conexion;
 import Logica.Date;
 import Logica.DtItemReserva;
+import Logica.DtProveedor;
 import Logica.DtReserva;
 import Logica.DtUsuario;
 import Logica.ItemReserva;
@@ -190,6 +191,34 @@ public class Consultas {
             System.out.println("No obtuve Usuario :(");
             System.err.println(e.getMessage());
         }
+        return nuevo;
+    }
+
+    public DtProveedor getDtProveedor(String nickname) {
+        DtProveedor nuevo = null;
+        /*
+        DtUsuario u = getDtUsuario(nickname);
+        ResultSet rsProv;
+        Statement stProv;
+        try {
+            Connection con = Conexion.getInstance().getConnection();
+            stProv = con.createStatement();
+            String sql = "SELECT * FROM help4traveling.proveedores WHERE nickname='" + nickname + "'";
+            rsProv = stProv.executeQuery(sql);
+            if (rsProv.next()) {
+                String empresa = rsProv.getString("empresa");
+                String link = rsProv.getString("link");
+                nuevo = new DtProveedor("", "", nickname, "", null, "", empresa, link);
+            }
+            rsProv.close();
+            stProv.close();
+            con.close();
+            System.out.println("Se obtuvo Usuario :)");
+        } catch (SQLException e) {
+            System.out.println("No obtuve Usuario :(");
+            System.err.println(e.getMessage());
+        }
+         */
         return nuevo;
     }
 
@@ -462,27 +491,6 @@ public class Consultas {
         return items;
     }
 
-    public String getNkProveedorServicio(String servicio) {
-        String prov = null;
-        ResultSet rs;
-        Statement st;
-        try {
-            Connection con = Conexion.getInstance().getConnection();
-            String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + servicio + "'";
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            while (rs.next()) {
-                prov = rs.getString("proveedor");
-            }
-            rs.close();
-            st.close();
-            con.close();
-        } catch (SQLException e) {
-            System.out.println("No pude obtener Proveedor :(");
-        }
-        return prov;
-    }
-
     public Boolean esProveedor(String nickname) {
         Boolean esProv = false;
         ResultSet rs;
@@ -502,6 +510,27 @@ public class Consultas {
             System.out.println("No pude obtener Proveedor :(");
         }
         return esProv;
+    }
+
+    public String getNkProveedorServicio(String servicio) {
+        String prov = null;
+        ResultSet rs;
+        Statement st;
+        try {
+            Connection con = Conexion.getInstance().getConnection();
+            String sql = "SELECT * FROM help4traveling.servicios WHERE nombre='" + servicio + "'";
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                prov = rs.getString("proveedor");
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("No pude obtener Proveedor :(");
+        }
+        return prov;
     }
 
     public String getNkProveedorPromocion(String promocion) {

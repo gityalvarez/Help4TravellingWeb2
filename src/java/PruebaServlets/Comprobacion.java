@@ -48,6 +48,13 @@ public class Comprobacion extends HttpServlet {
             Boolean esProv = con.esProveedor(nickname);
             sesion.setAttribute("esProv", esProv);
 
+            /*
+            if (esProv) {
+                DtProveedor dtProv = con.getDtProveedor(nickname);
+                sesion.setAttribute("empresa", dtProv.getEmpresa());
+                sesion.setAttribute("link", dtProv.getLink());
+            }
+             */
             response.sendRedirect("InicioSesion.jsp");
 
         } else {

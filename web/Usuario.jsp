@@ -1,9 +1,13 @@
 <%--
-    Document   : perfil1
+    Document   : Usuario
     Created on : 26/09/2016, 05:07:29 PM
     Author     : HP Usuario
 --%>
 
+<%@page import="Logica.ManejadorServicio"%>
+<%@page import="Logica.DtServicio"%>
+<%@page import="Logica.ManejadorProveedor"%>
+<%@page import="Logica.DtUsuario"%>
 <%@page import="Logica.Reserva"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="PruebaModelo.Consultas"%>
@@ -45,7 +49,7 @@
                String nombre = "\"" + session.getAttribute("nombre").toString() + "\"";
                String apellido = "\"" + session.getAttribute("apellido").toString() + "\"";
                 String fecha = "\"" + session.getAttribute("fNac").toString() + "\"";
-               String email = "\"" + session.getAttribute("email").toString() + "\"";
+               String correo = "\"" + session.getAttribute("email").toString() + "\"";
 
             --%>
             <%};%>
@@ -62,16 +66,33 @@
                 }, 100);
             });
         </script>
-        <title>Ver Perfil</title>
+        <title>Perfil de Usuario</title>
     </head>
     <body>
         <div class="navbar navbar-default navbar-fixed-top" id="header"></div>
         <%
+            Boolean esProv = (Boolean) session.getAttribute("esProv");
             String nick = session.getAttribute("nickname").toString();
             String nombre = session.getAttribute("nombre").toString();
             String apellido = session.getAttribute("apellido").toString();
             String fecha = session.getAttribute("fechaNac").toString();
-            String email = session.getAttribute("email").toString();
+            String correo = session.getAttribute("email").toString();
+            String empresa = "";
+            String enlace = "";
+            DtUsuario dtProv = null;
+            //empresa = session.getAttribute("empresa").toString();
+            //enlace = session.getAttribute("link").toString();
+            if (esProv) {
+                dtProv = ManejadorProveedor.getInstance().getDtProveedor(nick);
+                /*
+                String nombre = dtProv.getNombre();
+                String apellido = dtProv.getApellido();
+                String correo = dtProv.getCorreo();
+                Date fechanac = dtProv.getNacimiento();
+                 */
+                empresa = dtProv.getEmpresa();
+                enlace = dtProv.getLink();
+            }
             String partes[] = fecha.split("-");
 
             fecha = partes[2] + "/" + partes[1] + "/" + partes[0];
@@ -97,7 +118,11 @@
                                 <a class="pull-left" href="#"><img class="media-object" src="<% out.print(imagen);%>" height="130" width="130"></a>
                                 <div class="media-body">
                                     <h2 class="media-heading"><%=nick%></h2>
-                                    <p><%=email%></p>
+                                    <p><h3 class="media-body"><%=empresa%></h3></p>
+                                    <p><a href="mailto:<% out.print(correo);%>"><%=correo%></a></p>
+                                        <% if (esProv) { %>
+                                    <p><a href="<% out.print(enlace);%>" target="_blank"><%=enlace%></a></p>
+                                        <% }%>
                                 </div>
                             </li>
                             <li class="media"></li>
@@ -108,6 +133,9 @@
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a data-toggle="tab" href="#Datos">Datos personales</a></li>
+                        <% if (esProv) { %>
+                    <li><a data-toggle="tab" href="#servicios">Servicios</a></li>
+                        <% }%>
                     <li><a data-toggle="tab" href="#reservas">Reservas</a></li>
 
                 </ul>
@@ -130,14 +158,58 @@
                             </div>
                         </div>
                     </div>
+                    <%
+                        if (esProv) {
+                            List<DtServicio> servicios = ManejadorServicio.getInstance().listarServiciosProveedor(dtProv);
+                            if (!servicios.isEmpty()) {
+                                Iterator<DtServicio> iserv = servicios.iterator(); %>
+                    <div id="servicios" class="tab-pane fade">
+                        <table class="default table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr class="default">
+                                    <td class="default" width="100" align="center"><b>Nombre</b></td>
+                                    <td class="default" width="300" align="center"><b>Descripcion</b></td>
+                                    <td class="default" width="100" align="center"><b>Precio</b></td>
+                                    <td class="default" width="100" align="center"><b>Origen</b></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% while (iserv.hasNext()) {
+                                        DtServicio dtServ = iserv.next();
+                                        String servicio = dtServ.getNombre();
+                                        String descripcion = dtServ.getDescripcion();
+                                        float precio = dtServ.getPrecio();
+                                        String origen = dtServ.getNomCiuOrigen();  %>
+                                <tr class="default">
+                                    <td class="default" align="center" width="100" id="nombre"><a href="Servicio.jsp?nombre=<% out.print(servicio); %>&proveedor=<% out.print(nick); %>&categoria=<% out.print("");%>" target="_blank"><%=servicio%></a></td>
+                                    <td class="default" align="center" width="300" id="descripcion"><%=descripcion%></td>
+                                    <td class="default" align="center" width="100" id="precio"><%=precio%></td>
+                                    <td class="default" align="center" width="100" id="origen"><%=origen%></td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        <% } else { %>
+                        <table class="default table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>El proveedor seleccionado no tiene servicios asociados.</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <% }
+                        } %>
+                        <ul class="list-group"></ul>
+                    </div>
                     <div id="reservas" class="tab-pane fade">
                         <table class="default table table-bordered table-hover table-striped">
                             <tbody>
                                 <tr class="default">
                                     <td class="default" width="20" align="center"><b>Número</b></td>
                                     <td class="default" width="20" align="center"><b>Reserva</b></td>
-                                    <% Boolean esProv = (Boolean) session.getAttribute("esProv");
-                                        if (esProv) { %>
+                                    <% if (esProv) { %>
                                     <td class="default" width="100" align="center"><b>Cliente</b></td>
                                     <% } %>
                                     <td class="default" width="200" align="center"><b>Fecha</b></td>

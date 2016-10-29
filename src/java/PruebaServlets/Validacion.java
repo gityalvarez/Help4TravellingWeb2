@@ -31,6 +31,7 @@ public class Validacion extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -54,6 +55,13 @@ public class Validacion extends HttpServlet {
             Boolean esProv = con.esProveedor(nickname);
             sesion.setAttribute("esProv", esProv);
 
+            /*
+            if (esProv) {
+                DtProveedor dtProv = con.getDtProveedor(nickname);
+                sesion.setAttribute("empresa", dtProv.getEmpresa());
+                sesion.setAttribute("link", dtProv.getLink());
+            }
+             */
             if (!(request.getParameter("Recordarme") == null)) {
                 if (recordar.equals("on")) {
                     Cookie Galleta = new Cookie("nick", nickname);

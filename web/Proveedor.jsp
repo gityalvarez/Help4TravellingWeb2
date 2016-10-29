@@ -1,9 +1,10 @@
 <%--
-    Document   : perfil1
+    Document   : Usuario
     Created on : 26/09/2016, 05:07:29 PM
     Author     : HP Usuario
 --%>
 
+<%@page import="Logica.Fabrica"%>
 <%@page import="Logica.ManejadorServicio"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="Logica.DtServicio"%>
@@ -99,6 +100,7 @@
                                 <a class="pull-left" href="#"><img class="media-object" src="<% out.print(imagen);%>" height="130" width="130"></a>
                                 <div class="media-body">
                                     <h2 class="media-heading"><%=nick%></h2>
+                                    <p><h3 class="media-body"><%=empresa%></h3></p>
                                     <p><a href="mailto:<% out.print(correo);%>"><%=correo%></a></p>
                                     <p><a href="<% out.print(enlace);%>" target="_blank"><%=enlace%></a></p>
                                 </div>
@@ -134,6 +136,7 @@
 
                         <%
                             List<DtServicio> servicios = ManejadorServicio.getInstance().listarServiciosProveedor(dtProv);
+
                             if (!servicios.isEmpty()) {
                                 Iterator<DtServicio> iserv = servicios.iterator(); %>
                         <table class="default table table-bordered table-hover table-striped">

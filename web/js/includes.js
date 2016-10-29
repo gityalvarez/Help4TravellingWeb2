@@ -36,7 +36,7 @@ $(document).ready(function () {
 
                 //Usuarios Opciones
                 $("#idPerfil").click(function () {
-                    $(location).attr('href', 'perfil1.jsp');
+                    $(location).attr('href', 'Usuario.jsp');
                 });
 
                 $("#idReservas").click(function () {

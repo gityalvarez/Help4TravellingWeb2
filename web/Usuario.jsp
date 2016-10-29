@@ -199,10 +199,10 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <% }
-                        } %>
                         <ul class="list-group"></ul>
+                        <% } %>
                     </div>
+                    <% } %>
                     <div id="reservas" class="tab-pane fade">
                         <table class="default table table-bordered table-hover table-striped">
                             <tbody>

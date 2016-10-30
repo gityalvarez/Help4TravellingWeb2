@@ -54,14 +54,7 @@ public class Validacion extends HttpServlet {
 
             Boolean esProv = con.esProveedor(nickname);
             sesion.setAttribute("esProv", esProv);
-
-            /*
-            if (esProv) {
-                DtProveedor dtProv = con.getDtProveedor(nickname);
-                sesion.setAttribute("empresa", dtProv.getEmpresa());
-                sesion.setAttribute("link", dtProv.getLink());
-            }
-             */
+    
             if (!(request.getParameter("Recordarme") == null)) {
                 if (recordar.equals("on")) {
                     Cookie Galleta = new Cookie("nick", nickname);

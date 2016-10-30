@@ -76,7 +76,6 @@
         <%
             String nick = (String) request.getParameter("nick");
             Consultas con = new Consultas();
-            //DtProveedor dtProv = con.getDtProveedor(nick);
             DtUsuario dtProv = ManejadorProveedor.getInstance().getDtProveedor(nick);
             String nombre = dtProv.getNombre();
             String apellido = dtProv.getApellido();

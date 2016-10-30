@@ -8,6 +8,7 @@ package PruebaModelo;
 import Logica.Conexion;
 import Logica.Date;
 import Logica.DtItemReserva;
+import Logica.DtPromocion;
 import Logica.DtProveedor;
 import Logica.DtReserva;
 import Logica.DtUsuario;
@@ -384,6 +385,36 @@ public class Consultas {
             System.out.println("No pude cargar reservas :(");
         }
         return ReservaxProveedor;
+    }
+
+    public ArrayList<DtPromocion> listarPromocionesProveedor(String prov) {
+        Connection con = Conexion.getInstance().getConnection();
+        Statement st;
+        ResultSet rs;
+        String sql = "SELECT * FROM help4traveling.promociones WHERE proveedor= '" + prov + "'";
+        ArrayList<DtPromocion> promociones = new ArrayList<DtPromocion>();
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+
+            DtPromocion prom;
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String proveedor = rs.getString("proveedor");
+                String descuento = rs.getString("descuento");
+                String total = rs.getString("total");
+                prom = new DtPromocion(nombre, proveedor, descuento, total);
+                promociones.add(prom);
+            }
+            rs.close();
+            con.close();
+            st.close();
+
+        } catch (SQLException e) {
+            System.out.println("No se encontraron promociones.");
+            System.out.println(e.getMessage());
+        }
+        return promociones;
     }
 
     /*public List<DtServicio> listarServicios() throws SQLException {

@@ -12,6 +12,7 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="PruebaModelo.Consultas"%>
 <%@page import="java.util.List"%>
+<%@page import="Logica.DtPromocion"%>
 <%@page import="Logica.DtReserva"%>
 <%@page import="Logica.Cliente" %>
 <%@page import="Logica.Date" %>
@@ -135,6 +136,7 @@
                         <a data-toggle="tab" href="#Datos">Datos personales</a></li>
                         <% if (esProv) { %>
                     <li><a data-toggle="tab" href="#servicios">Servicios</a></li>
+                    <li><a data-toggle="tab" href="#promociones">Promociones</a></li>
                         <% }%>
                     <li><a data-toggle="tab" href="#reservas">Reservas</a></li>
 
@@ -158,11 +160,13 @@
                             </div>
                         </div>
                     </div>
+
+                    <% if (esProv) { %>
+
                     <%
-                        if (esProv) {
-                            List<DtServicio> servicios = ManejadorServicio.getInstance().listarServiciosProveedor(dtProv);
-                            if (!servicios.isEmpty()) {
-                                Iterator<DtServicio> iserv = servicios.iterator(); %>
+                        List<DtServicio> servicios = ManejadorServicio.getInstance().listarServiciosProveedor(dtProv);
+                        if (!servicios.isEmpty()) {
+                            Iterator<DtServicio> iserv = servicios.iterator(); %>
                     <div id="servicios" class="tab-pane fade">
                         <table class="default table table-bordered table-hover table-striped">
                             <thead>
@@ -202,6 +206,53 @@
                         <ul class="list-group"></ul>
                         <% } %>
                     </div>
+
+
+                    <%
+                        Consultas con = new Consultas();
+                        List<DtPromocion> promociones = con.listarPromocionesProveedor(nick);
+                        if (!promociones.isEmpty()) {
+                            Iterator<DtPromocion> ipromo = promociones.iterator(); %>
+                    <div id="promociones" class="tab-pane fade">
+                        <table class="default table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr class="default">
+                                    <td class="default" width="100" align="center"><b>Nombre</b></td>
+                                    <td class="default" width="300" align="center"><b>Proveedor</b></td>
+                                    <td class="default" width="100" align="center"><b>Descuento</b></td>
+                                    <td class="default" width="100" align="center"><b>Total</b></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% while (ipromo.hasNext()) {
+                                        DtPromocion dtPromo = ipromo.next();
+                                        String promocion = dtPromo.getNombre();
+                                        String proveedor = dtPromo.getProveedor();
+                                        String descuento = dtPromo.getDescuento();
+                                        String total = dtPromo.getPrecio();  %>
+                                <tr class="default">
+                                    <td class="default" align="center" width="100" id="nombre"><a href="Promocion.jsp?nombre=<% out.print(promocion); %>&proveedor=<% out.print(nick);%>" target="_blank"><%=promocion%></a></td>
+                                    <td class="default" align="center" width="300" id="proveedor"><%=proveedor%></td>
+                                    <td class="default" align="center" width="100" id="descuento"><%=descuento%></td>
+                                    <td class="default" align="center" width="100" id="total"><%=total%></td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        <% } else { %>
+                        <table class="default table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>El proveedor seleccionado no tiene promociones asociadas.</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul class="list-group"></ul>
+                        <% } %>
+                    </div>
+
                     <% } %>
                     <div id="reservas" class="tab-pane fade">
                         <table class="default table table-bordered table-hover table-striped">
